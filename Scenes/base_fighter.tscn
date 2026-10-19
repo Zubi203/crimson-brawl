@@ -1,0 +1,389 @@
+[gd_scene format=3 uid="uid://c4pgmigxg81xo"]
+
+[ext_resource type="Animation" uid="uid://fhyv8w1tanwe" path="res://Animations/Dash.tres" id="1_g6k5k"]
+[ext_resource type="Script" uid="uid://dpaylk0mjfeds" path="res://Scripts/Fighter/fighter.gd" id="1_vdqem"]
+[ext_resource type="Script" uid="uid://betqx36uovqvv" path="res://Scripts/Inputs/player_input_handler.gd" id="2_bgg7p"]
+[ext_resource type="Animation" uid="uid://dhukn2h54qvdm" path="res://Animations/Defeat.tres" id="2_vdqem"]
+[ext_resource type="Animation" uid="uid://d12m862eiuruk" path="res://Animations/HeavyAttack.tres" id="3_bgg7p"]
+[ext_resource type="Animation" uid="uid://cl7454r6ltg68" path="res://Animations/HeavyAttackRecovery.tres" id="4_1b26d"]
+[ext_resource type="Script" uid="uid://denw8lg86vmw8" path="res://Scripts/State Machine/state_machine.gd" id="4_fpq8k"]
+[ext_resource type="Animation" uid="uid://dne6g4qhinvib" path="res://Animations/Hit_Chest.tres" id="5_fpq8k"]
+[ext_resource type="Script" uid="uid://cdhoawqbot8yj" path="res://Scripts/State Machine/standing_state.gd" id="5_j0h8e"]
+[ext_resource type="Animation" uid="uid://b2frugccqmd7i" path="res://Animations/Hit_Head.tres" id="6_gowae"]
+[ext_resource type="Script" uid="uid://cle57fh6mf16q" path="res://Scripts/State Machine/jumping_state.gd" id="6_sot8s"]
+[ext_resource type="Script" uid="uid://b71u831ltfd82" path="res://Scripts/State Machine/light_attack_state.gd" id="7_cjoc6"]
+[ext_resource type="Animation" uid="uid://nr357k0gphia" path="res://Animations/Idle.tres" id="7_j0h8e"]
+[ext_resource type="Animation" uid="uid://png5jl5d1e66" path="res://Animations/JumpIdle.tres" id="8_sot8s"]
+[ext_resource type="Script" uid="uid://bs5rnxp6bs13" path="res://Scripts/State Machine/heavy_attack_state.gd" id="8_ylc4a"]
+[ext_resource type="Animation" uid="uid://xx013mh1uxud" path="res://Animations/JumpLand.tres" id="9_cjoc6"]
+[ext_resource type="Script" uid="uid://ogby2s88nxrv" path="res://Scripts/State Machine/hit_state.gd" id="9_w4atc"]
+[ext_resource type="Script" uid="uid://dtbe7f86x14b1" path="res://Scripts/State Machine/defeat_state.gd" id="10_rhw32"]
+[ext_resource type="Animation" uid="uid://btmv8jpn10svm" path="res://Animations/JumpStart.tres" id="10_ylc4a"]
+[ext_resource type="Script" uid="uid://b5run2nq87mng" path="res://Scripts/State Machine/dashing_state.gd" id="11_cbn6b"]
+[ext_resource type="Animation" uid="uid://cevaa15fovmw8" path="res://Animations/LightAttack.anim" id="11_w4atc"]
+[ext_resource type="Script" uid="uid://donlmi4kc6kip" path="res://Scripts/State Machine/light_combo_state.gd" id="12_iv45o"]
+[ext_resource type="Animation" uid="uid://7s13bd5xufsf" path="res://Animations/Walk.tres" id="12_rhw32"]
+[ext_resource type="Script" uid="uid://b8vtvccofi21a" path="res://Scripts/State Machine/special_state.gd" id="13_ge4xq"]
+[ext_resource type="Script" uid="uid://ckl3sx47sc6yx" path="res://Scripts/Inputs/input_buffer.gd" id="15_1b26d"]
+[ext_resource type="Script" uid="uid://dbe1j3a2ppmqm" path="res://Scripts/Fighter/fighter_animation.gd" id="19_sot8s"]
+[ext_resource type="Animation" uid="uid://bsnau31a8i651" path="res://Animations/LightAttack2.res" id="23_hmecv"]
+[ext_resource type="Animation" uid="uid://gbhsefnye4nw" path="res://Animations/SpecialExit.res" id="24_iv45o"]
+[ext_resource type="Script" uid="uid://dglhwjh50ossn" path="res://Scripts/Fighter/fighter_visual.gd" id="24_lmko8"]
+[ext_resource type="Material" uid="uid://dh8ua66wjf0m1" path="res://Materials/hit_flash_material.tres" id="25_cbn6b"]
+[ext_resource type="Animation" uid="uid://dlvucy4o1e43y" path="res://Animations/SpecialShoot.res" id="25_ge4xq"]
+[ext_resource type="Animation" uid="uid://vv8c8m0up65j" path="res://Animations/SpecialStart.res" id="26_bq4yu"]
+[ext_resource type="Animation" uid="uid://b4n61eom3ccpf" path="res://Animations/Sprint.res" id="27_7m2qr"]
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3m6lo"]
+_data = {
+&"Dash": ExtResource("1_g6k5k"),
+&"Defeat": ExtResource("2_vdqem"),
+&"HeavyAttack": ExtResource("3_bgg7p"),
+&"HeavyAttackRecovery": ExtResource("4_1b26d"),
+&"Hit_Chest": ExtResource("5_fpq8k"),
+&"Hit_Head": ExtResource("6_gowae"),
+&"Idle": ExtResource("7_j0h8e"),
+&"JumpIdle": ExtResource("8_sot8s"),
+&"JumpLand": ExtResource("9_cjoc6"),
+&"JumpStart": ExtResource("10_ylc4a"),
+&"LightAttack": ExtResource("11_w4atc"),
+&"LightAttack2": ExtResource("23_hmecv"),
+&"SpecialExit": ExtResource("24_iv45o"),
+&"SpecialShoot": ExtResource("25_ge4xq"),
+&"SpecialStart": ExtResource("26_bq4yu"),
+&"Sprint": ExtResource("27_7m2qr"),
+&"Walk": ExtResource("12_rhw32")
+}
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_h2w44"]
+radius = 0.3
+height = 1.8
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_30o8h"]
+animation = &"FighterBase/Hit_Chest"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3m6lo"]
+animation = &"FighterBase/Dash"
+use_custom_timeline = true
+timeline_length = 0.5
+stretch_time_scale = true
+start_offset = 0.0
+loop_mode = 0
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ded0y"]
+animation = &"FighterBase/Defeat"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_8027c"]
+animation = &"FighterBase/Hit_Head"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_cbn6b"]
+animation = &"FighterBase/HeavyAttack"
+use_custom_timeline = true
+timeline_length = 0.4
+stretch_time_scale = true
+start_offset = 0.0
+loop_mode = 0
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ejkuj"]
+animation = &"FighterBase/HeavyAttackRecovery"
+use_custom_timeline = true
+timeline_length = 0.3
+stretch_time_scale = true
+start_offset = 0.0
+loop_mode = 0
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ylc4a"]
+animation = &"FighterBase/JumpIdle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_w4atc"]
+animation = &"FighterBase/JumpLand"
+use_custom_timeline = true
+timeline_length = 0.6
+stretch_time_scale = true
+start_offset = 0.0
+loop_mode = 0
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_rhw32"]
+animation = &"FighterBase/JumpStart"
+use_custom_timeline = true
+timeline_length = 0.5
+stretch_time_scale = true
+start_offset = 0.0
+loop_mode = 0
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_lmko8"]
+animation = &"FighterBase/LightAttack"
+use_custom_timeline = true
+timeline_length = 0.7
+stretch_time_scale = true
+start_offset = 0.0
+loop_mode = 0
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_hmecv"]
+animation = &"FighterBase/LightAttack2"
+use_custom_timeline = true
+timeline_length = 0.7
+stretch_time_scale = true
+start_offset = 0.0
+loop_mode = 0
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_iv45o"]
+animation = &"FighterBase/SpecialExit"
+use_custom_timeline = true
+timeline_length = 0.3
+stretch_time_scale = true
+start_offset = 0.0
+loop_mode = 0
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ge4xq"]
+animation = &"FighterBase/SpecialShoot"
+use_custom_timeline = true
+timeline_length = 0.3
+stretch_time_scale = true
+start_offset = 0.0
+loop_mode = 0
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_bq4yu"]
+animation = &"FighterBase/SpecialStart"
+use_custom_timeline = true
+timeline_length = 0.3
+stretch_time_scale = true
+start_offset = 0.0
+loop_mode = 0
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_j0h8e"]
+animation = &"FighterBase/Idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_sot8s"]
+animation = &"FighterBase/Walk"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_cjoc6"]
+animation = &"FighterBase/Walk"
+play_mode = 1
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_ylc4a"]
+value_label = "velocity"
+blend_point_0/node = SubResource("AnimationNodeAnimation_j0h8e")
+blend_point_0/pos = 0.0
+blend_point_0/name = &"FighterBase_Idle"
+blend_point_1/node = SubResource("AnimationNodeAnimation_sot8s")
+blend_point_1/pos = 1.0
+blend_point_1/name = &"FighterBase_Walk"
+blend_point_2/node = SubResource("AnimationNodeAnimation_cjoc6")
+blend_point_2/pos = -1.0
+blend_point_2/name = &"FighterBase_Walk 2"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_w4atc"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3m6lo"]
+xfade_time = 0.2
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_lmko8"]
+xfade_time = 0.2
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_cbn6b"]
+xfade_time = 0.2
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ejkuj"]
+xfade_time = 0.2
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ded0y"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_30o8h"]
+xfade_time = 0.2
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_8027c"]
+xfade_time = 0.1
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_hmecv"]
+xfade_time = 0.1
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_7m2qr"]
+xfade_time = 0.2
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_njbxy"]
+xfade_time = 0.2
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_barkk"]
+xfade_time = 0.1
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_rtpds"]
+xfade_time = 0.1
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_h2w44"]
+states/ChestHit/node = SubResource("AnimationNodeAnimation_30o8h")
+states/ChestHit/position = Vector2(360.2, -107.89829)
+states/Dash/node = SubResource("AnimationNodeAnimation_3m6lo")
+states/Dash/position = Vector2(238, -13.602659)
+states/Defeat/node = SubResource("AnimationNodeAnimation_ded0y")
+states/Defeat/position = Vector2(724, -75.298294)
+states/End/position = Vector2(1020.8, 76)
+states/HeadHit/node = SubResource("AnimationNodeAnimation_8027c")
+states/HeadHit/position = Vector2(514.2595, -84.4548)
+states/HeavyAttack/node = SubResource("AnimationNodeAnimation_cbn6b")
+states/HeavyAttack/position = Vector2(42.6, 183.17686)
+states/HeavyAttackRecovery/node = SubResource("AnimationNodeAnimation_ejkuj")
+states/HeavyAttackRecovery/position = Vector2(177.8, 287.08432)
+states/JumpIdle/node = SubResource("AnimationNodeAnimation_ylc4a")
+states/JumpIdle/position = Vector2(935.568, 220.32295)
+states/JumpLand/node = SubResource("AnimationNodeAnimation_w4atc")
+states/JumpLand/position = Vector2(610.80005, -27.199997)
+states/JumpStart/node = SubResource("AnimationNodeAnimation_rhw32")
+states/JumpStart/position = Vector2(936.55994, 311.82446)
+states/LightAttack/node = SubResource("AnimationNodeAnimation_lmko8")
+states/LightAttack/position = Vector2(421.2, 274.88434)
+states/LightAttack2/node = SubResource("AnimationNodeAnimation_hmecv")
+states/LightAttack2/position = Vector2(581.0595, 239.1452)
+states/SpecialExit/node = SubResource("AnimationNodeAnimation_iv45o")
+states/SpecialExit/position = Vector2(644.25946, 93.293655)
+states/SpecialShoot/node = SubResource("AnimationNodeAnimation_ge4xq")
+states/SpecialShoot/position = Vector2(812.57947, 93.54904)
+states/SpecialStart/node = SubResource("AnimationNodeAnimation_bq4yu")
+states/SpecialStart/position = Vector2(813.0595, 8.545193)
+states/Standing/node = SubResource("AnimationNodeBlendSpace1D_ylc4a")
+states/Standing/position = Vector2(457.2, 93.6)
+transitions = ["Start", "Standing", SubResource("AnimationNodeStateMachineTransition_w4atc"), "JumpLand", "Standing", SubResource("AnimationNodeStateMachineTransition_3m6lo"), "JumpStart", "JumpIdle", SubResource("AnimationNodeStateMachineTransition_lmko8"), "LightAttack", "Standing", SubResource("AnimationNodeStateMachineTransition_cbn6b"), "Dash", "Standing", SubResource("AnimationNodeStateMachineTransition_ejkuj"), "HeavyAttack", "HeavyAttackRecovery", SubResource("AnimationNodeStateMachineTransition_ded0y"), "HeavyAttackRecovery", "Standing", SubResource("AnimationNodeStateMachineTransition_30o8h"), "ChestHit", "Standing", SubResource("AnimationNodeStateMachineTransition_8027c"), "HeadHit", "Standing", SubResource("AnimationNodeStateMachineTransition_hmecv"), "LightAttack2", "Standing", SubResource("AnimationNodeStateMachineTransition_7m2qr"), "SpecialExit", "Standing", SubResource("AnimationNodeStateMachineTransition_njbxy"), "SpecialShoot", "SpecialExit", SubResource("AnimationNodeStateMachineTransition_barkk"), "SpecialStart", "SpecialShoot", SubResource("AnimationNodeStateMachineTransition_rtpds")]
+graph_offset = Vector2(322.54004, -32.884857)
+
+[node name="BaseFighter" type="CharacterBody3D" unique_id=48255611 node_paths=PackedStringArray("input_handler", "input_buffer", "state_machine")]
+collision_layer = 2
+script = ExtResource("1_vdqem")
+input_handler = NodePath("PlayerInputHandler")
+input_buffer = NodePath("InputBuffer")
+state_machine = NodePath("StateMachine")
+
+[node name="PlayerInputHandler" type="Node" parent="." unique_id=1391914265 node_paths=PackedStringArray("fighter")]
+script = ExtResource("2_bgg7p")
+fighter = NodePath("..")
+metadata/_custom_type_script = "uid://betqx36uovqvv"
+
+[node name="InputBuffer" type="Node" parent="." unique_id=752003290]
+script = ExtResource("15_1b26d")
+metadata/_custom_type_script = "uid://ckl3sx47sc6yx"
+
+[node name="StateMachine" type="Node" parent="." unique_id=323651919 node_paths=PackedStringArray("fighter", "input_buffer", "animation", "starting_state")]
+script = ExtResource("4_fpq8k")
+fighter = NodePath("..")
+input_buffer = NodePath("../InputBuffer")
+animation = NodePath("../FighterAnimation")
+starting_state = NodePath("StandingState")
+metadata/_custom_type_script = "uid://denw8lg86vmw8"
+
+[node name="StandingState" type="Node" parent="StateMachine" unique_id=22592066 node_paths=PackedStringArray("jumping_state", "light_attack_state", "heavy_attack_state", "dash_state", "special_state")]
+script = ExtResource("5_j0h8e")
+jumping_state = NodePath("../JumpingState")
+light_attack_state = NodePath("../LightAttackState")
+heavy_attack_state = NodePath("../HeavyAttackState")
+dash_state = NodePath("../DashingState")
+special_state = NodePath("../SpecialState")
+blend_position_parameter_path = "parameters/Standing/blend_position"
+metadata/_custom_type_script = "uid://cdhoawqbot8yj"
+
+[node name="JumpingState" type="Node" parent="StateMachine" unique_id=1327379916 node_paths=PackedStringArray("standing_state")]
+script = ExtResource("6_sot8s")
+standing_state = NodePath("../StandingState")
+move_speed = 3.0
+blend_position_parameter_path = "parameters/Standing/blend_position"
+metadata/_custom_type_script = "uid://cle57fh6mf16q"
+
+[node name="LightAttackState" type="Node" parent="StateMachine" unique_id=1425389835 node_paths=PackedStringArray("combo_state", "standing_state")]
+script = ExtResource("7_cjoc6")
+combo_state = NodePath("../LightComboState")
+standing_state = NodePath("../StandingState")
+forward_force = 3.0
+cooldown = 0.2
+metadata/_custom_type_script = "uid://b71u831ltfd82"
+
+[node name="HeavyAttackState" type="Node" parent="StateMachine" unique_id=1372267151 node_paths=PackedStringArray("standing_state")]
+script = ExtResource("8_ylc4a")
+standing_state = NodePath("../StandingState")
+animation_name = "HeavyAttack"
+duration = 0.6
+cooldown = 0.4
+active_frames_time = 0.45
+metadata/_custom_type_script = "uid://bs5rnxp6bs13"
+
+[node name="ChestHit" type="Node" parent="StateMachine" unique_id=1476403428 node_paths=PackedStringArray("standing_state")]
+script = ExtResource("9_w4atc")
+standing_state = NodePath("../StandingState")
+metadata/_custom_type_script = "uid://ogby2s88nxrv"
+
+[node name="HeadHit" type="Node" parent="StateMachine" unique_id=385778625 node_paths=PackedStringArray("standing_state")]
+script = ExtResource("9_w4atc")
+animation_name = "HeadHit"
+standing_state = NodePath("../StandingState")
+metadata/_custom_type_script = "uid://ogby2s88nxrv"
+
+[node name="DefeatState" type="Node" parent="StateMachine" unique_id=533010310]
+script = ExtResource("10_rhw32")
+metadata/_custom_type_script = "uid://dtbe7f86x14b1"
+
+[node name="DashingState" type="Node" parent="StateMachine" unique_id=50530029 node_paths=PackedStringArray("next_state")]
+script = ExtResource("11_cbn6b")
+next_state = NodePath("../StandingState")
+metadata/_custom_type_script = "uid://b5run2nq87mng"
+
+[node name="LightComboState" type="Node" parent="StateMachine" unique_id=150189987 node_paths=PackedStringArray("standing_state")]
+script = ExtResource("12_iv45o")
+standing_state = NodePath("../StandingState")
+animation_name = "LightAttack2"
+forward_force = 3.0
+cooldown = 0.2
+metadata/_custom_type_script = "uid://donlmi4kc6kip"
+
+[node name="SpecialState" type="Node" parent="StateMachine" unique_id=1189216632 node_paths=PackedStringArray("standing_state")]
+script = ExtResource("13_ge4xq")
+standing_state = NodePath("../StandingState")
+animation_name = "SpecialStart"
+duration = 0.7
+forward_force = 0.0
+startup_time = 0.3
+active_frames_time = 0.5
+metadata/_custom_type_script = "uid://b8vtvccofi21a"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1449416530]
+libraries/FighterBase = SubResource("AnimationLibrary_3m6lo")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=302337746]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+shape = SubResource("CapsuleShape3D_h2w44")
+
+[node name="AnimationTree" type="AnimationTree" parent="." unique_id=1314739245]
+tree_root = SubResource("AnimationNodeStateMachine_h2w44")
+anim_player = NodePath("../AnimationPlayer")
+parameters/Standing/blend_position = 0.0
+
+[node name="FighterAnimation" type="Node" parent="." unique_id=1026980949 node_paths=PackedStringArray("anim_tree")]
+script = ExtResource("19_sot8s")
+anim_tree = NodePath("../AnimationTree")
+metadata/_custom_type_script = "uid://dbe1j3a2ppmqm"
+
+[node name="FighterVisual" type="Node" parent="." unique_id=1811587310]
+script = ExtResource("24_lmko8")
+hit_flash_material = ExtResource("25_cbn6b")
+metadata/_custom_type_script = "uid://dglhwjh50ossn"

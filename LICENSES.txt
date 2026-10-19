@@ -1,0 +1,101 @@
+# Third Party Asset Licenses
+
+Some of the assets provided in this course are subject to third-party licenses:
+
+===================================
+
+Animations
+Created by Quaternius
+Source: https://quaternius.itch.io/universal-animation-library and https://quaternius.itch.io/universal-animation-library-2
+License Info: Creative Commons CC0 (https://creativecommons.org/publicdomain/zero/1.0/)
+
+----------
+
+Fighter Head Model
+Created by Quaternius
+Source: https://quaternius.itch.io/universal-base-characters
+License Info: Creative Commons CC0 (https://creativecommons.org/publicdomain/zero/1.0/)
+
+----------
+
+Fighter Outfit Model
+Created by Quaternius
+Source: https://quaternius.itch.io/modular-character-outfits-fantasy
+License Info: Creative Commons CC0 (https://creativecommons.org/publicdomain/zero/1.0/)
+
+----------
+
+Prop Models
+Created by Quaternius
+Source: https://quaternius.itch.io/fantasy-props-megakit
+License Info: Creative Commons CC0 (https://creativecommons.org/publicdomain/zero/1.0/)
+
+----------
+
+Nature Models
+Created by Quaternius
+Source: https://quaternius.itch.io/stylized-nature-megakit
+License Info: Creative Commons CC0 (https://creativecommons.org/publicdomain/zero/1.0/)
+
+----------
+
+Castle and Skybox Textures
+Created by Team FreeStylized
+Source: https://freestylized.com/
+License Info: FreeStylized Custom CC0 License (https://freestylized.com/disclaimer/)
+
+----------
+
+Smoke Particles Texture
+Created by Kenney
+Source: https://kenney.nl/assets/smoke-particles
+License Info: Creative Commons CC0 (https://creativecommons.org/publicdomain/zero/1.0/)
+
+----------
+
+Metal Mania Font
+Created by Open Window
+Source: https://fonts.google.com/specimen/Metal+Mania
+License Info: SIL Open Font License, Version 1.1 (https://openfontlicense.org/)
+
+----------
+
+Background Music
+Created by cynicmusic
+Source: https://opengameart.org/content/battle-theme-a
+License Info: Creative Commons CC0 (https://creativecommons.org/publicdomain/zero/1.0/)
+
+----------
+
+Menu Music
+Created by Alexander Ehlers (tricksntraps)
+Source: https://opengameart.org/content/free-music-pack
+License Info: Creative Commons CC0 (https://creativecommons.org/publicdomain/zero/1.0/)
+
+----------
+
+Voice SFX
+Created by Kenney
+Source: https://kenney.nl/assets/voiceover-pack-fighter
+License Info: Creative Commons CC0 (https://creativecommons.org/publicdomain/zero/1.0/)
+
+----------
+
+Dash SFX
+Created by artisticdude
+Source: https://opengameart.org/content/swishes-sound-pack
+License Info: Creative Commons CC0 (https://creativecommons.org/publicdomain/zero/1.0/)
+
+----------
+
+Hit SFX
+Created by Independent.nu (submitted by qubodup)
+Source: https://opengameart.org/content/37-hitspunches
+License Info: Creative Commons CC0 (https://creativecommons.org/publicdomain/zero/1.0/)
+
+----------
+
+Light Attack SFX
+Created by gulfstreamav
+Source: https://freesound.org/people/gulfstreamav/sounds/842510/
+License Info: Creative Commons CC0 (https://creativecommons.org/publicdomain/zero/1.0/)

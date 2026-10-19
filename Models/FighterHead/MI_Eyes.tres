@@ -1,0 +1,10 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://da8yxaabvkgf4"]
+
+[ext_resource type="Texture2D" uid="uid://dl4e3y6ni1epn" path="res://Models/FighterHead/Fighter_0_Head_T_Eye_Brown.png" id="1_lrfex"]
+
+[resource]
+resource_name = "MI_Eyes"
+cull_mode = 2
+albedo_texture = ExtResource("1_lrfex")
+roughness = 0.34545454
+emission_enabled = true

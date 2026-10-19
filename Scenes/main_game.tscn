@@ -1,0 +1,114 @@
+[gd_scene format=3 uid="uid://dvck7orxrqv5b"]
+
+[ext_resource type="Script" uid="uid://bbvowb13p78u2" path="res://Scripts/camera_controller.gd" id="1_6y7pd"]
+[ext_resource type="PackedScene" uid="uid://ccaitj0cdu831" path="res://Scenes/ranger.tscn" id="1_l756w"]
+[ext_resource type="PackedScene" uid="uid://d3vah6g23glw3" path="res://Scenes/tavernkeep.tscn" id="2_pu3va"]
+[ext_resource type="Texture2D" uid="uid://bmfar6t1xnyjr" path="res://Textures/Skybox/SkyboxTexture.png" id="3_0e3vx"]
+[ext_resource type="PackedScene" uid="uid://dtlsh06pm7wji" path="res://Models/Castle/CastleWall.glb" id="4_bb2iq"]
+[ext_resource type="Material" uid="uid://dmwwu5y8jsxpb" path="res://Models/Castle/castle_ground.tres" id="5_18r40"]
+[ext_resource type="Material" uid="uid://c8y16twfehobg" path="res://Models/Castle/castle_wall.tres" id="6_6y7pd"]
+[ext_resource type="PackedScene" uid="uid://cqeolksc6h3ps" path="res://Models/Props/torch.tscn" id="7_18r40"]
+
+[sub_resource type="Curve" id="Curve_6y7pd"]
+_limits = [4.0, 10.0, 2.0, 10.0]
+_data = [Vector2(2, 4), 0.0, 0.0, 0, 0, Vector2(10, 10), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_pu3va"]
+panorama = ExtResource("3_0e3vx")
+
+[sub_resource type="Sky" id="Sky_65ton"]
+sky_material = SubResource("PanoramaSkyMaterial_pu3va")
+
+[sub_resource type="Environment" id="Environment_h2w44"]
+background_mode = 2
+sky = SubResource("Sky_65ton")
+sky_custom_fov = 70.0
+sky_rotation = Vector3(0, -0.9948377, 0)
+ambient_light_source = 3
+reflected_light_source = 2
+ssao_enabled = true
+ssao_intensity = 3.0
+glow_enabled = true
+glow_bloom = 0.5
+fog_enabled = true
+fog_light_color = Color(0.68, 0.3150667, 0.20400001, 1)
+fog_sky_affect = 0.2
+fog_height = 1.2
+fog_height_density = 0.1
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_h2w44"]
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_65ton"]
+plane = Plane(0, 0, -1, 0)
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_18r40"]
+plane = Plane(0, 0, 1, 0)
+
+[node name="Main" type="Node3D" unique_id=46452760]
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1121779797]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 6.036251, 1.4141837, -0.41386187)
+fov = 50.0
+script = ExtResource("1_6y7pd")
+zoom_curve = SubResource("Curve_6y7pd")
+
+[node name="Ranger" parent="." unique_id=691553852 node_paths=PackedStringArray("opponent") instance=ExtResource("1_l756w")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, -0.008075626, 2.295745)
+opponent = NodePath("../Tavernkeep")
+
+[node name="Tavernkeep" parent="." unique_id=48255611 node_paths=PackedStringArray("opponent") instance=ExtResource("2_pu3va")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.008075625, -3.0174608)
+player_id = 1
+opponent = NodePath("../Ranger")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=827236143]
+environment = SubResource("Environment_h2w44")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1424022333]
+transform = Transform3D(0.7832089, 0.5574374, 0.27540395, -0.24752307, -0.12678973, 0.9605502, 0.5703651, -0.82048035, 0.038675822, 0.015797146, 4.165855, 0)
+layers = 2
+light_cull_mask = 4294967294
+shadow_enabled = true
+
+[node name="Colliders" type="StaticBody3D" parent="." unique_id=1797236450]
+
+[node name="Floor" type="CollisionShape3D" parent="Colliders" unique_id=224157130]
+shape = SubResource("WorldBoundaryShape3D_h2w44")
+
+[node name="LeftWall" type="CollisionShape3D" parent="Colliders" unique_id=269223190]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7)
+shape = SubResource("WorldBoundaryShape3D_65ton")
+
+[node name="LeftWall2" type="CollisionShape3D" parent="Colliders" unique_id=334811719]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7)
+shape = SubResource("WorldBoundaryShape3D_18r40")
+
+[node name="CastleWall" parent="." unique_id=1307475896 instance=ExtResource("4_bb2iq")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
+
+[node name="Cube" parent="CastleWall" index="0" unique_id=1792980011]
+surface_material_override/0 = ExtResource("5_18r40")
+surface_material_override/1 = ExtResource("6_6y7pd")
+
+[node name="Cube_001" parent="CastleWall" index="1" unique_id=1728944476]
+surface_material_override/0 = ExtResource("6_6y7pd")
+
+[node name="House1" type="Node3D" parent="." unique_id=905371831]
+
+[node name="Torch" parent="." unique_id=219027352 instance=ExtResource("7_18r40")]
+transform = Transform3D(-0.0060035065, 0, 0.999982, 0, 1, 0, -0.999982, 0, -0.0060035065, -1.585675, 0.3601606, 0.41790438)
+
+[node name="Torch2" parent="." unique_id=1502149426 instance=ExtResource("7_18r40")]
+transform = Transform3D(-0.0060035065, 0, 0.999982, 0, 1, 0, -0.999982, 0, -0.0060035065, -1.585675, 0.3601606, -3.6953006)
+
+[node name="Torch5" parent="." unique_id=442997674 instance=ExtResource("7_18r40")]
+transform = Transform3D(-0.0060035065, 0, 0.999982, 0, 1, 0, -0.999982, 0, -0.0060035065, -1.585675, 0.3601606, -7.629668)
+
+[node name="Torch3" parent="." unique_id=1696507321 instance=ExtResource("7_18r40")]
+transform = Transform3D(-0.0060035065, 0, 0.999982, 0, 1, 0, -0.999982, 0, -0.0060035065, -1.585675, 0.3601606, 4.3335547)
+
+[node name="Torch4" parent="." unique_id=832787109 instance=ExtResource("7_18r40")]
+transform = Transform3D(-0.0060035065, 0, 0.999982, 0, 1, 0, -0.999982, 0, -0.0060035065, -1.585675, 0.3601606, 8.489786)
+
+[editable path="CastleWall"]

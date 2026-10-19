@@ -1,0 +1,14 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://c8y16twfehobg"]
+
+[ext_resource type="Texture2D" uid="uid://d0exk2r0leijj" path="res://Models/Castle/CastleWall_stone_bricks_wall_03_color_1k.png" id="1_fdvsk"]
+[ext_resource type="Texture2D" uid="uid://dnb2buedet7pq" path="res://Models/Castle/stone_bricks_wall_03_height_1k.png" id="2_54o0o"]
+[ext_resource type="Texture2D" uid="uid://dr3mse5tmhjro" path="res://Models/Castle/stone_bricks_wall_03_normal_gl_1k.png" id="3_s7iye"]
+[ext_resource type="Texture2D" uid="uid://hd3t8rjidysa" path="res://Models/Castle/stone_bricks_wall_03_roughness_1k.png" id="4_88hdt"]
+
+[resource]
+albedo_texture = ExtResource("1_fdvsk")
+roughness_texture = ExtResource("4_88hdt")
+normal_enabled = true
+normal_texture = ExtResource("3_s7iye")
+heightmap_enabled = true
+heightmap_texture = ExtResource("2_54o0o")

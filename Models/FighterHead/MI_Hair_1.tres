@@ -1,0 +1,10 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://ds2dojl1trkfx"]
+
+[ext_resource type="Texture2D" uid="uid://1bl0k0cane6p" path="res://Models/FighterHead/Fighter_0_Head_T_Hair_1_BaseColor.png" id="1_yeca2"]
+
+[resource]
+resource_name = "MI_Hair_1"
+cull_mode = 2
+albedo_texture = ExtResource("1_yeca2")
+roughness = 0.82272726
+emission_enabled = true
