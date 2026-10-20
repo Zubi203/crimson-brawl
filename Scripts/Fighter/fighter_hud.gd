@@ -24,6 +24,7 @@ func _ready() -> void:
 	_set_max_values(fighter_parent)
 	fighter_parent.HealthChanged.connect(_update_health)
 	fighter_parent.StaminaUpdated.connect(_update_stamina)
+	fighter_parent.stamina_controller.StaminaUpdated.connect(_update_stamina)
 	
 	if stats_container == null:
 		return
@@ -77,6 +78,6 @@ func _set_max_values(fighter: Fighter):
 	
 	if stamina_bar == null:
 		return
-	stamina_bar.max_value = fighter.max_stamina
+	stamina_bar.max_value = fighter.stamina_controller.data.max_stamina
 	
 	

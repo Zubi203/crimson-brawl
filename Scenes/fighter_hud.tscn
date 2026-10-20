@@ -72,17 +72,19 @@ corner_radius_top_right = 2
 corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
 
-[node name="FighterHUD" type="CanvasLayer" unique_id=738699661 node_paths=PackedStringArray("health_bar", "health_bar_underlay", "health_text", "stats_container", "player_pos_0", "player_pos_1")]
+[node name="FighterHUD" type="CanvasLayer" unique_id=738699661 node_paths=PackedStringArray("health_bar", "health_bar_underlay", "health_text", "stamina_bar", "stats_container", "player_pos_0", "player_pos_1")]
 script = ExtResource("1_f8ikl")
 health_bar = NodePath("StatsContainer/HealthDisplay/MarginContainer/HealthBar")
 health_bar_underlay = NodePath("StatsContainer/HealthDisplay/MarginContainer/HealthBarUnderlay")
 health_text = NodePath("StatsContainer/HealthDisplay/MarginContainer/HealthLabel")
+stamina_bar = NodePath("StatsContainer/StaminaDisplay/MarginContainer/StaminaBar")
 stats_container = NodePath("StatsContainer")
 player_pos_0 = NodePath("PlayerPos0")
 player_pos_1 = NodePath("PlayerPos1")
 
 [node name="PlayerPos0" type="Control" parent="." unique_id=1592758318]
 layout_mode = 3
+anchors_preset = 0
 offset_left = 70.0
 offset_top = 70.0
 offset_right = 70.0
@@ -90,6 +92,7 @@ offset_bottom = 70.0
 
 [node name="PlayerPos1" type="Control" parent="." unique_id=918475257]
 layout_mode = 3
+anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
 offset_left = 70.0

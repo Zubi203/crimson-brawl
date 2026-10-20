@@ -34,6 +34,8 @@
 [ext_resource type="Animation" uid="uid://vv8c8m0up65j" path="res://Animations/SpecialStart.res" id="26_bq4yu"]
 [ext_resource type="Animation" uid="uid://b4n61eom3ccpf" path="res://Animations/Sprint.res" id="27_7m2qr"]
 [ext_resource type="PackedScene" uid="uid://eha4iwdpiw24" path="res://Scenes/fighter_hud.tscn" id="34_bq4yu"]
+[ext_resource type="Script" uid="uid://cn4k145y807v3" path="res://Scripts/Fighter/stamina_controller.gd" id="35_7m2qr"]
+[ext_resource type="Resource" uid="uid://dxftolubilo4s" path="res://Data/stamina_data.tres" id="36_njbxy"]
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_3m6lo"]
 _data = {
@@ -99,7 +101,7 @@ animation = &"FighterBase/JumpIdle"
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_w4atc"]
 animation = &"FighterBase/JumpLand"
 use_custom_timeline = true
-timeline_length = 0.6
+timeline_length = 0.3
 stretch_time_scale = true
 start_offset = 0.0
 loop_mode = 0
@@ -269,14 +271,15 @@ states/SpecialStart/position = Vector2(813.0595, 8.545193)
 states/Standing/node = SubResource("AnimationNodeBlendSpace1D_ylc4a")
 states/Standing/position = Vector2(457.2, 93.6)
 transitions = ["Start", "Standing", SubResource("AnimationNodeStateMachineTransition_w4atc"), "JumpLand", "Standing", SubResource("AnimationNodeStateMachineTransition_3m6lo"), "JumpStart", "JumpIdle", SubResource("AnimationNodeStateMachineTransition_lmko8"), "LightAttack", "Standing", SubResource("AnimationNodeStateMachineTransition_cbn6b"), "Dash", "Standing", SubResource("AnimationNodeStateMachineTransition_ejkuj"), "HeavyAttack", "HeavyAttackRecovery", SubResource("AnimationNodeStateMachineTransition_ded0y"), "HeavyAttackRecovery", "Standing", SubResource("AnimationNodeStateMachineTransition_30o8h"), "ChestHit", "Standing", SubResource("AnimationNodeStateMachineTransition_8027c"), "HeadHit", "Standing", SubResource("AnimationNodeStateMachineTransition_hmecv"), "LightAttack2", "Standing", SubResource("AnimationNodeStateMachineTransition_7m2qr"), "SpecialExit", "Standing", SubResource("AnimationNodeStateMachineTransition_njbxy"), "SpecialShoot", "SpecialExit", SubResource("AnimationNodeStateMachineTransition_barkk"), "SpecialStart", "SpecialShoot", SubResource("AnimationNodeStateMachineTransition_rtpds")]
-graph_offset = Vector2(322.54004, -32.884857)
+graph_offset = Vector2(157.54004, -48.884857)
 
-[node name="BaseFighter" type="CharacterBody3D" unique_id=48255611 node_paths=PackedStringArray("input_handler", "input_buffer", "state_machine")]
+[node name="BaseFighter" type="CharacterBody3D" unique_id=48255611 node_paths=PackedStringArray("input_handler", "input_buffer", "state_machine", "stamina_controller")]
 collision_layer = 2
 script = ExtResource("1_vdqem")
 input_handler = NodePath("PlayerInputHandler")
 input_buffer = NodePath("InputBuffer")
 state_machine = NodePath("StateMachine")
+stamina_controller = NodePath("StaminaController")
 
 [node name="PlayerInputHandler" type="Node" parent="." unique_id=1391914265 node_paths=PackedStringArray("fighter")]
 script = ExtResource("2_bgg7p")
@@ -390,3 +393,8 @@ hit_flash_material = ExtResource("25_cbn6b")
 metadata/_custom_type_script = "uid://dglhwjh50ossn"
 
 [node name="FighterHUD" parent="." unique_id=738699661 instance=ExtResource("34_bq4yu")]
+
+[node name="StaminaController" type="Node" parent="." unique_id=967866532]
+script = ExtResource("35_7m2qr")
+data = ExtResource("36_njbxy")
+metadata/_custom_type_script = "uid://cn4k145y807v3"

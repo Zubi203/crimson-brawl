@@ -3,7 +3,6 @@ extends CharacterBody3D
 
 signal HealthChanged (fighter: Fighter)
 signal StaminaUpdated (stamina: float)
-signal Defeated (fighter: Fighter)
 
 @export var player_id: int = 0
 @export var opponent: Fighter
@@ -11,6 +10,7 @@ signal Defeated (fighter: Fighter)
 @export var input_handler: InputHandler
 @export var input_buffer: InputBuffer
 @export var state_machine: StateMachine
+@export var stamina_controller: StaminaController
 
 var forward_direction: int
 var move_velocity: Vector3
@@ -18,7 +18,13 @@ var horizontal_force: float
 @export var drag: float = 0.8
 
 @export var max_health: int = 100
-@export var max_stamina: float = 100
+
+var game_manager: GameManager:
+	get:
+		if ServiceLocator.service_exists("game_manager"):
+			return ServiceLocator.get_service("game_manager")
+		return null
+
 var current_health: int:
 	set(value):
 		current_health = value
@@ -49,6 +55,8 @@ func setup():
 	current_health = max_health
 
 func _physics_process(delta: float) -> void:
+	if !game_manager.current_state == GameManager.GameState.PLAYING:
+		return
 	
 	# get input packet
 	var input_packet: InputPacket = input_handler.get_input_packet()
@@ -103,6 +111,6 @@ func defeat():
 	if is_defeated:
 		return
 	
-	Defeated.emit(self)
+	GlobalEvents.FighterDefeated.emit(self)
 	is_defeated = true
 	state_machine.change_state("DefeatState")

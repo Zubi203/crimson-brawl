@@ -7,9 +7,15 @@ extends MovementState
 @export var jump_start_animation_name: String = "JumpStart"
 @export var jump_land_animation_name: String = "JumpLand"
 
+func can_enter() -> bool:
+	return stamina_controller.stamina_available(stamina_data.light_attack_cost)
+	
 func enter():
+	super.enter()
 	animation.set_animation(jump_start_animation_name)
 	fighter.move_velocity.y = jump_force
+	stamina_controller.consume_stamina(stamina_data.light_attack_cost)
+
 
 func update(delta: float):
 	super.update(delta)

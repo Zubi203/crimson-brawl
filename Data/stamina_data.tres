@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="StaminaData" format=3 uid="uid://dxftolubilo4s"]
+
+[ext_resource type="Script" uid="uid://c7p8hluhc6fig" path="res://Scripts/Data/stamina_data.gd" id="1_yvpvi"]
+
+[resource]
+script = ExtResource("1_yvpvi")
+regen_rate = 20.0
+heavy_attack_cost = 10.0
+metadata/_custom_type_script = "uid://c7p8hluhc6fig"

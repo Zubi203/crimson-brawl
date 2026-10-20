@@ -16,7 +16,7 @@ func can_enter() -> bool:
 	if Time.get_unix_time_from_system() < cooldown_end_time:
 		return false
 	
-	return true
+	return stamina_controller.stamina_available(stamina_data.dash_cost)
 
 func enter():
 	super.enter()
@@ -24,6 +24,7 @@ func enter():
 	move_dir = input_buffer.movement_direction()
 	fighter.move_velocity = Vector3.ZERO
 	animation.set_animation(animation_name)
+	stamina_controller.consume_stamina(stamina_data.dash_cost)
 
 func update(delta: float):
 	super.update(delta)
