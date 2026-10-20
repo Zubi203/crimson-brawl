@@ -16,7 +16,7 @@ func _ready() -> void:
 		models.append(child)
 	
 	if owner is Fighter:
-		owner.DamageTaken.connect(hit_flash)
+		owner.HealthChanged.connect(hit_flash)
 	
 	if models.is_empty():
 		return

@@ -1,7 +1,8 @@
 class_name Fighter
 extends CharacterBody3D
 
-signal DamageTaken (fighter: Fighter)
+signal HealthChanged (fighter: Fighter)
+signal StaminaUpdated (stamina: float)
 signal Defeated (fighter: Fighter)
 
 @export var player_id: int = 0
@@ -17,10 +18,12 @@ var horizontal_force: float
 @export var drag: float = 0.8
 
 @export var max_health: int = 100
+@export var max_stamina: float = 100
 var current_health: int:
 	set(value):
 		current_health = value
 		current_health = clamp(current_health, 0, max_health)
+		HealthChanged.emit(self)
 		if current_health <= 0:
 			defeat()
 var is_defeated: bool = false
@@ -33,7 +36,7 @@ var camera_controller: CameraController:
 		return ServiceLocator.get_service("camera_controller")
 
 func _ready() -> void:
-	current_health = max_health
+	setup.call_deferred()
 	camera_controller.set_target_fighter(self)
 	
 	for child in find_children("*", "HitReciever", true, false):
@@ -41,6 +44,9 @@ func _ready() -> void:
 	
 	for child in find_children("*", "HitSender", true, false):
 		child.initialize(self)
+
+func setup():
+	current_health = max_health
 
 func _physics_process(delta: float) -> void:
 	
@@ -61,6 +67,8 @@ func _physics_process(delta: float) -> void:
 
 func _update_facing_direction():
 	if opponent == null:
+		return
+	if is_defeated:
 		return
 	
 	if global_position.z < opponent.global_position.z:
@@ -83,7 +91,7 @@ func _movement(_delta: float):
 
 func take_damage(source: HitReciever, damage: int, knockback: float = 8.0):
 	current_health -= damage
-	DamageTaken.emit(self)
+	camera_controller.shake()
 	
 	if is_defeated:
 		return

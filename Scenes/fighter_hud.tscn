@@ -1,0 +1,179 @@
+[gd_scene format=3 uid="uid://eha4iwdpiw24"]
+
+[ext_resource type="Script" uid="uid://ct15hmgwdisae" path="res://Scripts/Fighter/fighter_hud.gd" id="1_f8ikl"]
+[ext_resource type="FontFile" uid="uid://x8i6v4n3k2ku" path="res://Fonts/MetalMania-Regular.ttf" id="2_j8b3r"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f8ikl"]
+bg_color = Color(0.18, 0.012599999, 0.012599999, 1)
+skew = Vector2(0.5, 0)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+shadow_color = Color(0, 0, 0, 0.3254902)
+shadow_size = 1
+shadow_offset = Vector2(3, 3)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yhcui"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j8b3r"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0.97, 0.59364, 0.029099973, 1)
+skew = Vector2(0.5, 0)
+border_width_bottom = 20
+border_color = Color(0.73, 0.44676, 0.02189998, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_65ton"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0.92, 0.08279998, 0.08279998, 1)
+skew = Vector2(0.5, 0)
+border_width_bottom = 20
+border_color = Color(0.52, 0.046799984, 0.046799984, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="LabelSettings" id="LabelSettings_h2w44"]
+font = ExtResource("2_j8b3r")
+font_size = 42
+outline_size = 6
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 4
+shadow_color = Color(0, 0, 0, 0.44705883)
+shadow_offset = Vector2(2, 2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ydumf"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0.07919998, 0.88, 0.7064933, 1)
+skew = Vector2(0.5, 0)
+border_width_bottom = 5
+border_color = Color(0.04139999, 0.46, 0.36930335, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[node name="FighterHUD" type="CanvasLayer" unique_id=738699661 node_paths=PackedStringArray("health_bar", "health_bar_underlay", "health_text", "stats_container", "player_pos_0", "player_pos_1")]
+script = ExtResource("1_f8ikl")
+health_bar = NodePath("StatsContainer/HealthDisplay/MarginContainer/HealthBar")
+health_bar_underlay = NodePath("StatsContainer/HealthDisplay/MarginContainer/HealthBarUnderlay")
+health_text = NodePath("StatsContainer/HealthDisplay/MarginContainer/HealthLabel")
+stats_container = NodePath("StatsContainer")
+player_pos_0 = NodePath("PlayerPos0")
+player_pos_1 = NodePath("PlayerPos1")
+
+[node name="PlayerPos0" type="Control" parent="." unique_id=1592758318]
+layout_mode = 3
+offset_left = 70.0
+offset_top = 70.0
+offset_right = 70.0
+offset_bottom = 70.0
+
+[node name="PlayerPos1" type="Control" parent="." unique_id=918475257]
+layout_mode = 3
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 70.0
+offset_top = 70.0
+offset_right = -770.0
+offset_bottom = 70.0
+grow_horizontal = 0
+
+[node name="StatsContainer" type="VBoxContainer" parent="." unique_id=1747424445]
+offset_left = 65.0
+offset_top = 62.0
+offset_right = 765.0
+offset_bottom = 155.0
+offset_transform_enabled = true
+theme_override_constants/separation = -7
+alignment = 1
+
+[node name="HealthDisplay" type="Panel" parent="StatsContainer" unique_id=1192945154]
+show_behind_parent = true
+custom_minimum_size = Vector2(700, 70)
+custom_maximum_size = Vector2(700, -1)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_f8ikl")
+
+[node name="MarginContainer" type="MarginContainer" parent="StatsContainer/HealthDisplay" unique_id=1456424345]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="HealthBarUnderlay" type="ProgressBar" parent="StatsContainer/HealthDisplay/MarginContainer" unique_id=1938036387]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_styles/background = SubResource("StyleBoxEmpty_yhcui")
+theme_override_styles/fill = SubResource("StyleBoxFlat_j8b3r")
+value = 62.19
+show_percentage = false
+
+[node name="HealthBar" type="ProgressBar" parent="StatsContainer/HealthDisplay/MarginContainer" unique_id=544022604]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_styles/background = SubResource("StyleBoxEmpty_yhcui")
+theme_override_styles/fill = SubResource("StyleBoxFlat_65ton")
+value = 40.59
+show_percentage = false
+
+[node name="HealthLabel" type="Label" parent="StatsContainer/HealthDisplay/MarginContainer" unique_id=1897659507]
+visible = false
+layout_mode = 2
+size_flags_vertical = 1
+text = "100 / 100"
+label_settings = SubResource("LabelSettings_h2w44")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StaminaDisplay" type="Panel" parent="StatsContainer" unique_id=1388526711]
+show_behind_parent = true
+custom_minimum_size = Vector2(600, 30)
+custom_maximum_size = Vector2(600, -1)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_f8ikl")
+
+[node name="MarginContainer" type="MarginContainer" parent="StatsContainer/StaminaDisplay" unique_id=1128617609]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="StaminaBar" type="ProgressBar" parent="StatsContainer/StaminaDisplay/MarginContainer" unique_id=1875868288]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_styles/background = SubResource("StyleBoxEmpty_yhcui")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ydumf")
+value = 40.59
+show_percentage = false
