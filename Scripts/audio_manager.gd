@@ -5,10 +5,10 @@ var players: Array[AudioStreamPlayer]
 @export var pitch_randomness: float = 0.1
 
 func _enter_tree() -> void:
-	ManagerRegistry.register("audio_manager", self)
+	ServiceLocator.register("audio_manager", self)
 
 func _exit_tree() -> void:
-	ManagerRegistry.unregister("audio_manager")
+	ServiceLocator.unregister("audio_manager")
 
 func play (sound: AudioStream, volume_db: float = 0.0):
 	if sound == null:

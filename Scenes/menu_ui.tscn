@@ -1,0 +1,144 @@
+[gd_scene format=3 uid="uid://d3m8e2cw8tj3w"]
+
+[ext_resource type="FontFile" uid="uid://x8i6v4n3k2ku" path="res://Fonts/MetalMania-Regular.ttf" id="1_28efy"]
+[ext_resource type="Theme" uid="uid://crnhsk1q6t8r" path="res://Data/ui_theme.tres" id="1_bhc3w"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_h2w44"]
+font = ExtResource("1_28efy")
+font_size = 96
+font_color = Color(0, 0, 0, 1)
+shadow_size = 3
+shadow_color = Color(1, 0.3, 0.3, 1)
+shadow_offset = Vector2(5, 5)
+
+[node name="MenuUI" type="CanvasLayer" unique_id=1963338206]
+
+[node name="BG" type="ColorRect" parent="." unique_id=115193753]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("1_bhc3w")
+color = Color(0.86, 0.86, 0.86, 0)
+
+[node name="RedBorder" type="ColorRect" parent="BG" unique_id=391140247]
+layout_mode = 0
+offset_left = 151.00002
+offset_top = 1080.0001
+offset_right = 2251.0935
+offset_bottom = 1507.0001
+rotation = -0.09618686
+mouse_filter = 2
+color = Color(1, 0.23000002, 0.23000002, 1)
+
+[node name="RedBorder2" type="ColorRect" parent="BG" unique_id=1950443552]
+layout_mode = 0
+offset_left = -591.0
+offset_top = -180.84161
+offset_right = 1509.0935
+offset_bottom = 246.15839
+rotation = -0.1328211
+mouse_filter = 2
+color = Color(1, 0.23000002, 0.23000002, 1)
+
+[node name="BlackBorder" type="ColorRect" parent="BG" unique_id=110069627]
+layout_mode = 0
+offset_left = -618.0
+offset_top = -170.84172
+offset_right = 1482.0935
+offset_bottom = 256.15826
+rotation = -0.15111938
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="BlackBorder2" type="ColorRect" parent="BG" unique_id=1655486581]
+layout_mode = 0
+offset_left = 199.0
+offset_top = 1122.9999
+offset_right = 2299.0935
+offset_bottom = 1549.9999
+rotation = -0.12325936
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="BG" unique_id=1508650671]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TitleText" type="Label" parent="BG/VBoxContainer" unique_id=2128139338]
+custom_minimum_size = Vector2(0, 300)
+layout_mode = 2
+text = "UNTITLED FIGHTING GAME"
+label_settings = SubResource("LabelSettings_h2w44")
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="BG/VBoxContainer" unique_id=1487834912]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Padding" type="Control" parent="BG/VBoxContainer/HBoxContainer" unique_id=291269231]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="Padding2" type="Control" parent="BG/VBoxContainer/HBoxContainer" unique_id=1108798955]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="ButtonContainer" type="VBoxContainer" parent="BG/VBoxContainer/HBoxContainer" unique_id=1620860549]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 30
+
+[node name="Padding2" type="Control" parent="BG/VBoxContainer/HBoxContainer/ButtonContainer" unique_id=2015049875]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="LocalMPButton" type="Button" parent="BG/VBoxContainer/HBoxContainer/ButtonContainer" unique_id=40043874]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Local PvP"
+
+[node name="PvEButton" type="Button" parent="BG/VBoxContainer/HBoxContainer/ButtonContainer" unique_id=1812682863]
+layout_mode = 2
+size_flags_vertical = 3
+text = "PvE"
+
+[node name="OnlineMPButton" type="Button" parent="BG/VBoxContainer/HBoxContainer/ButtonContainer" unique_id=1919123567]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Online PvP"
+
+[node name="ExitButton" type="Button" parent="BG/VBoxContainer/HBoxContainer/ButtonContainer" unique_id=754601021]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Quit"
+
+[node name="Padding" type="Control" parent="BG/VBoxContainer/HBoxContainer/ButtonContainer" unique_id=265809920]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="Padding3" type="Control" parent="BG/VBoxContainer/HBoxContainer/ButtonContainer" unique_id=8698965]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="Padding5" type="Control" parent="BG/VBoxContainer/HBoxContainer" unique_id=1744819220]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="Padding6" type="Control" parent="BG/VBoxContainer/HBoxContainer" unique_id=1597263737]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
