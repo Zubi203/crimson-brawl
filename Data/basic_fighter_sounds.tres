@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="FighterSoundData" format=3 uid="uid://dtx3k2l8jagdr"]
+
+[ext_resource type="AudioStream" uid="uid://dtgm6u5nh2bal" path="res://Audio/Combat/Dash.ogg" id="1_i0ors"]
+[ext_resource type="Script" uid="uid://dkaijnf7eu51o" path="res://Scripts/Data/fighter_sound_data.gd" id="1_oh6ga"]
+[ext_resource type="AudioStream" uid="uid://dl747mmrh0v0x" path="res://Audio/Combat/Hit.ogg" id="2_44tnm"]
+[ext_resource type="AudioStream" uid="uid://cqw8pv8u2v1lw" path="res://Audio/Combat/LightAttack.ogg" id="3_5u536"]
+
+[resource]
+script = ExtResource("1_oh6ga")
+light_attack = ExtResource("3_5u536")
+dash = ExtResource("1_i0ors")
+hit = ExtResource("2_44tnm")
+metadata/_custom_type_script = "uid://dkaijnf7eu51o"

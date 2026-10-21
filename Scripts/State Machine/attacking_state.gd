@@ -36,6 +36,7 @@ func update(delta: float):
 			
 			if hit and not has_hit:
 				has_hit = true
+				audio_manager.play_random_pitch(sound_data.hit)
 				hit.hit(damage)
 	
 	if local_time >= duration:

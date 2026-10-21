@@ -2,6 +2,7 @@
 
 [ext_resource type="Animation" uid="uid://fhyv8w1tanwe" path="res://Animations/Dash.tres" id="1_g6k5k"]
 [ext_resource type="Script" uid="uid://dpaylk0mjfeds" path="res://Scripts/Fighter/fighter.gd" id="1_vdqem"]
+[ext_resource type="Resource" uid="uid://dtx3k2l8jagdr" path="res://Data/basic_fighter_sounds.tres" id="2_barkk"]
 [ext_resource type="Script" uid="uid://betqx36uovqvv" path="res://Scripts/Inputs/player_input_handler.gd" id="2_bgg7p"]
 [ext_resource type="Animation" uid="uid://dhukn2h54qvdm" path="res://Animations/Defeat.tres" id="2_vdqem"]
 [ext_resource type="Animation" uid="uid://d12m862eiuruk" path="res://Animations/HeavyAttack.tres" id="3_bgg7p"]
@@ -9,6 +10,7 @@
 [ext_resource type="Script" uid="uid://denw8lg86vmw8" path="res://Scripts/State Machine/state_machine.gd" id="4_fpq8k"]
 [ext_resource type="Animation" uid="uid://dne6g4qhinvib" path="res://Animations/Hit_Chest.tres" id="5_fpq8k"]
 [ext_resource type="Script" uid="uid://cdhoawqbot8yj" path="res://Scripts/State Machine/standing_state.gd" id="5_j0h8e"]
+[ext_resource type="Script" uid="uid://ch1f4gbkeqd1c" path="res://Scripts/Fighter/fighter_signals.gd" id="5_rtpds"]
 [ext_resource type="Animation" uid="uid://b2frugccqmd7i" path="res://Animations/Hit_Head.tres" id="6_gowae"]
 [ext_resource type="Script" uid="uid://cle57fh6mf16q" path="res://Scripts/State Machine/jumping_state.gd" id="6_sot8s"]
 [ext_resource type="Script" uid="uid://b71u831ltfd82" path="res://Scripts/State Machine/light_attack_state.gd" id="7_cjoc6"]
@@ -273,13 +275,15 @@ states/Standing/position = Vector2(457.2, 93.6)
 transitions = ["Start", "Standing", SubResource("AnimationNodeStateMachineTransition_w4atc"), "JumpLand", "Standing", SubResource("AnimationNodeStateMachineTransition_3m6lo"), "JumpStart", "JumpIdle", SubResource("AnimationNodeStateMachineTransition_lmko8"), "LightAttack", "Standing", SubResource("AnimationNodeStateMachineTransition_cbn6b"), "Dash", "Standing", SubResource("AnimationNodeStateMachineTransition_ejkuj"), "HeavyAttack", "HeavyAttackRecovery", SubResource("AnimationNodeStateMachineTransition_ded0y"), "HeavyAttackRecovery", "Standing", SubResource("AnimationNodeStateMachineTransition_30o8h"), "ChestHit", "Standing", SubResource("AnimationNodeStateMachineTransition_8027c"), "HeadHit", "Standing", SubResource("AnimationNodeStateMachineTransition_hmecv"), "LightAttack2", "Standing", SubResource("AnimationNodeStateMachineTransition_7m2qr"), "SpecialExit", "Standing", SubResource("AnimationNodeStateMachineTransition_njbxy"), "SpecialShoot", "SpecialExit", SubResource("AnimationNodeStateMachineTransition_barkk"), "SpecialStart", "SpecialShoot", SubResource("AnimationNodeStateMachineTransition_rtpds")]
 graph_offset = Vector2(157.54004, -48.884857)
 
-[node name="BaseFighter" type="CharacterBody3D" unique_id=48255611 node_paths=PackedStringArray("input_handler", "input_buffer", "state_machine", "stamina_controller")]
+[node name="BaseFighter" type="CharacterBody3D" unique_id=48255611 node_paths=PackedStringArray("input_handler", "input_buffer", "state_machine", "stamina_controller", "fighter_signals")]
 collision_layer = 2
 script = ExtResource("1_vdqem")
 input_handler = NodePath("PlayerInputHandler")
 input_buffer = NodePath("InputBuffer")
 state_machine = NodePath("StateMachine")
 stamina_controller = NodePath("StaminaController")
+sound_data = ExtResource("2_barkk")
+fighter_signals = NodePath("FighterSignals")
 
 [node name="PlayerInputHandler" type="Node" parent="." unique_id=1391914265 node_paths=PackedStringArray("fighter")]
 script = ExtResource("2_bgg7p")
@@ -289,6 +293,10 @@ metadata/_custom_type_script = "uid://betqx36uovqvv"
 [node name="InputBuffer" type="Node" parent="." unique_id=752003290]
 script = ExtResource("15_1b26d")
 metadata/_custom_type_script = "uid://ckl3sx47sc6yx"
+
+[node name="FighterSignals" type="Node" parent="." unique_id=29212043]
+script = ExtResource("5_rtpds")
+metadata/_custom_type_script = "uid://ch1f4gbkeqd1c"
 
 [node name="StateMachine" type="Node" parent="." unique_id=323651919 node_paths=PackedStringArray("fighter", "input_buffer", "animation", "starting_state")]
 script = ExtResource("4_fpq8k")

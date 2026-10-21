@@ -3,10 +3,10 @@ extends Node2D
 
 var button_parent: BaseButton = null
 @export var hover_scale_increase: float = 0.2
-@export var pressed_scale_increase: float = 0.2
+@export var pressed_scale_increase: float = 0.25
 @export var scale_with_width: bool = true
 @export var width_full_rotation: float = 400
-@export var rotate_on_hover: bool = true
+@export var rotate_on_hover: bool = false
 var base_scale: Vector2 = Vector2.ONE
 var base_rotation_degress: float
 @export var animation_duration: float = 1
@@ -52,7 +52,7 @@ func _on_mouse_entered():
 	
 	#scaling speed is non uniform between x and y axes, making the animation look "squishier" 
 	tween.tween_property(button_parent, "scale:x", scale_target.x, animation_duration * 0.2)
-	tween.parallel().tween_property(button_parent, "scale:y", scale_target.y, animation_duration * 0.35)
+	#tween.parallel().tween_property(button_parent, "scale:y", scale_target.y, animation_duration * 0.35)
 	
 	if rotate_on_hover:
 		tween.parallel().tween_property(button_parent, "rotation_degrees", 2.0 * scale_ratio * [-1.0, 1.0].pick_random(), animation_duration * 0.1)

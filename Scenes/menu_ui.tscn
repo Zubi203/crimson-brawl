@@ -1,7 +1,10 @@
 [gd_scene format=3 uid="uid://d3m8e2cw8tj3w"]
 
 [ext_resource type="FontFile" uid="uid://x8i6v4n3k2ku" path="res://Fonts/MetalMania-Regular.ttf" id="1_28efy"]
+[ext_resource type="Script" uid="uid://cfidens1j0prd" path="res://Scripts/UI/menu_ui.gd" id="1_amrxi"]
 [ext_resource type="Theme" uid="uid://crnhsk1q6t8r" path="res://Data/ui_theme.tres" id="1_bhc3w"]
+[ext_resource type="Script" uid="uid://sshbisoigeyr" path="res://Scripts/UI/animated_button_component.gd" id="3_2f5qs"]
+[ext_resource type="Script" uid="uid://dimct1fhrm5my" path="res://Scripts/UI/container_animation.gd" id="3_bryks"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_h2w44"]
 font = ExtResource("1_28efy")
@@ -12,6 +15,7 @@ shadow_color = Color(1, 0.3, 0.3, 1)
 shadow_offset = Vector2(5, 5)
 
 [node name="MenuUI" type="CanvasLayer" unique_id=1963338206]
+script = ExtResource("1_amrxi")
 
 [node name="BG" type="ColorRect" parent="." unique_id=115193753]
 anchors_preset = 15
@@ -97,6 +101,8 @@ mouse_filter = 2
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 30
+script = ExtResource("3_bryks")
+anim_when = 1
 
 [node name="Padding2" type="Control" parent="BG/VBoxContainer/HBoxContainer/ButtonContainer" unique_id=2015049875]
 layout_mode = 2
@@ -108,20 +114,36 @@ layout_mode = 2
 size_flags_vertical = 3
 text = "Local PvP"
 
+[node name="AnimatedButtonComponent" type="Node2D" parent="BG/VBoxContainer/HBoxContainer/ButtonContainer/LocalMPButton" unique_id=1286112432]
+script = ExtResource("3_2f5qs")
+metadata/_custom_type_script = "uid://sshbisoigeyr"
+
 [node name="PvEButton" type="Button" parent="BG/VBoxContainer/HBoxContainer/ButtonContainer" unique_id=1812682863]
 layout_mode = 2
 size_flags_vertical = 3
 text = "PvE"
+
+[node name="AnimatedButtonComponent" type="Node2D" parent="BG/VBoxContainer/HBoxContainer/ButtonContainer/PvEButton" unique_id=1541383148]
+script = ExtResource("3_2f5qs")
+metadata/_custom_type_script = "uid://sshbisoigeyr"
 
 [node name="OnlineMPButton" type="Button" parent="BG/VBoxContainer/HBoxContainer/ButtonContainer" unique_id=1919123567]
 layout_mode = 2
 size_flags_vertical = 3
 text = "Online PvP"
 
+[node name="AnimatedButtonComponent" type="Node2D" parent="BG/VBoxContainer/HBoxContainer/ButtonContainer/OnlineMPButton" unique_id=2044498675]
+script = ExtResource("3_2f5qs")
+metadata/_custom_type_script = "uid://sshbisoigeyr"
+
 [node name="ExitButton" type="Button" parent="BG/VBoxContainer/HBoxContainer/ButtonContainer" unique_id=754601021]
 layout_mode = 2
 size_flags_vertical = 3
 text = "Quit"
+
+[node name="AnimatedButtonComponent" type="Node2D" parent="BG/VBoxContainer/HBoxContainer/ButtonContainer/ExitButton" unique_id=1592593004]
+script = ExtResource("3_2f5qs")
+metadata/_custom_type_script = "uid://sshbisoigeyr"
 
 [node name="Padding" type="Control" parent="BG/VBoxContainer/HBoxContainer/ButtonContainer" unique_id=265809920]
 layout_mode = 2
@@ -142,3 +164,8 @@ mouse_filter = 2
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
+
+[connection signal="pressed" from="BG/VBoxContainer/HBoxContainer/ButtonContainer/LocalMPButton" to="." method="_on_local_mp_button_pressed"]
+[connection signal="pressed" from="BG/VBoxContainer/HBoxContainer/ButtonContainer/PvEButton" to="." method="_on_pv_e_button_pressed"]
+[connection signal="pressed" from="BG/VBoxContainer/HBoxContainer/ButtonContainer/OnlineMPButton" to="." method="_on_online_mp_button_pressed"]
+[connection signal="pressed" from="BG/VBoxContainer/HBoxContainer/ButtonContainer/ExitButton" to="." method="_on_exit_button_pressed"]

@@ -12,6 +12,10 @@ func can_enter() -> bool:
 	
 func enter():
 	super.enter()
+	
+	audio_manager.play_random_pitch(sound_data.jump)
+	signals.Jumped.emit()
+	
 	animation.set_animation(jump_start_animation_name)
 	fighter.move_velocity.y = jump_force
 	stamina_controller.consume_stamina(stamina_data.light_attack_cost)
@@ -26,5 +30,6 @@ func update(delta: float):
 		state_machine.change_state(standing_state.name)
 
 func exit():
+	audio_manager.play_random_pitch(sound_data.jump_land)
 	animation.set_animation(jump_land_animation_name)
 	fighter.move_velocity.y = 0.0

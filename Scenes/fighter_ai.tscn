@@ -1,0 +1,65 @@
+[gd_scene format=3 uid="uid://d0nvw5450l0bg"]
+
+[ext_resource type="PackedScene" uid="uid://d3vah6g23glw3" path="res://Scenes/tavernkeep.tscn" id="1_14qvg"]
+[ext_resource type="Script" uid="uid://xo27xjr7wxfi" path="res://Scripts/AI/ai_detector.gd" id="2_bid2c"]
+[ext_resource type="Script" uid="uid://j4piuv22yd6y" path="res://Scripts/AI/ai_brain.gd" id="3_n3tlt"]
+[ext_resource type="Script" uid="uid://crgryqyjhfrd5" path="res://Scripts/AI/ai_input_handler.gd" id="4_qj7el"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iyxq3"]
+resource_local_to_scene = true
+transparency = 1
+albedo_color = Color(1, 1, 1, 0)
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 1.1
+
+[node name="FighterAI" unique_id=48255611 node_paths=PackedStringArray("input_handler") instance=ExtResource("1_14qvg")]
+player_id = 1
+input_handler = NodePath("AIInputHandler")
+
+[node name="GeneralSkeleton" parent="Male_Peasant/Armature" parent_id_path=PackedInt32Array(106058088) index="0" unique_id=789314765]
+bones/1/position = Vector3(0.0016018207, 0.89958346, -0.09109076)
+bones/1/rotation = Quaternion(-0.035026923, -0.11594229, -0.004091264, 0.9926298)
+bones/3/rotation = Quaternion(0.09295093, 0.00011278444, 0.00025368604, 0.9956707)
+bones/4/rotation = Quaternion(0.09294879, 0.0003210027, 0.00024700578, 0.9956709)
+bones/5/rotation = Quaternion(-0.09294885, -0.00021718907, -0.00026005472, 0.99567086)
+bones/6/rotation = Quaternion(0.043177724, 0.09539801, 0.011176377, 0.9944396)
+bones/7/rotation = Quaternion(0.50323087, 0.52111095, 0.53120023, -0.43935004)
+bones/8/rotation = Quaternion(-0.012492275, 0.8257562, -0.56380635, 0.009657037)
+bones/9/rotation = Quaternion(0.15775247, -0.68877923, 0.16886897, 0.68715394)
+bones/31/rotation = Quaternion(0.55517286, -0.4708879, -0.47767937, -0.49180293)
+bones/32/rotation = Quaternion(0.06342803, 0.82038504, -0.5681994, -0.009732218)
+bones/33/rotation = Quaternion(0.28771445, 0.5579146, -0.21092749, 0.7493072)
+bones/55/rotation = Quaternion(-0.0008386011, 0.15887392, 0.979992, -0.119892545)
+bones/56/rotation = Quaternion(0.021452557, 0.9739841, -0.1971486, 0.109668866)
+bones/57/rotation = Quaternion(-0.09655074, 0.7138998, -0.6935249, 0.006947764)
+bones/60/rotation = Quaternion(0.0009749936, -0.07129545, 0.9876666, 0.13939478)
+bones/61/rotation = Quaternion(-0.054530628, 0.92231965, -0.14956717, -0.35211158)
+bones/62/rotation = Quaternion(0.17058693, 0.6185143, -0.7670272, 0.0030793108)
+
+[node name="LeftHand" parent="Male_Peasant/Armature/GeneralSkeleton" index="7" unique_id=165016580]
+transform = Transform3D(0.45077944, 0.03162936, -0.8920752, -0.40989077, -0.88044506, -0.23834129, -0.79296154, 0.4730925, -0.38392174, 0.31053063, 0.9441617, 0.027857888)
+
+[node name="RightHand" parent="Male_Peasant/Armature/GeneralSkeleton" index="8" unique_id=1505730946]
+transform = Transform3D(0.052172314, -0.13098851, 0.99001, 0.5354289, -0.8331551, -0.13845122, 0.8429675, 0.53730327, 0.02666767, -0.27074584, 0.96762747, -0.15329105)
+
+[node name="Chest" parent="Male_Peasant/Armature/GeneralSkeleton" index="9" unique_id=782435352]
+transform = Transform3D(0.9731304, -0.027059222, -0.2286588, 0.0005123086, 0.9933227, -0.115368366, 0.23025374, 0.112151325, 0.9666464, -0.005464852, 1.1310204, -0.061253097)
+
+[node name="Head" parent="Male_Peasant/Armature/GeneralSkeleton" index="10" unique_id=1535667967]
+transform = Transform3D(0.9975231, -0.060665935, -0.03559439, 0.0525612, 0.97921026, -0.19592066, 0.04674007, 0.19356453, 0.97997344, -0.021334037, 1.5533706, 0.004362706)
+
+[node name="FighterVisual" parent="." index="9" unique_id=1811587310]
+hit_flash_material = SubResource("StandardMaterial3D_iyxq3")
+
+[node name="AIDetector" type="Node" parent="." index="12" unique_id=1711259560]
+script = ExtResource("2_bid2c")
+metadata/_custom_type_script = "uid://xo27xjr7wxfi"
+
+[node name="AIBrain" type="Node" parent="." index="13" unique_id=1767978083]
+script = ExtResource("3_n3tlt")
+metadata/_custom_type_script = "uid://j4piuv22yd6y"
+
+[node name="AIInputHandler" type="Node" parent="." index="14" unique_id=1139175917]
+script = ExtResource("4_qj7el")
+metadata/_custom_type_script = "uid://crgryqyjhfrd5"

@@ -26,6 +26,9 @@ func _ready() -> void:
 	fighter_parent.StaminaUpdated.connect(_update_stamina)
 	fighter_parent.stamina_controller.StaminaUpdated.connect(_update_stamina)
 	
+	_setup_ui.call_deferred()
+	
+func _setup_ui():
 	if stats_container == null:
 		return
 	if player_pos_0 == null:

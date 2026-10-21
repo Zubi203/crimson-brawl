@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="FightingGameProject"
-run/main_scene="uid://dvck7orxrqv5b"
+run/main_scene="uid://bilxhlx6q35ji"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -19,6 +19,8 @@ config/icon="res://icon.svg"
 
 ServiceLocator="*uid://cjfcxwafakcra"
 GlobalEvents="*uid://cdih6yttsv6y1"
+GlobalData="*uid://ctowcabx1j810"
+SceneTransition="*uid://b6gdncamey57o"
 
 [display]
 

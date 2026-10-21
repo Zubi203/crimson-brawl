@@ -11,6 +11,8 @@ signal StaminaUpdated (stamina: float)
 @export var input_buffer: InputBuffer
 @export var state_machine: StateMachine
 @export var stamina_controller: StaminaController
+@export var sound_data: FighterSoundData
+@export var fighter_signals: FighterSignals
 
 var forward_direction: int
 var move_velocity: Vector3
@@ -42,17 +44,18 @@ var camera_controller: CameraController:
 		return ServiceLocator.get_service("camera_controller")
 
 func _ready() -> void:
-	setup.call_deferred()
-	camera_controller.set_target_fighter(self)
-	
 	for child in find_children("*", "HitReciever", true, false):
 		child.initialize(self)
 	
 	for child in find_children("*", "HitSender", true, false):
 		child.initialize(self)
 
-func setup():
+func setup(_opponent: Fighter = null, id: int = 0):
 	current_health = max_health
+	player_id = id
+	self.opponent = _opponent
+	camera_controller.set_target_fighter(self)
+	_update_facing_direction.call_deferred()
 
 func _physics_process(delta: float) -> void:
 	if !game_manager.current_state == GameManager.GameState.PLAYING:

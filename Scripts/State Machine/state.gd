@@ -21,6 +21,18 @@ var stamina_controller: StaminaController:
 var stamina_data: StaminaData:
 	get: return stamina_controller.data
 
+var audio_manager: AudioManager:
+	get:
+		if ServiceLocator.service_exists("audio_manager"):
+			return ServiceLocator.get_service("audio_manager")
+		return null
+
+var sound_data: FighterSoundData:
+	get: return fighter.sound_data
+
+var signals: FighterSignals:
+	get: return fighter.fighter_signals
+
 func initialize (state_machine: StateMachine):
 	self.state_machine = state_machine
 

@@ -21,6 +21,9 @@ func can_enter() -> bool:
 func enter():
 	super.enter()
 	
+	audio_manager.play_random_pitch(sound_data.dash)
+	signals.Dashed.emit()
+	
 	move_dir = input_buffer.movement_direction()
 	fighter.move_velocity = Vector3.ZERO
 	animation.set_animation(animation_name)

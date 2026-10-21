@@ -7,6 +7,7 @@ extends State
 
 func enter():
 	super.enter()
+	fighter.move_velocity = Vector3.ZERO
 	animation.set_animation(animation_name)
 
 func update(delta: float):

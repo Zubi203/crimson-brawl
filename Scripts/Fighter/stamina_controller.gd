@@ -18,7 +18,7 @@ var stamina_regen_delay_timer: float
 
 func _ready() -> void:
 	if data == null:
-		return
+		data = StaminaData.new()
 	current_stamina = data.max_stamina
 
 func consume_stamina(amount: float):

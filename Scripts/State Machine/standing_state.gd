@@ -30,3 +30,6 @@ func update(delta: float):
 	if input_buffer.is_pressed("dash") and not dash_state == null:
 		state_machine.change_state(dash_state.name)
 		return
+	
+	if not fighter.is_on_floor():
+		fighter.move_velocity.y -= delta * 10
