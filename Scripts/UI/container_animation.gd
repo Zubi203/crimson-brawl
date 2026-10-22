@@ -45,6 +45,14 @@ func _ready() -> void:
 	if target == null:
 		target = self
 	
+	_prime_for_animation()
+	
+	if anim_when == AnimStartTrigger.READY:
+		appear.call_deferred()
+	
+	visibility_changed.connect(_on_visibility_changed)
+
+func _prime_for_animation():
 	match anim_type:
 		AnimType.SCALE:
 			for child: Control in target.get_children():
@@ -54,11 +62,6 @@ func _ready() -> void:
 		AnimType.SLIDE_IN_LEFT, AnimType.SLIDE_IN_RIGHT:
 			for child: Control in target.get_children():
 				child.modulate.a = 0.0
-	
-	if anim_when == AnimStartTrigger.READY:
-		appear.call_deferred()
-	
-	visibility_changed.connect(_on_visibility_changed)
 
 func set_pivot(control: Control, pivot: ScaleFrom):
 	match pivot:
@@ -116,4 +119,5 @@ func appear():
 
 func _on_visibility_changed():
 	if visible and anim_when == AnimStartTrigger.VISIBLE:
+		_prime_for_animation()
 		appear()

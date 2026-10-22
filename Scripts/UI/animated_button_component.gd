@@ -23,18 +23,22 @@ func _connect_button_signals():
 	if button_parent == null:
 		return
 	
-	#set button pivot offset
-	button_parent.pivot_offset.y = button_parent.size.y / 2
-	button_parent.pivot_offset.x = button_parent.size.x / 2
+	_set_pivot_offset()
 	
 	#connect button signals
 	button_parent.mouse_entered.connect(_on_mouse_entered)
 	button_parent.mouse_exited.connect(_on_mouse_exited)
 
+func _set_pivot_offset():
+	button_parent.pivot_offset.y = button_parent.size.y / 2
+	button_parent.pivot_offset.x = button_parent.size.x / 2
+
 func _on_mouse_entered():
 	if button_parent.disabled:
 		#_reset()
 		return
+	
+	_set_pivot_offset()
 	
 	#adjust button scaling and rotation amount based on scale
 	#this helps animation on longer buttons not look jarring
@@ -62,6 +66,8 @@ func _on_mouse_exited():
 	if button_parent.disabled:
 		#_reset()
 		return
+	
+	_set_pivot_offset()
 	
 	#tween button properties back to default when mouse is exited
 	if tween and tween.is_running():

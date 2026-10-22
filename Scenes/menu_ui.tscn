@@ -6,6 +6,14 @@
 [ext_resource type="Script" uid="uid://sshbisoigeyr" path="res://Scripts/UI/animated_button_component.gd" id="3_2f5qs"]
 [ext_resource type="Script" uid="uid://dimct1fhrm5my" path="res://Scripts/UI/container_animation.gd" id="3_bryks"]
 
+[sub_resource type="LabelSettings" id="LabelSettings_amrxi"]
+font = ExtResource("1_28efy")
+font_size = 120
+font_color = Color(0, 0, 0, 1)
+shadow_size = 3
+shadow_color = Color(1, 0.3, 0.3, 1)
+shadow_offset = Vector2(5, 5)
+
 [sub_resource type="LabelSettings" id="LabelSettings_h2w44"]
 font = ExtResource("1_28efy")
 font_size = 96
@@ -14,8 +22,26 @@ shadow_size = 3
 shadow_color = Color(1, 0.3, 0.3, 1)
 shadow_offset = Vector2(5, 5)
 
-[node name="MenuUI" type="CanvasLayer" unique_id=1963338206]
+[sub_resource type="LabelSettings" id="LabelSettings_65ton"]
+font = ExtResource("1_28efy")
+font_size = 72
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_jg0i6"]
+font = ExtResource("1_28efy")
+font_size = 64
+font_color = Color(1, 0.23137255, 0.23137255, 1)
+
+[node name="MenuUI" type="CanvasLayer" unique_id=1963338206 node_paths=PackedStringArray("menu_scenes", "username_line_edit", "ip_line_edit", "port_line_edit")]
 script = ExtResource("1_amrxi")
+menu_scenes = {
+0: NodePath("BG/MainMenuScreen"),
+1: NodePath("BG/MultiplayerSetupScreen"),
+2: NodePath("BG/MultiplayerLobbyScreen")
+}
+username_line_edit = NodePath("BG/MultiplayerSetupScreen/HBoxContainer/ButtonContainer/UsernameEntryField")
+ip_line_edit = NodePath("BG/MultiplayerSetupScreen/HBoxContainer/ButtonContainer/IPEntryField")
+port_line_edit = NodePath("BG/MultiplayerSetupScreen/HBoxContainer/ButtonContainer/PortEntryField")
 
 [node name="BG" type="ColorRect" parent="." unique_id=115193753]
 anchors_preset = 15
@@ -29,45 +55,46 @@ color = Color(0.86, 0.86, 0.86, 0)
 
 [node name="RedBorder" type="ColorRect" parent="BG" unique_id=391140247]
 layout_mode = 0
-offset_left = 151.00002
-offset_top = 1080.0001
-offset_right = 2251.0935
-offset_bottom = 1507.0001
+offset_left = -710.43414
+offset_top = 1163.1152
+offset_right = 3031.473
+offset_bottom = 1590.1152
 rotation = -0.09618686
 mouse_filter = 2
 color = Color(1, 0.23000002, 0.23000002, 1)
 
 [node name="RedBorder2" type="ColorRect" parent="BG" unique_id=1950443552]
 layout_mode = 0
-offset_left = -591.0
-offset_top = -180.84161
-offset_right = 1509.0935
-offset_bottom = 246.15839
+offset_left = -1379.7488
+offset_top = -75.458694
+offset_right = 3086.7766
+offset_bottom = 351.54132
 rotation = -0.1328211
 mouse_filter = 2
 color = Color(1, 0.23000002, 0.23000002, 1)
 
 [node name="BlackBorder" type="ColorRect" parent="BG" unique_id=110069627]
 layout_mode = 0
-offset_left = -618.0
-offset_top = -170.84172
-offset_right = 1482.0935
-offset_bottom = 256.15826
+offset_left = -1396.8264
+offset_top = -52.24176
+offset_right = 3087.762
+offset_bottom = 374.75824
 rotation = -0.15111938
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
 [node name="BlackBorder2" type="ColorRect" parent="BG" unique_id=1655486581]
 layout_mode = 0
-offset_left = 199.0
-offset_top = 1122.9999
-offset_right = 2299.0935
-offset_bottom = 1549.9999
+offset_left = -764.6213
+offset_top = 1242.3804
+offset_right = 3007.6187
+offset_bottom = 1669.3804
 rotation = -0.12325936
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
-[node name="VBoxContainer" type="VBoxContainer" parent="BG" unique_id=1508650671]
+[node name="MainMenuScreen" type="VBoxContainer" parent="BG" unique_id=1508650671]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -75,97 +102,325 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TitleText" type="Label" parent="BG/VBoxContainer" unique_id=2128139338]
+[node name="TitleText" type="Label" parent="BG/MainMenuScreen" unique_id=2128139338]
 custom_minimum_size = Vector2(0, 300)
 layout_mode = 2
 text = "UNTITLED FIGHTING GAME"
-label_settings = SubResource("LabelSettings_h2w44")
+label_settings = SubResource("LabelSettings_amrxi")
 horizontal_alignment = 1
 vertical_alignment = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="BG/VBoxContainer" unique_id=1487834912]
+[node name="HBoxContainer" type="HBoxContainer" parent="BG/MainMenuScreen" unique_id=1487834912]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Padding" type="Control" parent="BG/VBoxContainer/HBoxContainer" unique_id=291269231]
+[node name="Padding" type="Control" parent="BG/MainMenuScreen/HBoxContainer" unique_id=291269231]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 
-[node name="Padding2" type="Control" parent="BG/VBoxContainer/HBoxContainer" unique_id=1108798955]
+[node name="Padding2" type="Control" parent="BG/MainMenuScreen/HBoxContainer" unique_id=1108798955]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 
-[node name="ButtonContainer" type="VBoxContainer" parent="BG/VBoxContainer/HBoxContainer" unique_id=1620860549]
+[node name="ButtonContainer" type="VBoxContainer" parent="BG/MainMenuScreen/HBoxContainer" unique_id=1620860549]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 30
 script = ExtResource("3_bryks")
-anim_when = 1
+anim_when = 2
 
-[node name="Padding2" type="Control" parent="BG/VBoxContainer/HBoxContainer/ButtonContainer" unique_id=2015049875]
+[node name="Padding2" type="Control" parent="BG/MainMenuScreen/HBoxContainer/ButtonContainer" unique_id=2015049875]
 layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 2
 
-[node name="LocalMPButton" type="Button" parent="BG/VBoxContainer/HBoxContainer/ButtonContainer" unique_id=40043874]
+[node name="LocalMPButton" type="Button" parent="BG/MainMenuScreen/HBoxContainer/ButtonContainer" unique_id=40043874]
 layout_mode = 2
 size_flags_vertical = 3
 text = "Local PvP"
 
-[node name="AnimatedButtonComponent" type="Node2D" parent="BG/VBoxContainer/HBoxContainer/ButtonContainer/LocalMPButton" unique_id=1286112432]
+[node name="AnimatedButtonComponent" type="Node2D" parent="BG/MainMenuScreen/HBoxContainer/ButtonContainer/LocalMPButton" unique_id=1286112432]
 script = ExtResource("3_2f5qs")
 metadata/_custom_type_script = "uid://sshbisoigeyr"
 
-[node name="PvEButton" type="Button" parent="BG/VBoxContainer/HBoxContainer/ButtonContainer" unique_id=1812682863]
+[node name="PvEButton" type="Button" parent="BG/MainMenuScreen/HBoxContainer/ButtonContainer" unique_id=1812682863]
 layout_mode = 2
 size_flags_vertical = 3
 text = "PvE"
 
-[node name="AnimatedButtonComponent" type="Node2D" parent="BG/VBoxContainer/HBoxContainer/ButtonContainer/PvEButton" unique_id=1541383148]
+[node name="AnimatedButtonComponent" type="Node2D" parent="BG/MainMenuScreen/HBoxContainer/ButtonContainer/PvEButton" unique_id=1541383148]
 script = ExtResource("3_2f5qs")
 metadata/_custom_type_script = "uid://sshbisoigeyr"
 
-[node name="OnlineMPButton" type="Button" parent="BG/VBoxContainer/HBoxContainer/ButtonContainer" unique_id=1919123567]
+[node name="OnlineMPButton" type="Button" parent="BG/MainMenuScreen/HBoxContainer/ButtonContainer" unique_id=1919123567]
 layout_mode = 2
 size_flags_vertical = 3
 text = "Online PvP"
 
-[node name="AnimatedButtonComponent" type="Node2D" parent="BG/VBoxContainer/HBoxContainer/ButtonContainer/OnlineMPButton" unique_id=2044498675]
+[node name="AnimatedButtonComponent" type="Node2D" parent="BG/MainMenuScreen/HBoxContainer/ButtonContainer/OnlineMPButton" unique_id=2044498675]
 script = ExtResource("3_2f5qs")
 metadata/_custom_type_script = "uid://sshbisoigeyr"
 
-[node name="ExitButton" type="Button" parent="BG/VBoxContainer/HBoxContainer/ButtonContainer" unique_id=754601021]
+[node name="ExitButton" type="Button" parent="BG/MainMenuScreen/HBoxContainer/ButtonContainer" unique_id=754601021]
 layout_mode = 2
 size_flags_vertical = 3
 text = "Quit"
 
-[node name="AnimatedButtonComponent" type="Node2D" parent="BG/VBoxContainer/HBoxContainer/ButtonContainer/ExitButton" unique_id=1592593004]
+[node name="AnimatedButtonComponent" type="Node2D" parent="BG/MainMenuScreen/HBoxContainer/ButtonContainer/ExitButton" unique_id=1592593004]
 script = ExtResource("3_2f5qs")
 metadata/_custom_type_script = "uid://sshbisoigeyr"
 
-[node name="Padding" type="Control" parent="BG/VBoxContainer/HBoxContainer/ButtonContainer" unique_id=265809920]
+[node name="Padding" type="Control" parent="BG/MainMenuScreen/HBoxContainer/ButtonContainer" unique_id=265809920]
 layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 2
 
-[node name="Padding3" type="Control" parent="BG/VBoxContainer/HBoxContainer/ButtonContainer" unique_id=8698965]
+[node name="Padding3" type="Control" parent="BG/MainMenuScreen/HBoxContainer/ButtonContainer" unique_id=8698965]
 layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 2
 
-[node name="Padding5" type="Control" parent="BG/VBoxContainer/HBoxContainer" unique_id=1744819220]
+[node name="Padding5" type="Control" parent="BG/MainMenuScreen/HBoxContainer" unique_id=1744819220]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 
-[node name="Padding6" type="Control" parent="BG/VBoxContainer/HBoxContainer" unique_id=1597263737]
+[node name="Padding6" type="Control" parent="BG/MainMenuScreen/HBoxContainer" unique_id=1597263737]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 
-[connection signal="pressed" from="BG/VBoxContainer/HBoxContainer/ButtonContainer/LocalMPButton" to="." method="_on_local_mp_button_pressed"]
-[connection signal="pressed" from="BG/VBoxContainer/HBoxContainer/ButtonContainer/PvEButton" to="." method="_on_pv_e_button_pressed"]
-[connection signal="pressed" from="BG/VBoxContainer/HBoxContainer/ButtonContainer/OnlineMPButton" to="." method="_on_online_mp_button_pressed"]
-[connection signal="pressed" from="BG/VBoxContainer/HBoxContainer/ButtonContainer/ExitButton" to="." method="_on_exit_button_pressed"]
+[node name="MultiplayerSetupScreen" type="VBoxContainer" parent="BG" unique_id=2121737597]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TitleText" type="Label" parent="BG/MultiplayerSetupScreen" unique_id=1936048433]
+custom_minimum_size = Vector2(0, 300)
+layout_mode = 2
+text = "Online Game Setup"
+label_settings = SubResource("LabelSettings_h2w44")
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="BG/MultiplayerSetupScreen" unique_id=384429223]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Padding" type="Control" parent="BG/MultiplayerSetupScreen/HBoxContainer" unique_id=14087277]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="Padding2" type="Control" parent="BG/MultiplayerSetupScreen/HBoxContainer" unique_id=1144354156]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="ButtonContainer" type="VBoxContainer" parent="BG/MultiplayerSetupScreen/HBoxContainer" unique_id=519592737]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 20
+script = ExtResource("3_bryks")
+anim_when = 1
+
+[node name="Padding2" type="Control" parent="BG/MultiplayerSetupScreen/HBoxContainer/ButtonContainer" unique_id=575166491]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="UsernameEntryField" type="LineEdit" parent="BG/MultiplayerSetupScreen/HBoxContainer/ButtonContainer" unique_id=1651625058]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+placeholder_text = "Username..."
+alignment = 1
+max_length = 15
+
+[node name="IPEntryField" type="LineEdit" parent="BG/MultiplayerSetupScreen/HBoxContainer/ButtonContainer" unique_id=1515316555]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+text = "localhost"
+placeholder_text = "IP Address..."
+alignment = 1
+max_length = 15
+
+[node name="PortEntryField" type="LineEdit" parent="BG/MultiplayerSetupScreen/HBoxContainer/ButtonContainer" unique_id=576921219]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+text = "1111"
+placeholder_text = "Port..."
+alignment = 1
+max_length = 15
+
+[node name="Padding4" type="Control" parent="BG/MultiplayerSetupScreen/HBoxContainer/ButtonContainer" unique_id=1236406859]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="CreateGameButton" type="Button" parent="BG/MultiplayerSetupScreen/HBoxContainer/ButtonContainer" unique_id=19219660]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Create Game"
+
+[node name="AnimatedButtonComponent" type="Node2D" parent="BG/MultiplayerSetupScreen/HBoxContainer/ButtonContainer/CreateGameButton" unique_id=1925886781]
+script = ExtResource("3_2f5qs")
+metadata/_custom_type_script = "uid://sshbisoigeyr"
+
+[node name="JoinGameButton" type="Button" parent="BG/MultiplayerSetupScreen/HBoxContainer/ButtonContainer" unique_id=560693391]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Join Game"
+
+[node name="AnimatedButtonComponent" type="Node2D" parent="BG/MultiplayerSetupScreen/HBoxContainer/ButtonContainer/JoinGameButton" unique_id=353677769]
+script = ExtResource("3_2f5qs")
+metadata/_custom_type_script = "uid://sshbisoigeyr"
+
+[node name="BackButton" type="Button" parent="BG/MultiplayerSetupScreen/HBoxContainer/ButtonContainer" unique_id=629989345]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Back"
+
+[node name="AnimatedButtonComponent" type="Node2D" parent="BG/MultiplayerSetupScreen/HBoxContainer/ButtonContainer/BackButton" unique_id=77211824]
+script = ExtResource("3_2f5qs")
+metadata/_custom_type_script = "uid://sshbisoigeyr"
+
+[node name="Padding" type="Control" parent="BG/MultiplayerSetupScreen/HBoxContainer/ButtonContainer" unique_id=1048040359]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="Padding3" type="Control" parent="BG/MultiplayerSetupScreen/HBoxContainer/ButtonContainer" unique_id=172514703]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="Padding5" type="Control" parent="BG/MultiplayerSetupScreen/HBoxContainer" unique_id=2017223665]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="Padding6" type="Control" parent="BG/MultiplayerSetupScreen/HBoxContainer" unique_id=97839428]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="MultiplayerLobbyScreen" type="VBoxContainer" parent="BG" unique_id=635590576]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TitleText" type="Label" parent="BG/MultiplayerLobbyScreen" unique_id=1265794670]
+custom_minimum_size = Vector2(0, 300)
+layout_mode = 2
+text = "Multiplayer Lobby"
+label_settings = SubResource("LabelSettings_h2w44")
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="BG/MultiplayerLobbyScreen" unique_id=2140089610]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Padding" type="Control" parent="BG/MultiplayerLobbyScreen/HBoxContainer" unique_id=1475082063]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="Padding2" type="Control" parent="BG/MultiplayerLobbyScreen/HBoxContainer" unique_id=382149292]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="ButtonContainer" type="VBoxContainer" parent="BG/MultiplayerLobbyScreen/HBoxContainer" unique_id=750005914]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 20
+script = ExtResource("3_bryks")
+anim_when = 1
+
+[node name="Padding2" type="Control" parent="BG/MultiplayerLobbyScreen/HBoxContainer/ButtonContainer" unique_id=247328807]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="Player1NameLabel" type="Label" parent="BG/MultiplayerLobbyScreen/HBoxContainer/ButtonContainer" unique_id=1723080140]
+layout_mode = 2
+text = "Player 1"
+label_settings = SubResource("LabelSettings_65ton")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VsLabel" type="Label" parent="BG/MultiplayerLobbyScreen/HBoxContainer/ButtonContainer" unique_id=583124686]
+layout_mode = 2
+text = "VS"
+label_settings = SubResource("LabelSettings_jg0i6")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Player2NameLabel" type="Label" parent="BG/MultiplayerLobbyScreen/HBoxContainer/ButtonContainer" unique_id=1631409803]
+layout_mode = 2
+text = "Player 2"
+label_settings = SubResource("LabelSettings_65ton")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Padding4" type="Control" parent="BG/MultiplayerLobbyScreen/HBoxContainer/ButtonContainer" unique_id=671869327]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="StartOnlineGameButton" type="Button" parent="BG/MultiplayerLobbyScreen/HBoxContainer/ButtonContainer" unique_id=1771807238]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Start Game"
+
+[node name="AnimatedButtonComponent" type="Node2D" parent="BG/MultiplayerLobbyScreen/HBoxContainer/ButtonContainer/StartOnlineGameButton" unique_id=1842239805]
+script = ExtResource("3_2f5qs")
+metadata/_custom_type_script = "uid://sshbisoigeyr"
+
+[node name="BackButton" type="Button" parent="BG/MultiplayerLobbyScreen/HBoxContainer/ButtonContainer" unique_id=882325079]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Leave"
+
+[node name="AnimatedButtonComponent" type="Node2D" parent="BG/MultiplayerLobbyScreen/HBoxContainer/ButtonContainer/BackButton" unique_id=236974520]
+script = ExtResource("3_2f5qs")
+metadata/_custom_type_script = "uid://sshbisoigeyr"
+
+[node name="Padding" type="Control" parent="BG/MultiplayerLobbyScreen/HBoxContainer/ButtonContainer" unique_id=1971469470]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="Padding3" type="Control" parent="BG/MultiplayerLobbyScreen/HBoxContainer/ButtonContainer" unique_id=1488432507]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="Padding5" type="Control" parent="BG/MultiplayerLobbyScreen/HBoxContainer" unique_id=1274915209]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="Padding6" type="Control" parent="BG/MultiplayerLobbyScreen/HBoxContainer" unique_id=151231940]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[connection signal="pressed" from="BG/MainMenuScreen/HBoxContainer/ButtonContainer/LocalMPButton" to="." method="_on_local_mp_button_pressed"]
+[connection signal="pressed" from="BG/MainMenuScreen/HBoxContainer/ButtonContainer/PvEButton" to="." method="_on_pv_e_button_pressed"]
+[connection signal="pressed" from="BG/MainMenuScreen/HBoxContainer/ButtonContainer/OnlineMPButton" to="." method="_on_online_mp_button_pressed"]
+[connection signal="pressed" from="BG/MainMenuScreen/HBoxContainer/ButtonContainer/ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="pressed" from="BG/MultiplayerSetupScreen/HBoxContainer/ButtonContainer/CreateGameButton" to="." method="_on_create_game_button_pressed"]
+[connection signal="pressed" from="BG/MultiplayerSetupScreen/HBoxContainer/ButtonContainer/JoinGameButton" to="." method="_on_join_game_button_pressed"]
+[connection signal="pressed" from="BG/MultiplayerSetupScreen/HBoxContainer/ButtonContainer/BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="BG/MultiplayerLobbyScreen/HBoxContainer/ButtonContainer/StartOnlineGameButton" to="." method="_on_start_online_game_button_pressed"]
+[connection signal="pressed" from="BG/MultiplayerLobbyScreen/HBoxContainer/ButtonContainer/BackButton" to="." method="_on_back_button_pressed"]

@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="FightingGameProject"
-run/main_scene="uid://bilxhlx6q35ji"
+run/main_scene="uid://bcqd5r0v7q03o"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -19,13 +19,14 @@ config/icon="res://icon.svg"
 
 ServiceLocator="*uid://cjfcxwafakcra"
 GlobalEvents="*uid://cdih6yttsv6y1"
-GlobalData="*uid://ctowcabx1j810"
 SceneTransition="*uid://b6gdncamey57o"
+NetworkManager="*uid://eyy13oqyydqs"
+GlobalData="*uid://ctowcabx1j810"
 
 [display]
 
-window/size/viewport_width=1920
-window/size/viewport_height=1080
+window/size/viewport_width=1280
+window/size/viewport_height=720
 window/stretch/mode="canvas_items"
 
 [input]
