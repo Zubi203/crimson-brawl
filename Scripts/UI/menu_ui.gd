@@ -28,8 +28,11 @@ var current_state: MenuStates:
 @export var ip_line_edit: LineEdit
 @export var port_line_edit: LineEdit
 
+@export_category("Lobby")
 @export var host_player_name: Label
 @export var client_player_name: Label
+@export var online_multiplayer_start_button: BaseButton
+@export var waiting_text: Label
 
 var port: int:
 	get:
@@ -45,6 +48,9 @@ var ip: String:
 
 func _ready() -> void:
 	current_state = MenuStates.MAIN
+	
+	if online_multiplayer_start_button:
+		online_multiplayer_start_button.pressed.connect(_on_multiplayer_game_start_button_pressed)
 	
 	NetworkManager.OnConnectedToServer.connect(_on_connected_to_server)
 	NetworkManager.OnConnectionFailed.connect(_on_connection_failed)
@@ -76,17 +82,11 @@ func _on_create_game_button_pressed() -> void:
 	if username_line_edit:
 		NetworkManager.local_username = username_line_edit.text
 	NetworkManager.start_host(port)
-	set_lobby_ui()
 
 func _on_join_game_button_pressed() -> void:
 	if username_line_edit:
 		NetworkManager.local_username = username_line_edit.text
 	NetworkManager.start_client(ip, port)
-	set_lobby_ui()
-
-func _on_start_online_game_button_pressed() -> void:
-	GlobalData.game_mode = GlobalData.GameMode.ONLINE_MULTIPLAYER
-	SceneTransition.transition(GlobalData.Scenes.MAIN_GAME, GlobalData.Scenes.TITLE_SCREEN)
 
 func _on_server_disconnected():
 	current_state = MenuStates.MAIN
@@ -103,12 +103,33 @@ func _on_connection_failed():
 func _on_player_connected(_id: int):
 	current_state = MenuStates.MULTIPLAYER_LOBBY
 
+func _on_multiplayer_game_start_button_pressed():
+	GlobalData.game_mode = GlobalData.GameMode.ONLINE_MULTIPLAYER
+	SceneTransition.transition.rpc(GlobalData.Scenes.MAIN_GAME, GlobalData.Scenes.TITLE_SCREEN)
+
 func set_lobby_ui():
 	if host_player_name == null or client_player_name == null:
 		return
 	
-	if NetworkManager.player_client == null or NetworkManager.player_host == null:
+	if NetworkManager.player_client:
+		client_player_name.text = NetworkManager.player_client.username
+	else:
+		client_player_name.text = "..."
+	
+	if NetworkManager.player_host:
+		host_player_name.text = NetworkManager.player_host.username
+	else:
+		host_player_name.text = "..."
+	
+	if online_multiplayer_start_button == null or waiting_text == null:
 		return
 	
-	host_player_name.text = NetworkManager.player_host.username
-	client_player_name.text = NetworkManager.player_client.username
+	if NetworkManager.is_server:
+		online_multiplayer_start_button.show()
+		waiting_text.hide()
+	else:
+		online_multiplayer_start_button.hide()
+		waiting_text.show()
+
+func _process(_delta: float) -> void:
+	set_lobby_ui()

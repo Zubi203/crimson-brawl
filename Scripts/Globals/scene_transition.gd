@@ -7,6 +7,7 @@ signal OnSceneChanged
 var is_loading: bool = false
 var current_scene: Node = null
 
+@rpc("authority", "call_local", "reliable")
 func transition(target_level: GlobalData.Scenes, current_level: GlobalData.Scenes):
 	animation_player.play("transition_enter")
 	await get_tree().create_timer(1.0).timeout

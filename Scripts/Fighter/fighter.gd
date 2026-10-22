@@ -43,12 +43,18 @@ var camera_controller: CameraController:
 		
 		return ServiceLocator.get_service("camera_controller")
 
-func _ready() -> void:
-	for child in find_children("*", "HitReciever", true, false):
-		child.initialize(self)
+func _enter_tree() -> void:
+	if not NetworkManager.has_connection:
+		return
 	
-	for child in find_children("*", "HitSender", true, false):
-		child.initialize(self)
+	for child in get_children():
+		if child is InputSync:
+			child.set_multiplayer_authority(name.to_int())
+
+func _ready() -> void:
+	if NetworkManager.has_connection and not NetworkManager.is_server:
+		set_physics_process(false)
+		return
 
 func setup(_opponent: Fighter = null, id: int = 0):
 	current_health = max_health
@@ -56,6 +62,12 @@ func setup(_opponent: Fighter = null, id: int = 0):
 	self.opponent = _opponent
 	camera_controller.set_target_fighter(self)
 	_update_facing_direction.call_deferred()
+	
+	for child in find_children("*", "HitReciever", true, false):
+		child.initialize(self)
+	
+	for child in find_children("*", "HitSender", true, false):
+		child.initialize(self)
 
 func _physics_process(delta: float) -> void:
 	if !game_manager.current_state == GameManager.GameState.PLAYING:
@@ -109,6 +121,13 @@ func take_damage(source: HitReciever, damage: int, knockback: float = 8.0):
 	
 	state_machine.change_state(source.hit_state_name)
 	add_force(knockback * -forward_direction)
+	
+	client_take_damage.rpc(damage)
+
+@rpc("authority", "call_remote", "reliable")
+func client_take_damage(new_health: int):
+	current_health = new_health
+
 
 func defeat():
 	if is_defeated:
@@ -117,3 +136,8 @@ func defeat():
 	GlobalEvents.FighterDefeated.emit(self)
 	is_defeated = true
 	state_machine.change_state("DefeatState")
+
+func is_server_fighter() -> bool:
+	if not NetworkManager.is_connected:
+		return false
+	return name.to_int() == 1

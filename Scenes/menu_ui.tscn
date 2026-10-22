@@ -32,7 +32,12 @@ font = ExtResource("1_28efy")
 font_size = 64
 font_color = Color(1, 0.23137255, 0.23137255, 1)
 
-[node name="MenuUI" type="CanvasLayer" unique_id=1963338206 node_paths=PackedStringArray("menu_scenes", "username_line_edit", "ip_line_edit", "port_line_edit")]
+[sub_resource type="LabelSettings" id="LabelSettings_q32wx"]
+font = ExtResource("1_28efy")
+font_size = 48
+font_color = Color(0, 0, 0, 1)
+
+[node name="MenuUI" type="CanvasLayer" unique_id=1963338206 node_paths=PackedStringArray("menu_scenes", "username_line_edit", "ip_line_edit", "port_line_edit", "host_player_name", "client_player_name", "online_multiplayer_start_button", "waiting_text")]
 script = ExtResource("1_amrxi")
 menu_scenes = {
 0: NodePath("BG/MainMenuScreen"),
@@ -42,6 +47,10 @@ menu_scenes = {
 username_line_edit = NodePath("BG/MultiplayerSetupScreen/HBoxContainer/ButtonContainer/UsernameEntryField")
 ip_line_edit = NodePath("BG/MultiplayerSetupScreen/HBoxContainer/ButtonContainer/IPEntryField")
 port_line_edit = NodePath("BG/MultiplayerSetupScreen/HBoxContainer/ButtonContainer/PortEntryField")
+host_player_name = NodePath("BG/MultiplayerLobbyScreen/HBoxContainer/ButtonContainer/Player1NameLabel")
+client_player_name = NodePath("BG/MultiplayerLobbyScreen/HBoxContainer/ButtonContainer/Player2NameLabel")
+online_multiplayer_start_button = NodePath("BG/MultiplayerLobbyScreen/HBoxContainer/ButtonContainer/StartOnlineGameButton")
+waiting_text = NodePath("BG/MultiplayerLobbyScreen/HBoxContainer/ButtonContainer/WaitingText")
 
 [node name="BG" type="ColorRect" parent="." unique_id=115193753]
 anchors_preset = 15
@@ -310,7 +319,6 @@ size_flags_horizontal = 3
 mouse_filter = 2
 
 [node name="MultiplayerLobbyScreen" type="VBoxContainer" parent="BG" unique_id=635590576]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -354,7 +362,7 @@ mouse_filter = 2
 
 [node name="Player1NameLabel" type="Label" parent="BG/MultiplayerLobbyScreen/HBoxContainer/ButtonContainer" unique_id=1723080140]
 layout_mode = 2
-text = "Player 1"
+text = "0"
 label_settings = SubResource("LabelSettings_65ton")
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -368,7 +376,7 @@ vertical_alignment = 1
 
 [node name="Player2NameLabel" type="Label" parent="BG/MultiplayerLobbyScreen/HBoxContainer/ButtonContainer" unique_id=1631409803]
 layout_mode = 2
-text = "Player 2"
+text = "0"
 label_settings = SubResource("LabelSettings_65ton")
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -376,6 +384,14 @@ vertical_alignment = 1
 [node name="Padding4" type="Control" parent="BG/MultiplayerLobbyScreen/HBoxContainer/ButtonContainer" unique_id=671869327]
 layout_mode = 2
 mouse_filter = 2
+
+[node name="WaitingText" type="Label" parent="BG/MultiplayerLobbyScreen/HBoxContainer/ButtonContainer" unique_id=695709493]
+visible = false
+layout_mode = 2
+text = "Waiting for host..."
+label_settings = SubResource("LabelSettings_q32wx")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="StartOnlineGameButton" type="Button" parent="BG/MultiplayerLobbyScreen/HBoxContainer/ButtonContainer" unique_id=1771807238]
 layout_mode = 2
@@ -422,5 +438,4 @@ mouse_filter = 2
 [connection signal="pressed" from="BG/MultiplayerSetupScreen/HBoxContainer/ButtonContainer/CreateGameButton" to="." method="_on_create_game_button_pressed"]
 [connection signal="pressed" from="BG/MultiplayerSetupScreen/HBoxContainer/ButtonContainer/JoinGameButton" to="." method="_on_join_game_button_pressed"]
 [connection signal="pressed" from="BG/MultiplayerSetupScreen/HBoxContainer/ButtonContainer/BackButton" to="." method="_on_back_button_pressed"]
-[connection signal="pressed" from="BG/MultiplayerLobbyScreen/HBoxContainer/ButtonContainer/StartOnlineGameButton" to="." method="_on_start_online_game_button_pressed"]
 [connection signal="pressed" from="BG/MultiplayerLobbyScreen/HBoxContainer/ButtonContainer/BackButton" to="." method="_on_back_button_pressed"]

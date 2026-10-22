@@ -40,7 +40,7 @@ func change_state(state_name: String):
 	current_state = states[state_name.to_lower()]
 	current_state.enter()
 	
-	print("State ", state_name)
+	#print("State ", state_name)
 
 func update(delta: float) -> void:
 	if current_state == null:

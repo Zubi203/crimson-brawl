@@ -6,7 +6,9 @@
 [ext_resource type="Texture2D" uid="uid://bmfar6t1xnyjr" path="res://Textures/Skybox/SkyboxTexture.png" id="3_0e3vx"]
 [ext_resource type="PackedScene" uid="uid://dtlsh06pm7wji" path="res://Models/Castle/CastleWall.glb" id="4_bb2iq"]
 [ext_resource type="Material" uid="uid://dmwwu5y8jsxpb" path="res://Models/Castle/castle_ground.tres" id="5_18r40"]
+[ext_resource type="PackedScene" uid="uid://5opujnhsdfwj" path="res://Scenes/networked_ranger.tscn" id="5_sftma"]
 [ext_resource type="Material" uid="uid://c8y16twfehobg" path="res://Models/Castle/castle_wall.tres" id="6_6y7pd"]
+[ext_resource type="PackedScene" uid="uid://duqfxx6hl26ge" path="res://Scenes/networked_tavernkeep.tscn" id="6_erobn"]
 [ext_resource type="PackedScene" uid="uid://cqeolksc6h3ps" path="res://Models/Props/torch.tscn" id="7_18r40"]
 [ext_resource type="Script" uid="uid://d4h85t5g4ykvb" path="res://Scripts/Managers/game_manager.gd" id="9_73nn6"]
 [ext_resource type="FontFile" uid="uid://x8i6v4n3k2ku" path="res://Fonts/MetalMania-Regular.ttf" id="10_r0mdn"]
@@ -18,6 +20,14 @@
 _limits = [4.0, 10.0, 2.0, 10.0]
 _data = [Vector2(2, 4), 0.0, 0.0, 0, 0, Vector2(10, 10), 0.0, 0.0, 0, 0]
 point_count = 2
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_sftma"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
 
 [sub_resource type="LabelSettings" id="LabelSettings_h2w44"]
 font = ExtResource("10_r0mdn")
@@ -200,7 +210,10 @@ fov = 50.0
 script = ExtResource("1_6y7pd")
 zoom_curve = SubResource("Curve_6y7pd")
 
-[node name="GameManager" type="Node" parent="." unique_id=43107521 node_paths=PackedStringArray("animation_player", "end_text_label", "fighter_0_spawn", "fighter_1_spawn")]
+[node name="CameraSync" type="MultiplayerSynchronizer" parent="Camera3D" unique_id=1767638735]
+replication_config = SubResource("SceneReplicationConfig_sftma")
+
+[node name="GameManager" type="Node" parent="." unique_id=43107521 node_paths=PackedStringArray("animation_player", "end_text_label", "fighter_0_spawn", "fighter_1_spawn", "multiplayer_fighter_spawner")]
 script = ExtResource("9_73nn6")
 animation_player = NodePath("LevelUI/AnimationPlayer")
 end_text_label = NodePath("LevelUI/EndScreenLabel")
@@ -208,7 +221,10 @@ fighter_0_spawn = NodePath("Fighter0Spawn")
 fighter_1_spawn = NodePath("Fighter1Spawn")
 ranger_fighter_scene = ExtResource("1_l756w")
 tavernkeep_fighter_scene = ExtResource("2_pu3va")
+networked_ranger_fighter_scene = ExtResource("5_sftma")
+networked_tavernkeep_fighter_scene = ExtResource("6_erobn")
 ai_fighter_scene = ExtResource("12_c78sm")
+multiplayer_fighter_spawner = NodePath("FighterMultiplayerSpawner")
 metadata/_custom_type_script = "uid://d4h85t5g4ykvb"
 
 [node name="LevelUI" type="CanvasLayer" parent="GameManager" unique_id=971172127]
@@ -247,6 +263,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
 
 [node name="Fighter1Spawn" type="Node3D" parent="GameManager" unique_id=151329955]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
+
+[node name="FighterMultiplayerSpawner" type="MultiplayerSpawner" parent="GameManager" unique_id=87718422]
+_spawnable_scenes = PackedStringArray("uid://5opujnhsdfwj", "uid://duqfxx6hl26ge")
+spawn_path = NodePath(".")
 
 [node name="BattleMusic" type="AudioStreamPlayer" parent="." unique_id=1299279989]
 stream = ExtResource("11_0xqxu")

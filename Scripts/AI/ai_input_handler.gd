@@ -4,6 +4,7 @@ extends InputHandler
 var brain: AIBrain
 
 func _ready() -> void:
+	super._ready()
 	for child in owner.get_children():
 		if child is AIBrain:
 			brain = child

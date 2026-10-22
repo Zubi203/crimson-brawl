@@ -19,7 +19,11 @@ var current_state: GameState
 
 @export var ranger_fighter_scene: PackedScene
 @export var tavernkeep_fighter_scene: PackedScene
+@export var networked_ranger_fighter_scene: PackedScene
+@export var networked_tavernkeep_fighter_scene: PackedScene
 @export var ai_fighter_scene: PackedScene
+
+@export var multiplayer_fighter_spawner: MultiplayerSpawner
 
 func _enter_tree() -> void:
 	ServiceLocator.register("game_manager", self)
@@ -29,10 +33,19 @@ func _exit_tree() -> void:
 
 func _ready() -> void:
 	GlobalEvents.FighterDefeated.connect(_on_fighter_defeated)
+	animation_player.animation_finished.connect(_on_animation_finished)
 	
 	if animation_player == null:
 		return
-	animation_player.animation_finished.connect(_on_animation_finished)
+	
+	if NetworkManager.has_connection:
+		if not NetworkManager.is_server:
+			client_in_game.rpc()
+	else:
+		_change_state(GameState.LOADING)
+
+@rpc("any_peer", "call_remote", "reliable")
+func client_in_game():
 	_change_state(GameState.LOADING)
 
 func _setup_fighters():
@@ -49,8 +62,7 @@ func _setup_fighters():
 			left_fighter = spawn_fighter(ranger_fighter_scene)
 			right_fighter = spawn_fighter(tavernkeep_fighter_scene)
 		GlobalData.GameMode.ONLINE_MULTIPLAYER:
-			left_fighter = spawn_fighter(ranger_fighter_scene)
-			right_fighter = spawn_fighter(tavernkeep_fighter_scene)
+			return
 		GlobalData.GameMode.PLAYER_VS_AI:
 			left_fighter = spawn_fighter(ranger_fighter_scene)
 			right_fighter = spawn_fighter(ai_fighter_scene)
@@ -63,6 +75,31 @@ func _setup_fighters():
 	
 	_change_state(GameState.COUNTDOWN)
 
+func _setup_networked_fighters():
+	if networked_ranger_fighter_scene == null or networked_tavernkeep_fighter_scene == null:
+		return
+	if fighter_0_spawn == null or fighter_1_spawn == null:
+		return
+	if multiplayer_fighter_spawner == null:
+		return
+	
+	var host_fighter: Fighter = networked_ranger_fighter_scene.instantiate()
+	var client_fighter: Fighter = networked_tavernkeep_fighter_scene.instantiate()
+	
+	host_fighter.name = NetworkManager.player_host.name
+	client_fighter.name = NetworkManager.player_client.name
+	
+	multiplayer_fighter_spawner.add_child(host_fighter, true)
+	multiplayer_fighter_spawner.add_child(client_fighter, true)
+	
+	host_fighter.global_position = fighter_0_spawn.global_position
+	client_fighter.global_position = fighter_1_spawn.global_position
+	
+	host_fighter.setup(client_fighter, 0)
+	client_fighter.setup(host_fighter, 1)
+	
+	_change_state(GameState.COUNTDOWN)
+	
 func spawn_fighter(fighter_scene: PackedScene) -> Fighter:
 	var fighter: Fighter = fighter_scene.instantiate()
 	get_tree().current_scene.add_child(fighter)
@@ -73,13 +110,20 @@ func _change_state(new_state: GameState):
 	
 	match current_state:
 		GameState.LOADING:
-			_setup_fighters.call_deferred()
+			if GlobalData.game_mode == GlobalData.GameMode.ONLINE_MULTIPLAYER:
+				_setup_networked_fighters.call_deferred()
+			else:
+				_setup_fighters.call_deferred()
 		GameState.COUNTDOWN:
-			animation_player.play(start_animation_name)
+			start_countdown.rpc()
 		GameState.PLAYING:
 			pass
 		GameState.ENDED:
 			animation_player.play(end_animation_name)
+
+@rpc("authority", "call_local", "reliable")
+func start_countdown():
+	animation_player.play(start_animation_name)
 
 func _on_fighter_defeated(fighter: Fighter):
 	_change_state(GameState.ENDED)

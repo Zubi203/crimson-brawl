@@ -1,0 +1,94 @@
+[gd_scene format=3 uid="uid://duqfxx6hl26ge"]
+
+[ext_resource type="PackedScene" uid="uid://d3vah6g23glw3" path="res://Scenes/tavernkeep.tscn" id="1_3ivia"]
+[ext_resource type="Script" uid="uid://dqpch2tvocpl" path="res://Scripts/Networking/input_sync.gd" id="2_5vblg"]
+[ext_resource type="Script" uid="uid://cwxel3ga1bv43" path="res://Scripts/Networking/networked_player_input_handler.gd" id="2_mmlcm"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mmlcm"]
+resource_local_to_scene = true
+transparency = 1
+albedo_color = Color(1, 1, 1, 0)
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 1.1
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_5vblg"]
+properties/0/path = NodePath("../NetworkedPlayerInputHandler:move_left")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath("../NetworkedPlayerInputHandler:move_right")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath("../NetworkedPlayerInputHandler:dash")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+properties/3/path = NodePath("../NetworkedPlayerInputHandler:jump")
+properties/3/spawn = true
+properties/3/replication_mode = 1
+properties/4/path = NodePath("../NetworkedPlayerInputHandler:crouch")
+properties/4/spawn = true
+properties/4/replication_mode = 1
+properties/5/path = NodePath("../NetworkedPlayerInputHandler:light_attack")
+properties/5/spawn = true
+properties/5/replication_mode = 1
+properties/6/path = NodePath("../NetworkedPlayerInputHandler:heavy_attack")
+properties/6/spawn = true
+properties/6/replication_mode = 1
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_67th8"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+
+[node name="NetworkedTavernkeep" unique_id=48255611 node_paths=PackedStringArray("input_handler") instance=ExtResource("1_3ivia")]
+input_handler = NodePath("NetworkedPlayerInputHandler")
+
+[node name="GeneralSkeleton" parent="Male_Peasant/Armature" parent_id_path=PackedInt32Array(106058088) index="0" unique_id=789314765]
+bones/1/position = Vector3(0.004512604, 0.90329564, -0.09086539)
+bones/1/rotation = Quaternion(-0.036663454, -0.115935385, -0.0042824303, 0.99257064)
+bones/3/rotation = Quaternion(0.100078814, 0.00011467497, 0.00024979204, 0.99497956)
+bones/4/rotation = Quaternion(0.10007913, 0.00032674373, 0.0002430332, 0.9949795)
+bones/5/rotation = Quaternion(-0.100078896, -0.00022104102, -0.00025707172, 0.9949795)
+bones/6/rotation = Quaternion(0.062714875, 0.09574014, 0.007702003, 0.9933989)
+bones/7/rotation = Quaternion(0.49648067, 0.52351964, 0.5291617, -0.446567)
+bones/8/rotation = Quaternion(-0.03381156, 0.8221957, -0.56811655, 0.009730844)
+bones/9/rotation = Quaternion(0.18074152, -0.67046994, 0.18434623, 0.695571)
+bones/31/rotation = Quaternion(0.5485551, -0.47246924, -0.476428, -0.4988753)
+bones/32/rotation = Quaternion(0.067248724, 0.8210172, -0.5668459, -0.009708923)
+bones/33/rotation = Quaternion(0.28838044, 0.55568874, -0.2100403, 0.7509527)
+bones/55/rotation = Quaternion(-0.00081078627, 0.1482529, 0.9821323, -0.115915895)
+bones/56/rotation = Quaternion(0.019666817, 0.9772266, -0.17976929, 0.11101539)
+bones/57/rotation = Quaternion(-0.09498529, 0.7196135, -0.68781894, 0.0062692487)
+bones/60/rotation = Quaternion(0.00092089496, -0.0823974, 0.987864, 0.13166101)
+bones/61/rotation = Quaternion(-0.045470726, 0.92525905, -0.12512681, -0.35520616)
+bones/62/rotation = Quaternion(0.1711445, 0.6293047, -0.7580798, 0.0006209617)
+
+[node name="LeftHand" parent="Male_Peasant/Armature/GeneralSkeleton" index="7" unique_id=165016580]
+transform = Transform3D(0.4700573, 0.025181442, -0.8822766, -0.39277846, -0.889195, -0.23464242, -0.7904246, 0.45683455, -0.408082, 0.31847197, 0.95604503, 0.014430102)
+
+[node name="RightHand" parent="Male_Peasant/Armature/GeneralSkeleton" index="8" unique_id=1505730946]
+transform = Transform3D(0.05966781, -0.13367607, 0.9892271, 0.49529433, -0.8564357, -0.14560671, 0.8666737, 0.49864662, 0.015107173, -0.27274054, 0.97828364, -0.16844554)
+
+[node name="Chest" parent="Male_Peasant/Armature/GeneralSkeleton" index="9" unique_id=782435352]
+transform = Transform3D(0.9731309, -0.029571638, -0.22834554, 0.00050541945, 0.9919904, -0.12631267, 0.23025183, 0.12280335, 0.96535146, -0.0023781476, 1.1348325, -0.061770502)
+
+[node name="Head" parent="Male_Peasant/Armature/GeneralSkeleton" index="10" unique_id=1535667967]
+transform = Transform3D(0.9975914, -0.061297238, -0.032466114, 0.05151291, 0.96814257, -0.24504402, 0.046452314, 0.2427814, 0.9689682, -0.020019235, 1.556125, 0.011359837)
+
+[node name="FighterVisual" parent="." index="9" unique_id=1811587310]
+hit_flash_material = SubResource("StandardMaterial3D_mmlcm")
+
+[node name="InputSync" type="MultiplayerSynchronizer" parent="." index="12" unique_id=1150832050]
+root_path = NodePath("../FighterSync")
+replication_config = SubResource("SceneReplicationConfig_5vblg")
+script = ExtResource("2_5vblg")
+
+[node name="FighterSync" type="MultiplayerSynchronizer" parent="." index="13" unique_id=1322291460]
+replication_config = SubResource("SceneReplicationConfig_67th8")
+
+[node name="NetworkedPlayerInputHandler" type="Node" parent="." index="14" unique_id=431143139]
+script = ExtResource("2_mmlcm")
+metadata/_custom_type_script = "uid://cwxel3ga1bv43"

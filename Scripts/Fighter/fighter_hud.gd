@@ -21,13 +21,13 @@ func _ready() -> void:
 	if fighter_parent == null:
 		return
 	
-	_set_max_values(fighter_parent)
 	fighter_parent.HealthChanged.connect(_update_health)
 	fighter_parent.StaminaUpdated.connect(_update_stamina)
 	fighter_parent.stamina_controller.StaminaUpdated.connect(_update_stamina)
-	
+	_set_max_values(fighter_parent)
 	_setup_ui.call_deferred()
-	
+
+
 func _setup_ui():
 	if stats_container == null:
 		return
@@ -36,12 +36,19 @@ func _setup_ui():
 	if player_pos_1 == null:
 		return
 	
-	match fighter_parent.player_id:
-		0:
+	if NetworkManager.has_connection:
+		if fighter_parent.is_server_fighter():
 			stats_container.position = player_pos_0.position
-		_:
+		else:
 			stats_container.position = player_pos_1.position
 			stats_container.offset_transform_scale.x *= -1
+	else:
+		match fighter_parent.player_id:
+			0:
+				stats_container.position = player_pos_0.position
+			_:
+				stats_container.position = player_pos_1.position
+				stats_container.offset_transform_scale.x *= -1
 
 func _update_stamina(stamina: float):
 	if stamina_bar == null:

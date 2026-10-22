@@ -10,3 +10,5 @@ func _enter_tree() -> void:
 func _ready() -> void:
 	username = NetworkManager.local_username
 	peer_id = NetworkManager.peer_id
+	
+	NetworkManager.register_player(self)
