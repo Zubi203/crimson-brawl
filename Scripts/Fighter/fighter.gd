@@ -122,7 +122,8 @@ func take_damage(source: HitReciever, damage: int, knockback: float = 8.0):
 	state_machine.change_state(source.hit_state_name)
 	add_force(knockback * -forward_direction)
 	
-	client_take_damage.rpc(damage)
+	if NetworkManager.has_connection and NetworkManager.is_server:
+		client_take_damage.rpc(damage)
 
 @rpc("authority", "call_remote", "reliable")
 func client_take_damage(new_health: int):

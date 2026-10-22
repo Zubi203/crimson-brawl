@@ -1,6 +1,8 @@
 class_name GameManager
 extends Node
 
+signal GameStateChanged (state: GameState)
+
 enum GameState{
 	LOADING,
 	COUNTDOWN,
@@ -120,6 +122,7 @@ func _change_state(new_state: GameState):
 			pass
 		GameState.ENDED:
 			animation_player.play(end_animation_name)
+	GameStateChanged.emit(current_state)
 
 @rpc("authority", "call_local", "reliable")
 func start_countdown():
