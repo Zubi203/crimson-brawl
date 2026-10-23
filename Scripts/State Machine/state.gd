@@ -33,8 +33,8 @@ var sound_data: FighterSoundData:
 var signals: FighterSignals:
 	get: return fighter.fighter_signals
 
-func initialize (state_machine: StateMachine):
-	self.state_machine = state_machine
+func initialize (fsm: StateMachine):
+	state_machine = fsm
 
 func can_enter() -> bool:
 	return true
@@ -45,6 +45,6 @@ func enter():
 func exit():
 	pass
 
-func update(delta: float):
+func update(_delta: float):
 	var time: float = Time.get_unix_time_from_system()
 	local_time = time - enter_time

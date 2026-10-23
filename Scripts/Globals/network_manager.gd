@@ -22,13 +22,19 @@ var player_host: NetworkPlayer
 var player_client: NetworkPlayer
 
 var is_server: bool:
-	get: return multiplayer.is_server()
+	get: 
+		if multiplayer.multiplayer_peer == null:
+			return false
+		return multiplayer.is_server()
 
 var peer_id: int:
 	get: return multiplayer.get_unique_id()
 
 var has_connection: bool:
-	get: return multiplayer.multiplayer_peer != null and multiplayer.multiplayer_peer.CONNECTION_CONNECTED and multiplayer.multiplayer_peer != OfflineMultiplayerPeer
+	get: 
+		if multiplayer.multiplayer_peer == null:
+			return false
+		return multiplayer.multiplayer_peer != null and multiplayer.multiplayer_peer.CONNECTION_CONNECTED and multiplayer.multiplayer_peer != OfflineMultiplayerPeer
 
 # Create a multiplayer game
 func start_host(port: int):
@@ -57,7 +63,19 @@ func _peer_connected(id: int):
 
 # when a peer (player) disconnects from the server
 func _peer_disconnected(id: int):
+	var player: NetworkPlayer = player_multiplayer_spawner.get_node(str(id))
+	
+	if player:
+		player.queue_free()
+	
+	close_peer()
+	_server_disconnected()
+	
 	OnPlayerDisconnected.emit(id)
+
+func _delete_all_player_nodes():
+	for child in player_multiplayer_spawner.get_children():
+		child.queue_free()
 
 # Join a multiplayer game
 func start_client(ip: String, port: int):
@@ -93,6 +111,7 @@ func close_peer():
 		return
 	multiplayer.multiplayer_peer.close()
 	multiplayer.multiplayer_peer = null
+	_delete_all_player_nodes()
 
 func register_player(player: NetworkPlayer):
 	if player.get_multiplayer_authority() == 1:

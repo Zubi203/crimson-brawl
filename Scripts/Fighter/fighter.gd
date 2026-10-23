@@ -1,6 +1,7 @@
 class_name Fighter
 extends CharacterBody3D
 
+@warning_ignore_start("unused_signal")
 signal HealthChanged (fighter: Fighter)
 signal StaminaUpdated (stamina: float)
 
@@ -55,13 +56,18 @@ func _ready() -> void:
 	if NetworkManager.has_connection and not NetworkManager.is_server:
 		set_physics_process(false)
 		return
+	
+	if not GlobalData.game_mode == GlobalData.GameMode.ONLINE_MULTIPLAYER:
+		_set_starting_health(max_health)
 
 func setup(_opponent: Fighter = null, id: int = 0):
-	current_health = max_health
 	player_id = id
 	self.opponent = _opponent
 	camera_controller.set_target_fighter(self)
 	_update_facing_direction.call_deferred()
+	
+	if NetworkManager.is_server:
+		_set_starting_health(max_health)
 	
 	for child in find_children("*", "HitReciever", true, false):
 		child.initialize(self)
@@ -69,7 +75,13 @@ func setup(_opponent: Fighter = null, id: int = 0):
 	for child in find_children("*", "HitSender", true, false):
 		child.initialize(self)
 
+@rpc("authority", "call_local", "reliable")
+func _set_starting_health(health: int):
+	current_health = health
+
 func _physics_process(delta: float) -> void:
+	if game_manager == null:
+		return
 	if !game_manager.current_state == GameManager.GameState.PLAYING:
 		return
 	
@@ -123,7 +135,7 @@ func take_damage(source: HitReciever, damage: int, knockback: float = 8.0):
 	add_force(knockback * -forward_direction)
 	
 	if NetworkManager.has_connection and NetworkManager.is_server:
-		client_take_damage.rpc(damage)
+		client_take_damage.rpc(current_health)
 
 @rpc("authority", "call_remote", "reliable")
 func client_take_damage(new_health: int):

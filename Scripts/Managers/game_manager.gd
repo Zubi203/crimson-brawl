@@ -36,6 +36,7 @@ func _exit_tree() -> void:
 func _ready() -> void:
 	GlobalEvents.FighterDefeated.connect(_on_fighter_defeated)
 	animation_player.animation_finished.connect(_on_animation_finished)
+	NetworkManager.OnServerDisconnected.connect(_on_server_disconnected)
 	
 	if animation_player == null:
 		return
@@ -43,7 +44,9 @@ func _ready() -> void:
 	if NetworkManager.has_connection:
 		if not NetworkManager.is_server:
 			client_in_game.rpc()
-	else:
+			return
+	
+	if not GlobalData.game_mode == GlobalData.GameMode.ONLINE_MULTIPLAYER:
 		_change_state(GameState.LOADING)
 
 @rpc("any_peer", "call_remote", "reliable")
@@ -104,7 +107,7 @@ func _setup_networked_fighters():
 	
 func spawn_fighter(fighter_scene: PackedScene) -> Fighter:
 	var fighter: Fighter = fighter_scene.instantiate()
-	get_tree().current_scene.add_child(fighter)
+	add_child(fighter)
 	return fighter
 
 func _change_state(new_state: GameState):
@@ -117,21 +120,36 @@ func _change_state(new_state: GameState):
 			else:
 				_setup_fighters.call_deferred()
 		GameState.COUNTDOWN:
-			start_countdown.rpc()
+			if NetworkManager.has_connection:
+				start_countdown.rpc()
+			else:
+				animation_player.play(start_animation_name)
 		GameState.PLAYING:
 			pass
 		GameState.ENDED:
-			animation_player.play(end_animation_name)
+			if NetworkManager.has_connection:
+				end_game.rpc()
+			else:
+				animation_player.play(end_animation_name)
 	GameStateChanged.emit(current_state)
+
 
 @rpc("authority", "call_local", "reliable")
 func start_countdown():
 	animation_player.play(start_animation_name)
 
+@rpc("authority", "call_local", "reliable")
+func end_game():
+	animation_player.play(end_animation_name)
+
 func _on_fighter_defeated(fighter: Fighter):
 	_change_state(GameState.ENDED)
 	
 	if end_text_label == null:
+		return
+	
+	if NetworkManager.has_connection:
+		_networked_end_game.rpc(fighter.is_server_fighter())
 		return
 	
 	match GlobalData.game_mode:
@@ -145,7 +163,22 @@ func _on_fighter_defeated(fighter: Fighter):
 				end_text_label.text = "PLAYER 2 WINS!"
 			else:
 				end_text_label.text = "PLAYER 1 WINS!"
-		
+
+@rpc("authority", "call_local", "reliable")
+func _networked_end_game(server_lost: bool):
+	var did_lose: bool = NetworkManager.is_server and server_lost
+	
+	if did_lose:
+		if NetworkManager.is_server:
+			end_text_label.text = NetworkManager.player_client.username + " Wins!"
+		else:
+			end_text_label.text = NetworkManager.local_username + " Wins!"
+	else:
+		if NetworkManager.is_server:
+			end_text_label.text = NetworkManager.local_username + " Wins!"
+		else:
+			end_text_label.text = NetworkManager.player_client.username + " Wins!"
+
 
 func _on_animation_finished(anim_name: String):
 	if anim_name == start_animation_name:
@@ -154,4 +187,10 @@ func _on_animation_finished(anim_name: String):
 	
 	if anim_name == end_animation_name:
 		SceneTransition.transition(GlobalData.Scenes.TITLE_SCREEN, GlobalData.Scenes.MAIN_GAME)
+		NetworkManager.close_peer()
 		return
+
+func _on_server_disconnected():
+	if not NetworkManager.has_connection:
+		return
+	SceneTransition.transition.rpc(GlobalData.Scenes.TITLE_SCREEN, GlobalData.Scenes.MAIN_GAME)

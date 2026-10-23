@@ -59,10 +59,12 @@ func _ready() -> void:
 	NetworkManager.OnPlayerDisconnected.connect(_on_player_disconnected)
 
 func _on_local_mp_button_pressed() -> void:
+	NetworkManager.close_peer()
 	GlobalData.game_mode = GlobalData.GameMode.LOCAL_PLAYER_VS_PLAYER
 	SceneTransition.transition(GlobalData.Scenes.MAIN_GAME, GlobalData.Scenes.TITLE_SCREEN)
 
 func _on_pv_e_button_pressed() -> void:
+	NetworkManager.close_peer()
 	GlobalData.game_mode = GlobalData.GameMode.PLAYER_VS_AI
 	SceneTransition.transition(GlobalData.Scenes.MAIN_GAME, GlobalData.Scenes.TITLE_SCREEN)
 
@@ -109,6 +111,8 @@ func _on_multiplayer_game_start_button_pressed():
 
 func set_lobby_ui():
 	if host_player_name == null or client_player_name == null:
+		return
+	if not NetworkManager.has_connection:
 		return
 	
 	if NetworkManager.player_client:

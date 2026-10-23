@@ -134,7 +134,7 @@ layout_mode = 2
 size_flags_vertical = 1
 theme_override_styles/background = SubResource("StyleBoxEmpty_yhcui")
 theme_override_styles/fill = SubResource("StyleBoxFlat_j8b3r")
-value = 62.19
+value = 100.0
 show_percentage = false
 
 [node name="HealthBar" type="ProgressBar" parent="StatsContainer/HealthDisplay/MarginContainer" unique_id=544022604]
@@ -142,7 +142,7 @@ layout_mode = 2
 size_flags_vertical = 1
 theme_override_styles/background = SubResource("StyleBoxEmpty_yhcui")
 theme_override_styles/fill = SubResource("StyleBoxFlat_65ton")
-value = 40.59
+value = 100.0
 show_percentage = false
 
 [node name="HealthLabel" type="Label" parent="StatsContainer/HealthDisplay/MarginContainer" unique_id=1897659507]
@@ -178,5 +178,5 @@ layout_mode = 2
 size_flags_vertical = 1
 theme_override_styles/background = SubResource("StyleBoxEmpty_yhcui")
 theme_override_styles/fill = SubResource("StyleBoxFlat_ydumf")
-value = 40.59
+value = 100.0
 show_percentage = false

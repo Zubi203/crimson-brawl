@@ -3,8 +3,8 @@ extends Area3D
 
 var fighter: Fighter
 
-func initialize(fighter: Fighter):
-	self.fighter = fighter
+func initialize(_fighter: Fighter):
+	fighter = _fighter
 
 func detect_hit() -> HitReciever:
 	var areas: Array[Area3D] = get_overlapping_areas()

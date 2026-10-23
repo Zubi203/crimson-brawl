@@ -45,5 +45,13 @@ func set_target_fighter(fighter: Fighter):
 		target_b = fighter
 
 func shake(intensity: float = 0.1, falloff: float = 10.0):
+	if NetworkManager.has_connection:
+		_networked_shake.rpc(intensity, falloff)
+		return
+	shake_intensity = intensity
+	shake_falloff = falloff
+
+@rpc("authority", "call_local", "reliable")
+func _networked_shake(intensity: float = 0.1, falloff: float = 10.0):
 	shake_intensity = intensity
 	shake_falloff = falloff
