@@ -1,8 +1,11 @@
 extends Node
 
+const RELAY_PORT: int = 9998
+
 # Called on Server
 signal OnPlayerConnected (id: int)
 signal OnPlayerDisconnected (id: int)
+signal OnOnlineIDCreated (id: String)
 
 # Called on Client
 signal OnConnectedToServer ()
@@ -36,11 +39,30 @@ var has_connection: bool:
 			return false
 		return multiplayer.multiplayer_peer != null and multiplayer.multiplayer_peer.CONNECTION_CONNECTED and multiplayer.multiplayer_peer != OfflineMultiplayerPeer
 
-# Create a multiplayer game
-func start_host(port: int):
-	var peer: ENetMultiplayerPeer = ENetMultiplayerPeer.new()
-	peer.create_server(port, 2)
+var peer: NodeTunnelPeer
+var online_id: String
+
+func setup_multiplayer():
+	peer = NodeTunnelPeer.new()
+	peer.connect_to_relay("us-east.nodetunnel.io:8080", "ojyrpcmr4oi6qi3")
 	multiplayer.multiplayer_peer = peer
+	
+	await peer.authenticated
+
+
+# Create a multiplayer game
+func start_host():
+	if multiplayer.multiplayer_peer == null:
+		return
+	
+	peer.host_room(true, "Fighting Game Room")
+	
+	await peer.room_connected
+	
+	online_id = peer.room_id
+	
+	OnOnlineIDCreated.emit(online_id)
+	DisplayServer.clipboard_set(online_id)
 	
 	if not multiplayer.peer_connected.is_connected(_peer_connected):
 		multiplayer.peer_connected.connect(_peer_connected)
@@ -78,10 +100,11 @@ func _delete_all_player_nodes():
 		child.queue_free()
 
 # Join a multiplayer game
-func start_client(ip: String, port: int):
-	var peer: ENetMultiplayerPeer = ENetMultiplayerPeer.new()
-	peer.create_client(ip, port)
-	multiplayer.multiplayer_peer = peer
+func start_client(room_id: String):
+	if multiplayer.multiplayer_peer == null:
+		return
+	
+	peer.join_room(room_id)
 	
 	if not multiplayer.connected_to_server.is_connected(_connected_to_server):
 		multiplayer.connected_to_server.connect(_connected_to_server)
@@ -111,6 +134,7 @@ func close_peer():
 		return
 	multiplayer.multiplayer_peer.close()
 	multiplayer.multiplayer_peer = null
+	peer = null
 	_delete_all_player_nodes()
 
 func register_player(player: NetworkPlayer):

@@ -69,6 +69,7 @@ func _on_pv_e_button_pressed() -> void:
 	SceneTransition.transition(GlobalData.Scenes.MAIN_GAME, GlobalData.Scenes.TITLE_SCREEN)
 
 func _on_online_mp_button_pressed() -> void:
+	NetworkManager.setup_multiplayer()
 	current_state = MenuStates.MULTIPLAYER_SETUP
 
 func _on_exit_button_pressed() -> void:
@@ -83,12 +84,12 @@ func _on_back_button_pressed() -> void:
 func _on_create_game_button_pressed() -> void:
 	if username_line_edit:
 		NetworkManager.local_username = username_line_edit.text
-	NetworkManager.start_host(port)
+	NetworkManager.start_host()
 
 func _on_join_game_button_pressed() -> void:
 	if username_line_edit:
 		NetworkManager.local_username = username_line_edit.text
-	NetworkManager.start_client(ip, port)
+	NetworkManager.start_client(ip)
 
 func _on_server_disconnected():
 	current_state = MenuStates.MAIN
