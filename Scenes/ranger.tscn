@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://c4pgmigxg81xo" path="res://Scenes/base_fighter.tscn" id="1_bgi7p"]
 [ext_resource type="PackedScene" uid="uid://d6jbw6wmibtg" path="res://Models/Outfits/Male_Ranger.gltf" id="2_lij4p"]
+[ext_resource type="Material" uid="uid://b5ilpkdv2len0" path="res://Materials/floor_material.tres" id="3_cpo1c"]
 [ext_resource type="Script" uid="uid://choykln8oykdb" path="res://Scripts/Fighter/hit_sender.gd" id="6_tqqd4"]
 [ext_resource type="Script" uid="uid://d3isghw2kjyb1" path="res://Scripts/Fighter/hit_reciever.gd" id="7_cpo1c"]
 [ext_resource type="ArrayMesh" uid="uid://cl3k1a1875ioj" path="res://Models/FighterHead/Fighter_0_Head_Face.res" id="8_xj75l"]
@@ -17,7 +18,7 @@ size = Vector3(0.37597656, 0.5319977, 0.26635742)
 [sub_resource type="BoxShape3D" id="BoxShape3D_lij4p"]
 size = Vector3(0.21972656, 0.23022842, 0.20251465)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tqqd4"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yrqoh"]
 resource_local_to_scene = true
 transparency = 1
 albedo_color = Color(1, 1, 1, 0)
@@ -30,16 +31,16 @@ emission_energy_multiplier = 1.1
 [node name="Male_Ranger" parent="." index="1" unique_id=672115247 instance=ExtResource("2_lij4p")]
 
 [node name="GeneralSkeleton" parent="Male_Ranger/Armature" parent_id_path=PackedInt32Array(672115247, 106058088) index="0" unique_id=789314765]
-bones/1/position = Vector3(0.005476406, 0.90803725, -0.08948312)
-bones/1/rotation = Quaternion(-0.046607226, -0.11579323, -0.005445244, 0.9921643)
-bones/3/rotation = Quaternion(0.09171957, 0.000115999086, 0.00025480438, 0.99578494)
-bones/4/rotation = Quaternion(0.09171949, 0.00033074626, 0.00024638066, 0.9957849)
-bones/5/rotation = Quaternion(-0.09171959, -0.00022345771, -0.00025856632, 0.9957848)
-bones/6/rotation = Quaternion(0.07668778, 0.095620885, 0.008174802, 0.99242574)
-bones/7/rotation = Quaternion(0.48771822, 0.5265133, 0.52642107, -0.45584607)
-bones/8/rotation = Quaternion(-0.06189976, 0.81770736, -0.57221144, 0.009856169)
-bones/9/rotation = Quaternion(0.18898034, -0.65149564, 0.1821645, 0.7117977)
-bones/10/rotation = Quaternion(0.09908246, 0.7068779, 0.062870055, 0.6975341)
+bones/1/position = Vector3(0.005320721, 0.90636474, -0.09022576)
+bones/1/rotation = Quaternion(-0.041162092, -0.115814805, -0.004820259, 0.9924059)
+bones/3/rotation = Quaternion(0.09755455, 0.00012218297, 0.0002580416, 0.9952302)
+bones/4/rotation = Quaternion(0.09755502, 0.00035040485, 0.00023018193, 0.9952301)
+bones/5/rotation = Quaternion(-0.09755487, -0.00023505908, -0.00024599087, 0.99523014)
+bones/6/rotation = Quaternion(0.07611115, 0.095696315, 0.007119982, 0.99247104)
+bones/7/rotation = Quaternion(0.49088788, 0.52543324, 0.5274013, -0.45254493)
+bones/8/rotation = Quaternion(-0.051564667, 0.81931394, -0.5709377, 0.0097963335)
+bones/9/rotation = Quaternion(0.1907383, -0.65728813, 0.18748532, 0.7045854)
+bones/10/rotation = Quaternion(0.09908891, 0.70687664, 0.06287642, 0.69753385)
 bones/11/rotation = Quaternion(0.6295969, -4.1051948e-08, -4.619129e-06, 0.776922)
 bones/12/rotation = Quaternion(0.62334186, 2.9481813e-08, -4.2619877e-06, 0.78194946)
 bones/13/rotation = Quaternion(0.62334144, -2.2340741e-07, -4.470517e-06, 0.7819499)
@@ -56,10 +57,10 @@ bones/27/rotation = Quaternion(-0.123819165, 0.7195234, 0.20183535, 0.6528533)
 bones/28/rotation = Quaternion(0.18180692, 0.11012422, 0.0600633, 0.9753006)
 bones/29/rotation = Quaternion(0.59942997, 0.27396563, 0.19463211, 0.7264606)
 bones/30/scale = Vector3(1.0001454, 1.0004877, 1.0005833)
-bones/31/rotation = Quaternion(0.53991646, -0.47444788, -0.47475037, -0.5079385)
-bones/32/rotation = Quaternion(0.09002621, 0.82483596, -0.5580752, -0.009643579)
-bones/33/rotation = Quaternion(0.2923369, 0.54236764, -0.20459817, 0.76060253)
-bones/34/rotation = Quaternion(0.12028334, -0.6990269, -0.056964688, 0.70260113)
+bones/31/rotation = Quaternion(0.54301196, -0.4737589, -0.47537366, -0.50468844)
+bones/32/rotation = Quaternion(0.080033176, 0.8232092, -0.561984, -0.0097595425)
+bones/33/rotation = Quaternion(0.29066053, 0.5482887, -0.20693398, 0.75635606)
+bones/34/rotation = Quaternion(0.12027706, -0.6990284, -0.056958195, 0.7026013)
 bones/35/rotation = Quaternion(0.6295971, 3.6962504e-08, 4.1724447e-06, 0.77692175)
 bones/36/rotation = Quaternion(0.62334144, 1.8226517e-07, 4.4701296e-06, 0.7819497)
 bones/37/rotation = Quaternion(0.62334156, 1.00128474e-07, 4.2318875e-06, 0.78194976)
@@ -80,59 +81,72 @@ bones/51/rotation = Quaternion(-0.123819225, -0.7195233, -0.2018356, 0.65285325)
 bones/52/rotation = Quaternion(0.18180701, -0.11012422, -0.0600633, 0.97530067)
 bones/53/rotation = Quaternion(0.5994302, -0.27396527, -0.1946322, 0.72646046)
 bones/54/scale = Vector3(1.0001454, 1.0004876, 1.0005835)
-bones/55/rotation = Quaternion(-0.0007848497, 0.12205417, 0.9862724, -0.111215994)
-bones/56/rotation = Quaternion(0.016351663, 0.9822451, -0.14909148, 0.11268937)
-bones/57/rotation = Quaternion(-0.094513595, 0.728995, -0.6779343, 0.006211308)
-bones/58/rotation = Quaternion(2.9949476e-07, 1, 7.152978e-06, 3.1027124e-08)
-bones/60/rotation = Quaternion(0.0008297071, -0.11002924, 0.98720616, 0.115398474)
-bones/61/rotation = Quaternion(-0.028910642, 0.9290336, -0.081193514, -0.35981727)
-bones/62/rotation = Quaternion(0.17148344, 0.6469716, -0.7429764, -0.002711473)
-bones/63/rotation = Quaternion(-6.6982516e-08, 1, 8.9364896e-08, 2.1875957e-09)
+bones/55/rotation = Quaternion(-0.00080999685, 0.13422035, 0.98448956, -0.1129812)
+bones/56/rotation = Quaternion(0.017752608, 0.9802693, -0.16189505, 0.112013884)
+bones/57/rotation = Quaternion(-0.094502434, 0.7252629, -0.68192685, 0.006237606)
+bones/58/rotation = Quaternion(4.664514e-08, 1, 5.9564698e-08, 2.7766212e-08)
+bones/60/rotation = Quaternion(0.0008518161, -0.09699753, 0.98772407, 0.12244218)
+bones/61/rotation = Quaternion(-0.036147367, 0.92769, -0.10026972, -0.3578135)
+bones/62/rotation = Quaternion(0.1712309, 0.63950634, -0.7494731, -0.001359695)
+bones/63/rotation = Quaternion(-8.5969197e-07, 1, 3.143787e-05, -3.3660502e-08)
 
 [node name="Male_Ranger_Acc_Pauldron" parent="Male_Ranger/Armature/GeneralSkeleton" index="0" unique_id=31165408]
 layers = 2
+surface_material_override/0 = ExtResource("3_cpo1c")
 
 [node name="Male_Ranger_Arms" parent="Male_Ranger/Armature/GeneralSkeleton" index="1" unique_id=943269506]
 layers = 2
+surface_material_override/0 = ExtResource("3_cpo1c")
+surface_material_override/1 = ExtResource("3_cpo1c")
 
 [node name="Male_Ranger_Arms_Bracer" parent="Male_Ranger/Armature/GeneralSkeleton" index="2" unique_id=1873274504]
 layers = 2
+surface_material_override/0 = ExtResource("3_cpo1c")
 
 [node name="Male_Ranger_Body" parent="Male_Ranger/Armature/GeneralSkeleton" index="3" unique_id=1008264117]
 layers = 2
+surface_material_override/0 = ExtResource("3_cpo1c")
 
 [node name="Male_Ranger_Body_Belt_1" parent="Male_Ranger/Armature/GeneralSkeleton" index="4" unique_id=1921725296]
 layers = 2
+surface_material_override/0 = ExtResource("3_cpo1c")
 
 [node name="Male_Ranger_Body_Belt_2" parent="Male_Ranger/Armature/GeneralSkeleton" index="5" unique_id=821869715]
 layers = 2
+surface_material_override/0 = ExtResource("3_cpo1c")
 
 [node name="Male_Ranger_Feet_Boots" parent="Male_Ranger/Armature/GeneralSkeleton" index="6" unique_id=848688007]
 layers = 2
+surface_material_override/0 = ExtResource("3_cpo1c")
 
 [node name="Male_Ranger_Head_Hood" parent="Male_Ranger/Armature/GeneralSkeleton" index="7" unique_id=2082657642]
 layers = 2
+surface_material_override/0 = ExtResource("3_cpo1c")
 
 [node name="Male_Ranger_Legs" parent="Male_Ranger/Armature/GeneralSkeleton" index="8" unique_id=1133806549]
 layers = 2
+surface_material_override/0 = ExtResource("3_cpo1c")
 
 [node name="Fighter0HeadFace" type="MeshInstance3D" parent="Male_Ranger/Armature/GeneralSkeleton" index="9" unique_id=1811865273]
 layers = 2
 mesh = ExtResource("8_xj75l")
 skeleton = NodePath("..")
+surface_material_override/0 = ExtResource("3_cpo1c")
 
 [node name="Fighter0HeadFace001" type="MeshInstance3D" parent="Male_Ranger/Armature/GeneralSkeleton" index="10" unique_id=1763464230]
 layers = 2
 mesh = ExtResource("9_s50qn")
 skeleton = NodePath("..")
+surface_material_override/0 = ExtResource("3_cpo1c")
 
 [node name="Fighter0HeadSphere005Retopology004" type="MeshInstance3D" parent="Male_Ranger/Armature/GeneralSkeleton" index="11" unique_id=383085059]
 layers = 2
 mesh = ExtResource("10_st2b5")
 skeleton = NodePath("..")
+surface_material_override/0 = ExtResource("3_cpo1c")
 
 [node name="LeftHand" type="BoneAttachment3D" parent="Male_Ranger/Armature/GeneralSkeleton" index="12" unique_id=2013517441]
-transform = Transform3D(0.48175848, 0.028958336, -0.8758257, -0.39033097, -0.88773715, -0.24405836, -0.7845704, 0.45943904, -0.41637146, 0.32892567, 0.9683723, 0.0006537363)
+transform = Transform3D(0.4797603, 0.024217106, -0.87706566, -0.3901265, -0.88948065, -0.23796144, -0.7858955, 0.45633093, -0.4172896, 0.32442045, 0.9648164, 0.0058861077)
 bone_name = "LeftHand"
 bone_idx = 10
 
@@ -144,7 +158,7 @@ shape = SubResource("SphereShape3D_h2w44")
 debug_color = Color(1, 0, 0, 0.41960785)
 
 [node name="RightHand" type="BoneAttachment3D" parent="Male_Ranger/Armature/GeneralSkeleton" index="13" unique_id=2123164439]
-transform = Transform3D(0.07876064, -0.15464215, 0.9848262, 0.4855019, -0.85687095, -0.17337774, 0.8706807, 0.49179035, 0.0075913235, -0.28137133, 0.99011576, -0.18719926)
+transform = Transform3D(0.0705389, -0.14401138, 0.9870589, 0.47958523, -0.8627575, -0.16014878, 0.8746556, 0.48467568, 0.008207827, -0.2776936, 0.9865309, -0.18120024)
 bone_name = "RightHand"
 bone_idx = 34
 
@@ -156,7 +170,7 @@ shape = SubResource("SphereShape3D_h2w44")
 debug_color = Color(1, 0, 0, 0.41960785)
 
 [node name="Chest" type="BoneAttachment3D" parent="Male_Ranger/Armature/GeneralSkeleton" index="14" unique_id=565224252]
-transform = Transform3D(0.9731781, -0.02111653, -0.22908194, 0.00049758446, 0.9959693, -0.08969356, 0.23005259, 0.08717384, 0.969266, -0.00033643423, 1.1401267, -0.06490733)
+transform = Transform3D(0.9731817, -0.0262974, -0.22852945, 0.00048669562, 0.9936773, -0.11227213, 0.230037, 0.10914996, 0.9670415, -0.0010730294, 1.1381631, -0.063172124)
 bone_name = "Chest"
 bone_idx = 3
 
@@ -169,7 +183,7 @@ shape = SubResource("BoxShape3D_h2w44")
 debug_color = Color(0.0333333, 1, 0, 0.41960785)
 
 [node name="Head" type="BoneAttachment3D" parent="Male_Ranger/Armature/GeneralSkeleton" index="15" unique_id=6332714]
-transform = Transform3D(0.99779963, -0.057574242, -0.032881707, 0.048180804, 0.970328, -0.2369434, 0.045547873, 0.23483779, 0.9709669, -0.013552377, 1.5641041, -0.010433184)
+transform = Transform3D(0.99767566, -0.060361028, -0.031618252, 0.05021765, 0.9649496, -0.25758582, 0.04605815, 0.2553993, 0.96573794, -0.017064122, 1.5605688, 0.003101524)
 bone_name = "Head"
 bone_idx = 6
 
@@ -188,19 +202,16 @@ hit_sender = NodePath("../../Male_Ranger/Armature/GeneralSkeleton/RightHand/Righ
 [node name="HeavyAttackState" parent="StateMachine" parent_id_path=PackedInt32Array(323651919) index="3" unique_id=1372267151 node_paths=PackedStringArray("hit_sender")]
 hit_sender = NodePath("../../Male_Ranger/Armature/GeneralSkeleton/RightHand/RightHandHitSender")
 
-[node name="LightComboState" parent="StateMachine" parent_id_path=PackedInt32Array(323651919) index="8" unique_id=150189987 node_paths=PackedStringArray("hit_sender")]
-hit_sender = NodePath("../../Male_Ranger/Armature/GeneralSkeleton/LeftHand/LeftHandHitSender")
-
-[node name="AnimationPlayer" parent="." index="4" unique_id=1449416530]
+[node name="AnimationPlayer" parent="." index="5" unique_id=1449416530]
 root_node = NodePath("../Male_Ranger")
 autoplay = &"FighterBase/Idle"
 
-[node name="AnimationTree" parent="." index="6" unique_id=1314739245]
+[node name="AnimationTree" parent="." index="7" unique_id=1314739245]
 root_node = NodePath("../Male_Ranger")
 parameters/Standing/blend_position = -0.0007776022
 
-[node name="FighterVisual" parent="." index="8" unique_id=1811587310 node_paths=PackedStringArray("model_root")]
+[node name="FighterVisual" parent="." index="9" unique_id=1811587310 node_paths=PackedStringArray("model_root")]
 model_root = NodePath("../Male_Ranger/Armature/GeneralSkeleton")
-hit_flash_material = SubResource("StandardMaterial3D_tqqd4")
+hit_flash_material = SubResource("StandardMaterial3D_yrqoh")
 
 [editable path="Male_Ranger"]

@@ -5,16 +5,16 @@
 [ext_resource type="PackedScene" uid="uid://d3vah6g23glw3" path="res://Scenes/tavernkeep.tscn" id="2_pu3va"]
 [ext_resource type="Texture2D" uid="uid://bmfar6t1xnyjr" path="res://Textures/Skybox/SkyboxTexture.png" id="3_0e3vx"]
 [ext_resource type="PackedScene" uid="uid://dtlsh06pm7wji" path="res://Models/Castle/CastleWall.glb" id="4_bb2iq"]
-[ext_resource type="Material" uid="uid://dmwwu5y8jsxpb" path="res://Models/Castle/castle_ground.tres" id="5_18r40"]
 [ext_resource type="PackedScene" uid="uid://5opujnhsdfwj" path="res://Scenes/networked_ranger.tscn" id="5_sftma"]
-[ext_resource type="Material" uid="uid://c8y16twfehobg" path="res://Models/Castle/castle_wall.tres" id="6_6y7pd"]
 [ext_resource type="PackedScene" uid="uid://duqfxx6hl26ge" path="res://Scenes/networked_tavernkeep.tscn" id="6_erobn"]
-[ext_resource type="PackedScene" uid="uid://cqeolksc6h3ps" path="res://Models/Props/torch.tscn" id="7_18r40"]
 [ext_resource type="Script" uid="uid://d4h85t5g4ykvb" path="res://Scripts/Managers/game_manager.gd" id="9_73nn6"]
 [ext_resource type="FontFile" uid="uid://x8i6v4n3k2ku" path="res://Fonts/MetalMania-Regular.ttf" id="10_r0mdn"]
 [ext_resource type="AudioStream" uid="uid://bulg3rv6qahxf" path="res://Audio/Music/BattleMusic.mp3" id="11_0xqxu"]
 [ext_resource type="PackedScene" uid="uid://d0nvw5450l0bg" path="res://Scenes/fighter_ai.tscn" id="12_c78sm"]
 [ext_resource type="Script" uid="uid://bol7lwjjpdtyt" path="res://Scripts/Managers/audio_manager.gd" id="12_tpqse"]
+[ext_resource type="PackedScene" uid="uid://b0m472m67jm1n" path="res://Models/Props/Crate_Wooden.gltf" id="13_i47ox"]
+[ext_resource type="PackedScene" uid="uid://cyntcx0uhl44l" path="res://Models/Props/Barrel.gltf" id="14_sftma"]
+[ext_resource type="Material" uid="uid://b5ilpkdv2len0" path="res://Materials/floor_material.tres" id="16_erobn"]
 
 [sub_resource type="Curve" id="Curve_6y7pd"]
 _limits = [4.0, 10.0, 2.0, 10.0]
@@ -189,7 +189,7 @@ sky_material = SubResource("PanoramaSkyMaterial_pu3va")
 background_mode = 2
 sky = SubResource("Sky_65ton")
 sky_custom_fov = 70.0
-sky_rotation = Vector3(0, -0.9948377, 0)
+sky_rotation = Vector3(0.2443461, -0.9948377, 0.17453292)
 ambient_light_source = 3
 reflected_light_source = 2
 ssao_enabled = true
@@ -197,10 +197,13 @@ ssao_intensity = 3.0
 glow_enabled = true
 glow_bloom = 0.5
 fog_enabled = true
-fog_light_color = Color(0.68, 0.3150667, 0.20400001, 1)
-fog_sky_affect = 0.2
+fog_light_color = Color(0.62, 0.42036, 0.35960004, 1)
+fog_sky_affect = 0.3
 fog_height = 1.2
 fog_height_density = 0.1
+
+[sub_resource type="BoxMesh" id="BoxMesh_h2w44"]
+size = Vector3(1.0256348, 6.3085938, 21.043945)
 
 [node name="Main" type="Node3D" unique_id=46452760]
 
@@ -292,33 +295,6 @@ shape = SubResource("WorldBoundaryShape3D_65ton")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6)
 shape = SubResource("WorldBoundaryShape3D_18r40")
 
-[node name="CastleWall" parent="Environment" unique_id=1307475896 instance=ExtResource("4_bb2iq")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
-
-[node name="Cube" parent="Environment/CastleWall" index="0" unique_id=1792980011]
-surface_material_override/0 = ExtResource("5_18r40")
-surface_material_override/1 = ExtResource("6_6y7pd")
-
-[node name="Cube_001" parent="Environment/CastleWall" index="1" unique_id=1728944476]
-surface_material_override/0 = ExtResource("6_6y7pd")
-
-[node name="House1" type="Node3D" parent="Environment" unique_id=905371831]
-
-[node name="Torch" parent="Environment" unique_id=219027352 instance=ExtResource("7_18r40")]
-transform = Transform3D(-0.0060035065, 0, 0.999982, 0, 1, 0, -0.999982, 0, -0.0060035065, -1.585675, 0.3601606, 0.41790438)
-
-[node name="Torch2" parent="Environment" unique_id=1502149426 instance=ExtResource("7_18r40")]
-transform = Transform3D(-0.0060035065, 0, 0.999982, 0, 1, 0, -0.999982, 0, -0.0060035065, -1.585675, 0.3601606, -3.6953006)
-
-[node name="Torch5" parent="Environment" unique_id=442997674 instance=ExtResource("7_18r40")]
-transform = Transform3D(-0.0060035065, 0, 0.999982, 0, 1, 0, -0.999982, 0, -0.0060035065, -1.585675, 0.3601606, -7.629668)
-
-[node name="Torch3" parent="Environment" unique_id=1696507321 instance=ExtResource("7_18r40")]
-transform = Transform3D(-0.0060035065, 0, 0.999982, 0, 1, 0, -0.999982, 0, -0.0060035065, -1.585675, 0.3601606, 4.3335547)
-
-[node name="Torch4" parent="Environment" unique_id=832787109 instance=ExtResource("7_18r40")]
-transform = Transform3D(-0.0060035065, 0, 0.999982, 0, 1, 0, -0.999982, 0, -0.0060035065, -1.585675, 0.3601606, 8.489786)
-
 [node name="WorldEnvironment" type="WorldEnvironment" parent="Environment" unique_id=827236143]
 environment = SubResource("Environment_h2w44")
 
@@ -328,4 +304,129 @@ layers = 2
 light_cull_mask = 4294967294
 shadow_enabled = true
 
+[node name="Floor" type="MeshInstance3D" parent="Environment" unique_id=1700826672]
+transform = Transform3D(0.99006134, -0.1406357, 5.9604645e-08, 0.1406357, 0.9900613, -1.1175871e-08, -3.1664968e-08, -7.450581e-09, 1, -0.22241223, -3.2466784, -0.6638185)
+material_override = ExtResource("16_erobn")
+mesh = SubResource("BoxMesh_h2w44")
+
+[node name="Crate_Wooden2" parent="Environment" unique_id=1896144642 instance=ExtResource("13_i47ox")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5152694, -0.05514895, 6.4409604)
+
+[node name="Crate_Wooden" parent="Environment/Crate_Wooden2" index="0" unique_id=1795274480]
+surface_material_override/0 = ExtResource("16_erobn")
+surface_material_override/1 = ExtResource("16_erobn")
+
+[node name="Crate_Wooden10" parent="Environment" unique_id=252715869 instance=ExtResource("13_i47ox")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5152694, 0.8739532, 6.4409604)
+
+[node name="Crate_Wooden" parent="Environment/Crate_Wooden10" index="0" unique_id=1795274480]
+surface_material_override/0 = ExtResource("16_erobn")
+surface_material_override/1 = ExtResource("16_erobn")
+
+[node name="Crate_Wooden3" parent="Environment" unique_id=996696034 instance=ExtResource("13_i47ox")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5152694, -0.05514895, 7.370294)
+
+[node name="Crate_Wooden" parent="Environment/Crate_Wooden3" index="0" unique_id=1795274480]
+surface_material_override/0 = ExtResource("16_erobn")
+surface_material_override/1 = ExtResource("16_erobn")
+
+[node name="Crate_Wooden4" parent="Environment" unique_id=2013636804 instance=ExtResource("13_i47ox")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5152694, -0.05514895, -7.3104053)
+
+[node name="Crate_Wooden" parent="Environment/Crate_Wooden4" index="0" unique_id=1795274480]
+surface_material_override/0 = ExtResource("16_erobn")
+surface_material_override/1 = ExtResource("16_erobn")
+
+[node name="Crate_Wooden9" parent="Environment" unique_id=1193675094 instance=ExtResource("13_i47ox")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5152694, -0.05514895, -8.246946)
+
+[node name="Crate_Wooden" parent="Environment/Crate_Wooden9" index="0" unique_id=1795274480]
+surface_material_override/0 = ExtResource("16_erobn")
+surface_material_override/1 = ExtResource("16_erobn")
+
+[node name="Crate_Wooden5" parent="Environment" unique_id=252896041 instance=ExtResource("13_i47ox")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5152694, -0.05514895, -6.412293)
+
+[node name="Crate_Wooden" parent="Environment/Crate_Wooden5" index="0" unique_id=1795274480]
+surface_material_override/0 = ExtResource("16_erobn")
+surface_material_override/1 = ExtResource("16_erobn")
+
+[node name="Crate_Wooden6" parent="Environment" unique_id=237211812 instance=ExtResource("13_i47ox")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5152694, 0.85926294, -6.412293)
+
+[node name="Crate_Wooden" parent="Environment/Crate_Wooden6" index="0" unique_id=1795274480]
+surface_material_override/0 = ExtResource("16_erobn")
+surface_material_override/1 = ExtResource("16_erobn")
+
+[node name="Crate_Wooden7" parent="Environment" unique_id=1303990740 instance=ExtResource("13_i47ox")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5152694, 0.8636433, -7.3416266)
+
+[node name="Crate_Wooden" parent="Environment/Crate_Wooden7" index="0" unique_id=1795274480]
+surface_material_override/0 = ExtResource("16_erobn")
+surface_material_override/1 = ExtResource("16_erobn")
+
+[node name="Crate_Wooden8" parent="Environment" unique_id=332269104 instance=ExtResource("13_i47ox")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5152694, 1.7602742, -6.412293)
+
+[node name="Crate_Wooden" parent="Environment/Crate_Wooden8" index="0" unique_id=1795274480]
+surface_material_override/0 = ExtResource("16_erobn")
+surface_material_override/1 = ExtResource("16_erobn")
+
+[node name="Barrel2" parent="Environment" unique_id=684631427 instance=ExtResource("14_sftma")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.48965883, 1.7517734, 6.4150763)
+
+[node name="Barrel" parent="Environment/Barrel2" index="0" unique_id=153477468]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.07889509, 0)
+surface_material_override/0 = ExtResource("16_erobn")
+surface_material_override/1 = ExtResource("16_erobn")
+
+[node name="Barrel4" parent="Environment" unique_id=754201416 instance=ExtResource("14_sftma")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.48965883, 0.8289913, 7.4561744)
+
+[node name="Barrel" parent="Environment/Barrel4" index="0" unique_id=153477468]
+surface_material_override/0 = ExtResource("16_erobn")
+surface_material_override/1 = ExtResource("16_erobn")
+
+[node name="Barrel3" parent="Environment" unique_id=1611852559 instance=ExtResource("14_sftma")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.48965883, -0.16484463, 8.534513)
+
+[node name="Barrel" parent="Environment/Barrel3" index="0" unique_id=153477468]
+surface_material_override/0 = ExtResource("16_erobn")
+surface_material_override/1 = ExtResource("16_erobn")
+
+[node name="CastleWall" parent="Environment" unique_id=1307475896 instance=ExtResource("4_bb2iq")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, -0.25760293, 17.596962)
+
+[node name="Cube" parent="Environment/CastleWall" index="0" unique_id=1792980011]
+surface_material_override/0 = ExtResource("16_erobn")
+surface_material_override/1 = ExtResource("16_erobn")
+
+[node name="Cube_001" parent="Environment/CastleWall" index="1" unique_id=1728944476]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.484089, 0.34242633, -1.75)
+surface_material_override/0 = ExtResource("16_erobn")
+
+[node name="CastleWall2" parent="Environment" unique_id=1922995053 instance=ExtResource("4_bb2iq")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, -0.25760293, -19.142689)
+
+[node name="Cube" parent="Environment/CastleWall2" index="0" unique_id=1792980011]
+surface_material_override/0 = ExtResource("16_erobn")
+surface_material_override/1 = ExtResource("16_erobn")
+
+[node name="Cube_001" parent="Environment/CastleWall2" index="1" unique_id=1728944476]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.484089, 0.34242633, -1.75)
+surface_material_override/0 = ExtResource("16_erobn")
+
+[editable path="Environment/Crate_Wooden2"]
+[editable path="Environment/Crate_Wooden10"]
+[editable path="Environment/Crate_Wooden3"]
+[editable path="Environment/Crate_Wooden4"]
+[editable path="Environment/Crate_Wooden9"]
+[editable path="Environment/Crate_Wooden5"]
+[editable path="Environment/Crate_Wooden6"]
+[editable path="Environment/Crate_Wooden7"]
+[editable path="Environment/Crate_Wooden8"]
+[editable path="Environment/Barrel2"]
+[editable path="Environment/Barrel4"]
+[editable path="Environment/Barrel3"]
 [editable path="Environment/CastleWall"]
+[editable path="Environment/CastleWall2"]
