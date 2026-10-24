@@ -25,26 +25,20 @@ var current_state: MenuStates:
 
 @export_category("Multiplayer Setup")
 @export var username_line_edit: LineEdit
-@export var ip_line_edit: LineEdit
-@export var port_line_edit: LineEdit
+@export var room_id_line_edit: LineEdit
 
 @export_category("Lobby")
 @export var host_player_name: Label
 @export var client_player_name: Label
 @export var online_multiplayer_start_button: BaseButton
 @export var waiting_text: Label
+@export var room_id_text: Label
 
-var port: int:
+var room_id: String:
 	get:
-		if port_line_edit == null:
-			return 0
-		return int(port_line_edit.text)
-
-var ip: String:
-	get:
-		if ip_line_edit == null:
+		if room_id_line_edit == null:
 			return ""
-		return ip_line_edit.text
+		return room_id_line_edit.text
 
 func _ready() -> void:
 	current_state = MenuStates.MAIN
@@ -89,7 +83,7 @@ func _on_create_game_button_pressed() -> void:
 func _on_join_game_button_pressed() -> void:
 	if username_line_edit:
 		NetworkManager.local_username = username_line_edit.text
-	NetworkManager.start_client(ip)
+	NetworkManager.start_client(room_id)
 
 func _on_server_disconnected():
 	current_state = MenuStates.MAIN
@@ -135,6 +129,11 @@ func set_lobby_ui():
 	else:
 		online_multiplayer_start_button.hide()
 		waiting_text.show()
+	
+	if not NetworkManager.online_id == "" and room_id_text:
+		room_id_text.text = str("Room ID: ", NetworkManager.online_id)
+	else:
+		room_id_text.text = ""
 
 func _process(_delta: float) -> void:
 	set_lobby_ui()

@@ -22,6 +22,11 @@ shadow_size = 3
 shadow_color = Color(1, 0.3, 0.3, 1)
 shadow_offset = Vector2(5, 5)
 
+[sub_resource type="LabelSettings" id="LabelSettings_ofcii"]
+font = ExtResource("1_28efy")
+font_size = 48
+font_color = Color(0, 0, 0, 1)
+
 [sub_resource type="LabelSettings" id="LabelSettings_65ton"]
 font = ExtResource("1_28efy")
 font_size = 72
@@ -37,7 +42,7 @@ font = ExtResource("1_28efy")
 font_size = 48
 font_color = Color(0, 0, 0, 1)
 
-[node name="MenuUI" type="CanvasLayer" unique_id=1963338206 node_paths=PackedStringArray("menu_scenes", "username_line_edit", "ip_line_edit", "port_line_edit", "host_player_name", "client_player_name", "online_multiplayer_start_button", "waiting_text")]
+[node name="MenuUI" type="CanvasLayer" unique_id=1963338206 node_paths=PackedStringArray("menu_scenes", "username_line_edit", "room_id_line_edit", "host_player_name", "client_player_name", "online_multiplayer_start_button", "waiting_text", "room_id_text")]
 script = ExtResource("1_amrxi")
 menu_scenes = {
 0: NodePath("BG/MainMenuScreen"),
@@ -45,12 +50,12 @@ menu_scenes = {
 2: NodePath("BG/MultiplayerLobbyScreen")
 }
 username_line_edit = NodePath("BG/MultiplayerSetupScreen/HBoxContainer/ButtonContainer/UsernameEntryField")
-ip_line_edit = NodePath("BG/MultiplayerSetupScreen/HBoxContainer/ButtonContainer/IPEntryField")
-port_line_edit = NodePath("BG/MultiplayerSetupScreen/HBoxContainer/ButtonContainer/PortEntryField")
+room_id_line_edit = NodePath("BG/MultiplayerSetupScreen/HBoxContainer/ButtonContainer/RoomIDEntryField")
 host_player_name = NodePath("BG/MultiplayerLobbyScreen/HBoxContainer/ButtonContainer/Player1NameLabel")
 client_player_name = NodePath("BG/MultiplayerLobbyScreen/HBoxContainer/ButtonContainer/Player2NameLabel")
 online_multiplayer_start_button = NodePath("BG/MultiplayerLobbyScreen/HBoxContainer/ButtonContainer/StartOnlineGameButton")
 waiting_text = NodePath("BG/MultiplayerLobbyScreen/HBoxContainer/ButtonContainer/WaitingText")
+room_id_text = NodePath("BG/MultiplayerLobbyScreen/HBoxContainer/ButtonContainer/RoomIDLabel")
 
 [node name="BG" type="ColorRect" parent="." unique_id=115193753]
 anchors_preset = 15
@@ -202,7 +207,6 @@ size_flags_horizontal = 3
 mouse_filter = 2
 
 [node name="MultiplayerSetupScreen" type="VBoxContainer" parent="BG" unique_id=2121737597]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -247,25 +251,18 @@ mouse_filter = 2
 [node name="UsernameEntryField" type="LineEdit" parent="BG/MultiplayerSetupScreen/HBoxContainer/ButtonContainer" unique_id=1651625058]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
+size_flags_vertical = 3
 placeholder_text = "Username..."
 alignment = 1
-max_length = 15
+max_length = 20
 
-[node name="IPEntryField" type="LineEdit" parent="BG/MultiplayerSetupScreen/HBoxContainer/ButtonContainer" unique_id=1515316555]
+[node name="RoomIDEntryField" type="LineEdit" parent="BG/MultiplayerSetupScreen/HBoxContainer/ButtonContainer" unique_id=1515316555]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
-text = "localhost"
-placeholder_text = "IP Address..."
+size_flags_vertical = 3
+placeholder_text = "Room ID..."
 alignment = 1
-max_length = 15
-
-[node name="PortEntryField" type="LineEdit" parent="BG/MultiplayerSetupScreen/HBoxContainer/ButtonContainer" unique_id=576921219]
-custom_minimum_size = Vector2(0, 60)
-layout_mode = 2
-text = "1111"
-placeholder_text = "Port..."
-alignment = 1
-max_length = 15
+max_length = 20
 
 [node name="Padding4" type="Control" parent="BG/MultiplayerSetupScreen/HBoxContainer/ButtonContainer" unique_id=1236406859]
 layout_mode = 2
@@ -319,6 +316,7 @@ size_flags_horizontal = 3
 mouse_filter = 2
 
 [node name="MultiplayerLobbyScreen" type="VBoxContainer" parent="BG" unique_id=635590576]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -355,10 +353,13 @@ theme_override_constants/separation = 20
 script = ExtResource("3_bryks")
 anim_when = 1
 
-[node name="Padding2" type="Control" parent="BG/MultiplayerLobbyScreen/HBoxContainer/ButtonContainer" unique_id=247328807]
+[node name="RoomIDLabel" type="Label" parent="BG/MultiplayerLobbyScreen/HBoxContainer/ButtonContainer" unique_id=2080008064]
 layout_mode = 2
-size_flags_vertical = 3
-mouse_filter = 2
+size_flags_vertical = 6
+text = "Room ID: YD45L"
+label_settings = SubResource("LabelSettings_ofcii")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Player1NameLabel" type="Label" parent="BG/MultiplayerLobbyScreen/HBoxContainer/ButtonContainer" unique_id=1723080140]
 layout_mode = 2

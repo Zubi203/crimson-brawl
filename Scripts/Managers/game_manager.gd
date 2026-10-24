@@ -172,10 +172,10 @@ func _networked_end_game(server_lost: bool):
 		if NetworkManager.is_server:
 			end_text_label.text = NetworkManager.player_client.username + " Wins!"
 		else:
-			end_text_label.text = NetworkManager.local_username + " Wins!"
+			end_text_label.text = NetworkManager.player_host.username + " Wins!"
 	else:
 		if NetworkManager.is_server:
-			end_text_label.text = NetworkManager.local_username + " Wins!"
+			end_text_label.text = NetworkManager.player_host.username + " Wins!"
 		else:
 			end_text_label.text = NetworkManager.player_client.username + " Wins!"
 
