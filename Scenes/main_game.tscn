@@ -275,6 +275,7 @@ spawn_path = NodePath(".")
 stream = ExtResource("11_0xqxu")
 volume_db = -15.0
 autoplay = true
+parameters/looping = true
 
 [node name="AudioManager" type="Node" parent="." unique_id=29922740]
 script = ExtResource("12_tpqse")

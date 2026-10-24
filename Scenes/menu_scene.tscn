@@ -23,7 +23,12 @@ _data = {
 
 [node name="MenuScene" type="Node3D" unique_id=295806656]
 
-[node name="MenuUI" parent="." unique_id=1963338206 instance=ExtResource("1_1opiu")]
+[node name="MenuUI" parent="." unique_id=1963338206 node_paths=PackedStringArray("menu_scenes") instance=ExtResource("1_1opiu")]
+menu_scenes = {
+0: NodePath("BG/MainMenuScreen"),
+1: NodePath("BG/MultiplayerSetupScreen"),
+2: NodePath("BG/MultiplayerLobbyScreen")
+}
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=2062284436]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5351422, 1.9306889)
@@ -257,6 +262,7 @@ libraries/TitleScreenFighter = SubResource("AnimationLibrary_yvq3c")
 stream = ExtResource("8_jjc8c")
 volume_db = -10.0
 autoplay = true
+parameters/looping = true
 
 [editable path="Male_Ranger"]
 [editable path="Male_Ranger2"]
