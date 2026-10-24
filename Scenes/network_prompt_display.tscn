@@ -1,0 +1,428 @@
+[gd_scene format=3 uid="uid://cyc3oo3y4y7v4"]
+
+[ext_resource type="Script" uid="uid://bxbfkfn8ajssc" path="res://Scripts/network_prompt_display.gd" id="1_q3vgr"]
+[ext_resource type="Theme" uid="uid://crnhsk1q6t8r" path="res://Data/ui_theme.tres" id="2_bcnlc"]
+[ext_resource type="Script" uid="uid://dimct1fhrm5my" path="res://Scripts/UI/container_animation.gd" id="3_jheto"]
+[ext_resource type="Texture2D" uid="uid://bg6tlnw1qlch7" path="res://UI/2x/Danger sign 1.png" id="3_lyqui"]
+[ext_resource type="FontFile" uid="uid://x8i6v4n3k2ku" path="res://Fonts/MetalMania-Regular.ttf" id="4_21bp7"]
+[ext_resource type="Script" uid="uid://sshbisoigeyr" path="res://Scripts/UI/animated_button_component.gd" id="5_be2f8"]
+[ext_resource type="Texture2D" uid="uid://c1pie62hd0siq" path="res://UI/2x/Wi Fi.png" id="6_21bp7"]
+[ext_resource type="Script" uid="uid://bw7u2deyx1w4l" path="res://Scripts/UI/auto_animate_ui_component.gd" id="6_be2f8"]
+[ext_resource type="Script" uid="uid://b0ig5g6bl6xug" path="res://Scripts/UI/button_audio_component.gd" id="7_voomm"]
+
+[sub_resource type="SystemFont" id="SystemFont_yhcui"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_h2w44"]
+font = SubResource("SystemFont_yhcui")
+font_size = 22
+shadow_color = Color(0, 0, 0, 0.7254902)
+shadow_offset = Vector2(2, 2)
+
+[sub_resource type="LabelSettings" id="LabelSettings_65ton"]
+font = ExtResource("4_21bp7")
+font_size = 32
+
+[sub_resource type="Gradient" id="Gradient_774hc"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0.1353211, 0.4885321, 0.6536697)
+colors = PackedColorArray(1, 1, 1, 0, 0.82606, 0.82606006, 0.82606, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_774hc"]
+gradient = SubResource("Gradient_774hc")
+width = 96
+height = 96
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="Animation" id="Animation_q3vgr"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:fill_mode")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [5]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:value")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_bcnlc"]
+resource_name = "loading"
+length = 1.5666667
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:fill_mode")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [4, 5]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:value")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.8, 1.0333333),
+"transitions": PackedFloat32Array(2.2973967, 0.4506253, 0.4204483),
+"update": 0,
+"values": [0.0, 1.0, 1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_d14pd"]
+_data = {
+&"RESET": SubResource("Animation_q3vgr"),
+&"loading": SubResource("Animation_bcnlc")
+}
+
+[node name="NetworkPromptDisplay" type="CanvasLayer" unique_id=835329614 node_paths=PackedStringArray("panels", "background", "text_copied_panel", "room_id_input", "join_room_button")]
+layer = 50
+script = ExtResource("1_q3vgr")
+panels = {
+1: NodePath("PromptMenu/LoadingDisplay"),
+2: NodePath("PromptMenu/ConnectionFailedPrompt"),
+3: NodePath("PromptMenu/DisconnectedPrompt"),
+4: NodePath("PromptMenu/JoinRoomPrompt")
+}
+background = NodePath("PromptMenu/Background")
+text_copied_panel = NodePath("PromptMenu/CopiedToClipboardDisplay")
+room_id_input = NodePath("PromptMenu/JoinRoomPrompt/MarginContainer/VBoxContainer/RoomIDLineEdit")
+join_room_button = NodePath("PromptMenu/JoinRoomPrompt/MarginContainer/VBoxContainer/HBoxContainer/JoinButton")
+
+[node name="PromptMenu" type="Control" parent="." unique_id=657423839]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("2_bcnlc")
+
+[node name="Background" type="ColorRect" parent="PromptMenu" unique_id=1345782573]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.40784314)
+
+[node name="CopiedToClipboardDisplay" type="PanelContainer" parent="PromptMenu" unique_id=203607589]
+visible = false
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(370, 70)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -185.0
+offset_top = 386.0
+offset_right = 185.0
+offset_bottom = 456.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="PromptMenu/CopiedToClipboardDisplay" unique_id=581582583]
+layout_mode = 2
+text = "Room ID copied to clipboard"
+label_settings = SubResource("LabelSettings_h2w44")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DisconnectedPrompt" type="PanelContainer" parent="PromptMenu" unique_id=879604730]
+visible = false
+custom_minimum_size = Vector2(500, 300)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -150.0
+offset_right = 250.0
+offset_bottom = 150.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PromptMenu/DisconnectedPrompt" unique_id=807120392]
+layout_mode = 2
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PromptMenu/DisconnectedPrompt/MarginContainer" unique_id=1216419355]
+layout_mode = 2
+alignment = 1
+script = ExtResource("3_jheto")
+anim_when = 2
+delay_appear = 0.1
+
+[node name="Icon" type="TextureRect" parent="PromptMenu/DisconnectedPrompt/MarginContainer/VBoxContainer" unique_id=161179503]
+modulate = Color(1, 0.18, 0.18, 1)
+custom_minimum_size = Vector2(0, 60)
+custom_maximum_size = Vector2(-1, 60)
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("3_lyqui")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="PromptMenu/DisconnectedPrompt/MarginContainer/VBoxContainer" unique_id=1979461522]
+layout_mode = 2
+size_flags_vertical = 6
+text = "Connection Lost!"
+label_settings = SubResource("LabelSettings_65ton")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="PromptMenu/DisconnectedPrompt/MarginContainer/VBoxContainer" unique_id=2063066859]
+layout_mode = 2
+
+[node name="DisconnectCloseButton" type="Button" parent="PromptMenu/DisconnectedPrompt/MarginContainer/VBoxContainer/CenterContainer" unique_id=312420641]
+custom_minimum_size = Vector2(200, 60)
+custom_maximum_size = Vector2(200, 60)
+layout_mode = 2
+size_flags_vertical = 3
+text = "OK"
+
+[node name="AnimatedButtonComponent" type="Node2D" parent="PromptMenu/DisconnectedPrompt/MarginContainer/VBoxContainer/CenterContainer/DisconnectCloseButton" unique_id=1064899213]
+script = ExtResource("5_be2f8")
+metadata/_custom_type_script = "uid://sshbisoigeyr"
+
+[node name="ButtonAudioComponent" type="AudioStreamPlayer" parent="PromptMenu/DisconnectedPrompt/MarginContainer/VBoxContainer/CenterContainer/DisconnectCloseButton" unique_id=1852928848]
+script = ExtResource("7_voomm")
+metadata/_custom_type_script = "uid://b0ig5g6bl6xug"
+
+[node name="AutoAnimateUIComponent" type="Control" parent="PromptMenu/DisconnectedPrompt" unique_id=175059342]
+layout_mode = 2
+script = ExtResource("6_be2f8")
+anim_when = 2
+metadata/_custom_type_script = "uid://bw7u2deyx1w4l"
+
+[node name="ConnectionFailedPrompt" type="PanelContainer" parent="PromptMenu" unique_id=1939388370]
+visible = false
+custom_minimum_size = Vector2(500, 300)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -150.0
+offset_right = 250.0
+offset_bottom = 150.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PromptMenu/ConnectionFailedPrompt" unique_id=2140333973]
+layout_mode = 2
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PromptMenu/ConnectionFailedPrompt/MarginContainer" unique_id=179182475]
+layout_mode = 2
+alignment = 1
+script = ExtResource("3_jheto")
+anim_when = 2
+delay_appear = 0.1
+
+[node name="Icon" type="TextureRect" parent="PromptMenu/ConnectionFailedPrompt/MarginContainer/VBoxContainer" unique_id=942956864]
+modulate = Color(1, 0.18, 0.18, 1)
+custom_minimum_size = Vector2(0, 60)
+custom_maximum_size = Vector2(-1, 60)
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("3_lyqui")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="PromptMenu/ConnectionFailedPrompt/MarginContainer/VBoxContainer" unique_id=194227057]
+layout_mode = 2
+size_flags_vertical = 6
+text = "Error: failed to connect"
+label_settings = SubResource("LabelSettings_65ton")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="PromptMenu/ConnectionFailedPrompt/MarginContainer/VBoxContainer" unique_id=910127349]
+layout_mode = 2
+
+[node name="ConnectionFailedCloseButton" type="Button" parent="PromptMenu/ConnectionFailedPrompt/MarginContainer/VBoxContainer/CenterContainer" unique_id=1002186332]
+custom_minimum_size = Vector2(200, 60)
+custom_maximum_size = Vector2(200, 60)
+layout_mode = 2
+size_flags_vertical = 3
+text = "OK"
+
+[node name="AnimatedButtonComponent" type="Node2D" parent="PromptMenu/ConnectionFailedPrompt/MarginContainer/VBoxContainer/CenterContainer/ConnectionFailedCloseButton" unique_id=1349452326]
+script = ExtResource("5_be2f8")
+metadata/_custom_type_script = "uid://sshbisoigeyr"
+
+[node name="ButtonAudioComponent" type="AudioStreamPlayer" parent="PromptMenu/ConnectionFailedPrompt/MarginContainer/VBoxContainer/CenterContainer/ConnectionFailedCloseButton" unique_id=1168446986]
+script = ExtResource("7_voomm")
+metadata/_custom_type_script = "uid://b0ig5g6bl6xug"
+
+[node name="AutoAnimateUIComponent" type="Control" parent="PromptMenu/ConnectionFailedPrompt" unique_id=1775548761]
+layout_mode = 2
+script = ExtResource("6_be2f8")
+anim_when = 2
+metadata/_custom_type_script = "uid://bw7u2deyx1w4l"
+
+[node name="JoinRoomPrompt" type="PanelContainer" parent="PromptMenu" unique_id=1437497463]
+visible = false
+custom_minimum_size = Vector2(600, 400)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -200.0
+offset_right = 300.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PromptMenu/JoinRoomPrompt" unique_id=1029843118]
+layout_mode = 2
+theme_override_constants/margin_left = 70
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 70
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PromptMenu/JoinRoomPrompt/MarginContainer" unique_id=607715246]
+layout_mode = 2
+theme_override_constants/separation = 15
+script = ExtResource("3_jheto")
+anim_when = 2
+order_type = 1
+duration = 0.15
+delay_appear = 0.1
+
+[node name="Icon" type="TextureRect" parent="PromptMenu/JoinRoomPrompt/MarginContainer/VBoxContainer" unique_id=1245288394]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("6_21bp7")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="PromptMenu/JoinRoomPrompt/MarginContainer/VBoxContainer" unique_id=218291110]
+layout_mode = 2
+size_flags_vertical = 6
+text = "Enter Room ID:"
+label_settings = SubResource("LabelSettings_65ton")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RoomIDLineEdit" type="LineEdit" parent="PromptMenu/JoinRoomPrompt/MarginContainer/VBoxContainer" unique_id=1194710557]
+layout_mode = 2
+placeholder_text = "Room ID..."
+alignment = 1
+max_length = 5
+
+[node name="Padding" type="Control" parent="PromptMenu/JoinRoomPrompt/MarginContainer/VBoxContainer" unique_id=15785369]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PromptMenu/JoinRoomPrompt/MarginContainer/VBoxContainer" unique_id=1942154672]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="JoinButton" type="Button" parent="PromptMenu/JoinRoomPrompt/MarginContainer/VBoxContainer/HBoxContainer" unique_id=919436364]
+custom_minimum_size = Vector2(200, 60)
+custom_maximum_size = Vector2(200, 60)
+layout_mode = 2
+size_flags_vertical = 3
+text = "join"
+
+[node name="AnimatedButtonComponent" type="Node2D" parent="PromptMenu/JoinRoomPrompt/MarginContainer/VBoxContainer/HBoxContainer/JoinButton" unique_id=583864455]
+script = ExtResource("5_be2f8")
+metadata/_custom_type_script = "uid://sshbisoigeyr"
+
+[node name="ButtonAudioComponent" type="AudioStreamPlayer" parent="PromptMenu/JoinRoomPrompt/MarginContainer/VBoxContainer/HBoxContainer/JoinButton" unique_id=1149339053]
+script = ExtResource("7_voomm")
+metadata/_custom_type_script = "uid://b0ig5g6bl6xug"
+
+[node name="JoinViewCloseMenu" type="Button" parent="PromptMenu/JoinRoomPrompt/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1831368347]
+custom_minimum_size = Vector2(200, 60)
+custom_maximum_size = Vector2(200, 60)
+layout_mode = 2
+size_flags_vertical = 3
+text = "cancel"
+
+[node name="AnimatedButtonComponent" type="Node2D" parent="PromptMenu/JoinRoomPrompt/MarginContainer/VBoxContainer/HBoxContainer/JoinViewCloseMenu" unique_id=1900458735]
+script = ExtResource("5_be2f8")
+metadata/_custom_type_script = "uid://sshbisoigeyr"
+
+[node name="ButtonAudioComponent" type="AudioStreamPlayer" parent="PromptMenu/JoinRoomPrompt/MarginContainer/VBoxContainer/HBoxContainer/JoinViewCloseMenu" unique_id=1416115063]
+script = ExtResource("7_voomm")
+metadata/_custom_type_script = "uid://b0ig5g6bl6xug"
+
+[node name="AutoAnimateUIComponent" type="Control" parent="PromptMenu/JoinRoomPrompt" unique_id=2124269554]
+layout_mode = 2
+script = ExtResource("6_be2f8")
+anim_when = 2
+metadata/_custom_type_script = "uid://bw7u2deyx1w4l"
+
+[node name="LoadingDisplay" type="TextureProgressBar" parent="PromptMenu" unique_id=2133441597]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -48.0
+offset_top = -48.0
+offset_right = 48.0
+offset_bottom = 48.0
+grow_horizontal = 2
+grow_vertical = 2
+max_value = 1.0
+step = 0.01
+fill_mode = 5
+texture_progress = SubResource("GradientTexture2D_774hc")
+
+[node name="LoadingAnimation" type="AnimationPlayer" parent="PromptMenu/LoadingDisplay" unique_id=184317554]
+libraries/ = SubResource("AnimationLibrary_d14pd")
+autoplay = &"loading"
+
+[node name="AutoAnimateUIComponent" type="Control" parent="PromptMenu/LoadingDisplay" unique_id=377154296]
+anchors_preset = 0
+script = ExtResource("6_be2f8")
+anim_when = 2
+metadata/_custom_type_script = "uid://bw7u2deyx1w4l"
+
+[connection signal="pressed" from="PromptMenu/DisconnectedPrompt/MarginContainer/VBoxContainer/CenterContainer/DisconnectCloseButton" to="." method="close_menus"]
+[connection signal="pressed" from="PromptMenu/ConnectionFailedPrompt/MarginContainer/VBoxContainer/CenterContainer/ConnectionFailedCloseButton" to="." method="close_menus"]
+[connection signal="pressed" from="PromptMenu/JoinRoomPrompt/MarginContainer/VBoxContainer/HBoxContainer/JoinButton" to="." method="_on_join_game_button_pressed"]
+[connection signal="pressed" from="PromptMenu/JoinRoomPrompt/MarginContainer/VBoxContainer/HBoxContainer/JoinViewCloseMenu" to="." method="close_menus"]

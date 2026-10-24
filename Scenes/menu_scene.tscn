@@ -39,7 +39,7 @@ transform = Transform3D(159.04459, 0, 0, 0, 49.244953, 0, 0, 0, 40, 0, 0, -6.037
 texture = SubResource("GradientTexture2D_h2w44")
 
 [node name="Male_Ranger" parent="." unique_id=672115247 instance=ExtResource("2_w4cdh")]
-transform = Transform3D(0.42689773, 0, 0.90429986, -0.06663825, 0.9972812, 0.03145828, -0.9018412, -0.07369042, 0.42573708, -0.83542097, 0.114341736, 0.6808734)
+transform = Transform3D(0.42464867, 0.09581097, 0.90027416, -0.0079380665, 0.9947405, -0.10212016, -0.9053234, 0.03621879, 0.42317587, -0.83542097, 0.114341736, 0.6808734)
 
 [node name="GeneralSkeleton" parent="Male_Ranger/Armature" parent_id_path=PackedInt32Array(672115247, 106058088) index="0" unique_id=789314765]
 bones/1/position = Vector3(0.018598013, 0.85426676, -0.022805136)
@@ -148,7 +148,7 @@ surface_material_override/0 = ExtResource("3_i2hkk")
 libraries/TitleScreenFighter = SubResource("AnimationLibrary_yvq3c")
 
 [node name="Male_Ranger2" parent="." unique_id=1226733093 instance=ExtResource("2_w4cdh")]
-transform = Transform3D(-0.68385834, -0.022691522, -0.7292614, -0.06663824, 0.9972813, 0.031458296, 0.7265648, 0.07010972, -0.68351156, 0.90342903, 0.06946969, 0.65664005)
+transform = Transform3D(-0.68385834, -0.022691522, -0.7292614, -0.06663824, 0.9972813, 0.031458296, 0.7265648, 0.07010972, -0.68351156, 0.81706595, 0.06946969, 0.7404959)
 
 [node name="GeneralSkeleton" parent="Male_Ranger2/Armature" parent_id_path=PackedInt32Array(1226733093, 106058088) index="0" unique_id=789314765]
 bones/1/position = Vector3(-0.007594691, 0.8817622, -0.015812967)

@@ -18,11 +18,17 @@ var player_multiplayer_spawner: PlayerMultiplayerSpawner:
 			return ServiceLocator.get_service("player_multiplayer_spawner")
 		return null
 
+var prompt_manager: PromptManager:
+	get:
+		if ServiceLocator.service_exists("prompt_manager"):
+			return ServiceLocator.get_service("prompt_manager")
+		return null
+
 @onready var player_scene: PackedScene = preload("uid://81vin80rr0de")
 
 var local_username: String = "..."
-var player_host: NetworkPlayer
-var player_client: NetworkPlayer
+var player_host: NetworkPlayer = null
+var player_client: NetworkPlayer = null
 
 var is_server: bool:
 	get: 
@@ -57,12 +63,14 @@ func start_host():
 	
 	peer.host_room(true, "Fighting Game Room")
 	
+	prompt_manager.on_loading_start()
 	await peer.room_connected
+	prompt_manager.close_menus()
 	
 	online_id = peer.room_id
 	
-	OnOnlineIDCreated.emit(online_id)
 	DisplayServer.clipboard_set(online_id)
+	OnOnlineIDCreated.emit(online_id)
 	
 	if not multiplayer.peer_connected.is_connected(_peer_connected):
 		multiplayer.peer_connected.connect(_peer_connected)

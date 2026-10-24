@@ -20,6 +20,8 @@ corner_radius_top_right = 40
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 40
 corner_detail = 1
+shadow_size = 2
+shadow_offset = Vector2(6, 6)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_28efy"]
 bg_color = Color(0, 0, 0, 1)
@@ -28,6 +30,8 @@ corner_radius_top_right = 40
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 40
 corner_detail = 1
+shadow_size = 2
+shadow_offset = Vector2(4, 4)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jita5"]
 bg_color = Color(1, 0.12941177, 0.12941177, 1)
@@ -39,6 +43,8 @@ corner_radius_top_right = 40
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 40
 corner_detail = 1
+shadow_size = 2
+shadow_offset = Vector2(2, 2)
 
 [sub_resource type="Image" id="Image_v1joq"]
 data = {
@@ -1008,6 +1014,20 @@ corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 corner_detail = 5
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d14pd"]
+bg_color = Color(0.16924527, 0.1692453, 0.16924527, 1)
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.45064825, 0.4506483, 0.450648, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 1
+shadow_color = Color(0, 0, 0, 0.4509804)
+shadow_size = 2
+shadow_offset = Vector2(3, 3)
+
 [resource]
 Button/colors/font_color = Color(0.875, 0.875, 0.875, 1)
 Button/colors/font_disabled_color = Color(0.875, 0.875, 0.875, 0.5)
@@ -1051,3 +1071,4 @@ LineEdit/icons/clear = SubResource("DPITexture_al5rm")
 LineEdit/styles/focus = SubResource("StyleBoxFlat_h5osd")
 LineEdit/styles/normal = SubResource("StyleBoxFlat_h2w44")
 LineEdit/styles/read_only = SubResource("StyleBoxFlat_yvrbg")
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_d14pd")

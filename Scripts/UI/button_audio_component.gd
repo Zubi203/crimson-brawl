@@ -5,10 +5,10 @@ extends AudioStreamPlayer
 @export var override_button_exit_sound: AudioStream
 @export var override_button_press_sound: AudioStream
 @export var pitch_variation: float = 0.3
-@export var volume_decibels: float = -20
+@export var volume_decibels: float = -10
 
-@onready var default_button_enter_sound: AudioStream
-@onready var default_button_press_sound: AudioStream
+@onready var default_button_enter_sound: AudioStream = preload("uid://cvu7fl34q48vb")
+@onready var default_button_press_sound: AudioStream = preload("uid://b1qjh7mikodki")
 
 func _ready() -> void:
 	volume_db = volume_decibels
