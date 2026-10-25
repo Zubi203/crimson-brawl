@@ -56,6 +56,7 @@
 [ext_resource type="Animation" uid="uid://bw7n2na2ltxay" path="res://Animations/Sword_Sweep_Recovery.res" id="41_5ygn2"]
 [ext_resource type="Animation" uid="uid://p8gt13pyg6lq" path="res://Animations/Sword_Uppercut.res" id="42_r2kgm"]
 [ext_resource type="Animation" uid="uid://dxissafxflmsb" path="res://Animations/Sword_Uppercut_Recovery.res" id="43_nxikv"]
+[ext_resource type="Material" uid="uid://c7llk8voj1yq5" path="res://Materials/smoke_vfx_material.tres" id="57_tpgsc"]
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_3m6lo"]
 _data = {
@@ -115,19 +116,9 @@ animation = &"FighterBase/Hit_Head"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_cbn6b"]
 animation = &"FighterBase/HeavyAttack"
-use_custom_timeline = true
-timeline_length = 0.4
-stretch_time_scale = true
-start_offset = 0.0
-loop_mode = 0
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ejkuj"]
 animation = &"FighterBase/HeavyAttackRecovery"
-use_custom_timeline = true
-timeline_length = 0.3
-stretch_time_scale = true
-start_offset = 0.0
-loop_mode = 0
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ylc4a"]
 animation = &"FighterBase/JumpIdle"
@@ -151,7 +142,7 @@ loop_mode = 0
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_lmko8"]
 animation = &"FighterBase/LightAttack"
 use_custom_timeline = true
-timeline_length = 0.4
+timeline_length = 0.6
 stretch_time_scale = true
 start_offset = 0.0
 loop_mode = 0
@@ -159,7 +150,7 @@ loop_mode = 0
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_51v4r"]
 animation = &"FighterBase/ShoulderBash"
 use_custom_timeline = true
-timeline_length = 0.5
+timeline_length = 1.0
 stretch_time_scale = true
 start_offset = 0.0
 loop_mode = 0
@@ -167,7 +158,7 @@ loop_mode = 0
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_wjfb4"]
 animation = &"FighterBase/ShoulderBashStart"
 use_custom_timeline = true
-timeline_length = 0.08
+timeline_length = 0.1
 stretch_time_scale = false
 start_offset = 0.0
 loop_mode = 0
@@ -175,23 +166,18 @@ loop_mode = 0
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_iv45o"]
 animation = &"FighterBase/SpecialExit"
 use_custom_timeline = true
-timeline_length = 0.1
+timeline_length = 0.3
 stretch_time_scale = true
 start_offset = 0.0
 loop_mode = 0
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ge4xq"]
 animation = &"FighterBase/SpecialShoot"
-use_custom_timeline = true
-timeline_length = 0.4
-stretch_time_scale = true
-start_offset = 0.0
-loop_mode = 0
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_bq4yu"]
 animation = &"FighterBase/SpecialStart"
 use_custom_timeline = true
-timeline_length = 0.2
+timeline_length = 0.5
 stretch_time_scale = true
 start_offset = 0.0
 loop_mode = 0
@@ -221,7 +207,7 @@ blend_point_2/name = &"FighterBase_Walk 2"
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_p7d5b"]
 animation = &"FighterBase/Sword_Dash_Light"
 use_custom_timeline = true
-timeline_length = 0.8
+timeline_length = 1.0
 stretch_time_scale = true
 start_offset = 0.0
 loop_mode = 0
@@ -229,7 +215,7 @@ loop_mode = 0
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ms2eb"]
 animation = &"FighterBase/Sword_Heavy_Lunge"
 use_custom_timeline = true
-timeline_length = 0.7
+timeline_length = 1.2
 stretch_time_scale = true
 start_offset = 0.0
 loop_mode = 0
@@ -238,23 +224,18 @@ loop_mode = 0
 animation = &"FighterBase/Sword_Sweep_Recovery"
 play_mode = 1
 use_custom_timeline = true
-timeline_length = 0.2
+timeline_length = 0.3
 stretch_time_scale = true
 start_offset = 0.0
 loop_mode = 0
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_tpgsc"]
 animation = &"FighterBase/Sword_Sweep"
-use_custom_timeline = true
-timeline_length = 0.4
-stretch_time_scale = true
-start_offset = 0.0
-loop_mode = 0
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5lsle"]
 animation = &"FighterBase/Sword_Sweep_Recovery"
 use_custom_timeline = true
-timeline_length = 0.1
+timeline_length = 0.2
 stretch_time_scale = true
 start_offset = 0.0
 loop_mode = 0
@@ -270,19 +251,9 @@ loop_mode = 0
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_yijv4"]
 animation = &"FighterBase/Sword_Uppercut"
-use_custom_timeline = true
-timeline_length = 0.4
-stretch_time_scale = true
-start_offset = 0.0
-loop_mode = 0
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_uggdw"]
 animation = &"FighterBase/Sword_Uppercut_Recovery"
-use_custom_timeline = true
-timeline_length = 0.3
-stretch_time_scale = true
-start_offset = 0.0
-loop_mode = 0
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_w4atc"]
 advance_mode = 2
@@ -422,19 +393,109 @@ states/SwordDashLight/position = Vector2(200.14001, 279.13785)
 states/SwordHeavyLunge/node = SubResource("AnimationNodeAnimation_ms2eb")
 states/SwordHeavyLunge/position = Vector2(723.388, 177.55606)
 states/SwordHeavyLungeStart/node = SubResource("AnimationNodeAnimation_flmlp")
-states/SwordHeavyLungeStart/position = Vector2(933.34, 176.84595)
+states/SwordHeavyLungeStart/position = Vector2(933.34, 177.41403)
 states/SwordSweep/node = SubResource("AnimationNodeAnimation_tpgsc")
 states/SwordSweep/position = Vector2(199.60126, 467.80548)
 states/SwordSweepRecovery/node = SubResource("AnimationNodeAnimation_5lsle")
 states/SwordSweepRecovery/position = Vector2(231.04623, 387.0055)
 states/SwordSweepStart/node = SubResource("AnimationNodeAnimation_fy4kr")
-states/SwordSweepStart/position = Vector2(202.04527, 557.20544)
+states/SwordSweepStart/position = Vector2(200.52107, 557.20544)
 states/SwordUppercut/node = SubResource("AnimationNodeAnimation_yijv4")
 states/SwordUppercut/position = Vector2(618.3401, 359.01788)
 states/SwordUppercutRecovery/node = SubResource("AnimationNodeAnimation_uggdw")
 states/SwordUppercutRecovery/position = Vector2(625.54004, 276.51404)
 transitions = ["Start", "Standing", SubResource("AnimationNodeStateMachineTransition_w4atc"), "JumpLand", "Standing", SubResource("AnimationNodeStateMachineTransition_3m6lo"), "JumpStart", "JumpIdle", SubResource("AnimationNodeStateMachineTransition_lmko8"), "LightAttack", "Standing", SubResource("AnimationNodeStateMachineTransition_cbn6b"), "Dash", "Standing", SubResource("AnimationNodeStateMachineTransition_ejkuj"), "HeavyAttack", "HeavyAttackRecovery", SubResource("AnimationNodeStateMachineTransition_ded0y"), "HeavyAttackRecovery", "Standing", SubResource("AnimationNodeStateMachineTransition_30o8h"), "ChestHit", "Standing", SubResource("AnimationNodeStateMachineTransition_8027c"), "HeadHit", "Standing", SubResource("AnimationNodeStateMachineTransition_hmecv"), "SpecialExit", "Standing", SubResource("AnimationNodeStateMachineTransition_njbxy"), "SpecialShoot", "SpecialExit", SubResource("AnimationNodeStateMachineTransition_barkk"), "SpecialStart", "SpecialShoot", SubResource("AnimationNodeStateMachineTransition_rtpds"), "ShoulderBash", "Standing", SubResource("AnimationNodeStateMachineTransition_63w8k"), "ShoulderBashStart", "ShoulderBash", SubResource("AnimationNodeStateMachineTransition_uggdw"), "SwordUppercut", "SwordUppercutRecovery", SubResource("AnimationNodeStateMachineTransition_p7d5b"), "SwordUppercutRecovery", "Standing", SubResource("AnimationNodeStateMachineTransition_ms2eb"), "SwordDashLight", "Standing", SubResource("AnimationNodeStateMachineTransition_flmlp"), "SwordHeavyLunge", "Standing", SubResource("AnimationNodeStateMachineTransition_tpgsc"), "SwordHeavyLungeStart", "SwordHeavyLunge", SubResource("AnimationNodeStateMachineTransition_5lsle"), "SwordSweep", "SwordSweepRecovery", SubResource("AnimationNodeStateMachineTransition_5ygn2"), "SwordSweepRecovery", "Standing", SubResource("AnimationNodeStateMachineTransition_r2kgm"), "SwordSweepStart", "SwordSweep", SubResource("AnimationNodeStateMachineTransition_nxikv")]
-graph_offset = Vector2(333.64624, 153.20547)
+graph_offset = Vector2(-342.35376, 239.20547)
+
+[sub_resource type="Curve" id="Curve_5lsle"]
+_data = [Vector2(0, 0.34821433), 0.0, 0.0, 0, 0, Vector2(0.26540285, 1), 0.0, 0.0, 0, 0, Vector2(0.620853, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_xpw1u"]
+curve = SubResource("Curve_5lsle")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_fy4kr"]
+lifetime_randomness = 1.0
+particle_flag_align_y = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 1, 0)
+emission_ring_height = 0.1
+emission_ring_radius = 0.4
+emission_ring_inner_radius = 0.0
+emission_ring_cone_angle = 90.0
+direction = Vector3(0, 1, 0)
+spread = 0.0
+flatness = 1.0
+initial_velocity_min = 1.0
+initial_velocity_max = 5.0
+damping_min = 1.0
+damping_max = 5.0
+scale_min = 0.049999997
+scale_max = 0.099999994
+scale_curve = SubResource("CurveTexture_xpw1u")
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_5ygn2"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_tpgsc"]
+particle_flag_align_y = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 1, 0)
+emission_ring_height = 0.1
+emission_ring_radius = 0.5
+emission_ring_inner_radius = 0.65
+emission_ring_cone_angle = 90.0
+direction = Vector3(0, 0.25, -1)
+spread = 15.0
+initial_velocity_min = 8.0
+initial_velocity_max = 12.0
+gravity = Vector3(0, 5, 0)
+damping_min = 20.0
+damping_max = 25.000002
+scale_min = 0.099999994
+scale_max = 0.19999999
+scale_curve = SubResource("CurveTexture_xpw1u")
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_5lsle"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_5lsle"]
+particle_flag_align_y = true
+emission_shape = 1
+emission_sphere_radius = 0.3
+direction = Vector3(0, 0.25, 1)
+spread = 15.0
+initial_velocity_min = 5.0
+initial_velocity_max = 7.0
+gravity = Vector3(0, 5, 0)
+damping_min = 6.0000005
+damping_max = 9.0
+scale_min = 0.08
+scale_max = 0.19999999
+scale_curve = SubResource("CurveTexture_xpw1u")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_h2w44"]
+lifetime_randomness = 0.5
+particle_flag_align_y = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 1, 0)
+emission_ring_height = 0.1
+emission_ring_radius = 0.4
+emission_ring_inner_radius = 0.3
+emission_ring_cone_angle = 90.0
+direction = Vector3(1, 0.3, 0)
+spread = 90.0
+flatness = 1.0
+initial_velocity_min = 2.0
+initial_velocity_max = 3.0
+gravity = Vector3(0, 5, 0)
+tangential_accel_min = 7.9999976
+tangential_accel_max = 11.999997
+damping_min = 1.0
+damping_max = 5.0
+scale_min = 0.099999994
+scale_max = 0.25
+scale_curve = SubResource("CurveTexture_xpw1u")
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_tpgsc"]
 
 [node name="BaseFighter" type="CharacterBody3D" unique_id=48255611 node_paths=PackedStringArray("input_handler", "input_buffer", "state_machine", "stamina_controller", "fighter_signals")]
 collision_layer = 2
@@ -473,17 +534,19 @@ light_attack_state = NodePath("../LightAttackState")
 heavy_attack_state = NodePath("../HeavyAttackState")
 dash_state = NodePath("../DashingState")
 back_heavy_state = NodePath("../SpecialState")
-down_heavy_state = NodePath("../SwordUppercutState")
+down_heavy_state = NodePath("../SwordSweepState")
 front_heavy_state = NodePath("../SwordLungeState")
 back_light_state = NodePath("../ShoulderBashState")
-down_light_state = NodePath("../SwordSweepState")
+down_light_state = NodePath("../SwordUppercutState")
 front_light_state = NodePath("../SwordDashState")
 blend_position_parameter_path = "parameters/Standing/blend_position"
 metadata/_custom_type_script = "uid://cdhoawqbot8yj"
 
-[node name="JumpingState" type="Node" parent="StateMachine" unique_id=1327379916 node_paths=PackedStringArray("standing_state")]
+[node name="JumpingState" type="Node" parent="StateMachine" unique_id=1327379916 node_paths=PackedStringArray("standing_state", "jump_particles", "land_particles")]
 script = ExtResource("6_sot8s")
 standing_state = NodePath("../StandingState")
+jump_particles = NodePath("../../ParticleEffects/JumpParticles")
+land_particles = NodePath("../../ParticleEffects/LandingParticles")
 move_speed = 3.0
 blend_position_parameter_path = "parameters/Standing/blend_position"
 metadata/_custom_type_script = "uid://cle57fh6mf16q"
@@ -521,9 +584,11 @@ metadata/_custom_type_script = "uid://ogby2s88nxrv"
 script = ExtResource("10_rhw32")
 metadata/_custom_type_script = "uid://dtbe7f86x14b1"
 
-[node name="DashingState" type="Node" parent="StateMachine" unique_id=50530029 node_paths=PackedStringArray("next_state")]
+[node name="DashingState" type="Node" parent="StateMachine" unique_id=50530029 node_paths=PackedStringArray("next_state", "dash_particles", "dash_stop_particles")]
 script = ExtResource("11_cbn6b")
 next_state = NodePath("../StandingState")
+dash_particles = NodePath("../../ParticleEffects/DashParticles")
+dash_stop_particles = NodePath("../../ParticleEffects/StopParticles")
 metadata/_custom_type_script = "uid://b5run2nq87mng"
 
 [node name="SpecialState" type="Node" parent="StateMachine" unique_id=1189216632 node_paths=PackedStringArray("standing_state")]
@@ -549,7 +614,7 @@ metadata/_custom_type_script = "uid://cf0fhhtxjtpll"
 script = ExtResource("16_tpgsc")
 standing_state = NodePath("../StandingState")
 animation_name = "SwordDashLight"
-duration = 0.5
+duration = 0.6
 forward_force = 7.0
 metadata/_custom_type_script = "uid://1s060q4xdjvj"
 
@@ -557,21 +622,21 @@ metadata/_custom_type_script = "uid://1s060q4xdjvj"
 script = ExtResource("17_5lsle")
 standing_state = NodePath("../StandingState")
 animation_name = "SwordSweepStart"
-duration = 0.5
+duration = 0.7
 metadata/_custom_type_script = "uid://djrjxcnlcivvl"
 
 [node name="SwordUppercutState" type="Node" parent="StateMachine" unique_id=1625368491 node_paths=PackedStringArray("standing_state")]
 script = ExtResource("18_fy4kr")
 standing_state = NodePath("../StandingState")
 animation_name = "SwordUppercut"
-duration = 0.5
+duration = 0.7
 metadata/_custom_type_script = "uid://bcpvk6bicif86"
 
 [node name="SwordLungeState" type="Node" parent="StateMachine" unique_id=972609267 node_paths=PackedStringArray("standing_state")]
 script = ExtResource("19_5ygn2")
 standing_state = NodePath("../StandingState")
 animation_name = "SwordHeavyLungeStart"
-duration = 0.5
+duration = 1.0
 forward_force = 10.0
 metadata/_custom_type_script = "uid://g86o7336xycf"
 
@@ -603,3 +668,50 @@ metadata/_custom_type_script = "uid://dglhwjh50ossn"
 script = ExtResource("35_7m2qr")
 data = ExtResource("36_njbxy")
 metadata/_custom_type_script = "uid://cn4k145y807v3"
+
+[node name="ParticleEffects" type="Node3D" parent="." unique_id=331687200]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.06541538, 0)
+
+[node name="JumpParticles" type="GPUParticles3D" parent="ParticleEffects" unique_id=726760203]
+material_override = ExtResource("57_tpgsc")
+emitting = false
+amount = 30
+lifetime = 0.3
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+process_material = SubResource("ParticleProcessMaterial_fy4kr")
+draw_pass_1 = SubResource("CapsuleMesh_5ygn2")
+
+[node name="DashParticles" type="GPUParticles3D" parent="ParticleEffects" unique_id=2146652295]
+material_override = ExtResource("57_tpgsc")
+emitting = false
+amount = 40
+lifetime = 0.4
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+process_material = SubResource("ParticleProcessMaterial_tpgsc")
+draw_pass_1 = SubResource("CapsuleMesh_5lsle")
+
+[node name="StopParticles" type="GPUParticles3D" parent="ParticleEffects" unique_id=285489167]
+material_override = ExtResource("57_tpgsc")
+emitting = false
+amount = 30
+lifetime = 0.3
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+process_material = SubResource("ParticleProcessMaterial_5lsle")
+draw_pass_1 = SubResource("CapsuleMesh_5lsle")
+
+[node name="LandingParticles" type="GPUParticles3D" parent="ParticleEffects" unique_id=2056072347]
+material_override = ExtResource("57_tpgsc")
+emitting = false
+amount = 30
+lifetime = 0.4
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+process_material = SubResource("ParticleProcessMaterial_h2w44")
+draw_pass_1 = SubResource("CapsuleMesh_tpgsc")

@@ -9,6 +9,9 @@ var cooldown_end_time: float
 @export var next_state: State = null
 var move_dir: int 
 
+@export var dash_particles: GPUParticles3D
+@export var dash_stop_particles: GPUParticles3D
+
 func can_enter() -> bool:
 	if input_buffer.movement_direction() == 0:
 		return false
@@ -20,6 +23,13 @@ func can_enter() -> bool:
 
 func enter():
 	super.enter()
+	
+	if dash_particles:
+		if fighter.forward_direction != input_buffer.movement_direction() and input_buffer.movement_direction() != 0:
+			dash_particles.rotation_degrees.y = 180
+		else :
+			dash_particles.rotation_degrees.y = 0
+		dash_particles.restart()
 	
 	audio_manager.play_random_pitch(sound_data.dash)
 	signals.Dashed.emit()
@@ -40,6 +50,13 @@ func update(delta: float):
 
 func exit():
 	super.exit()
+	
+	if dash_stop_particles:
+		if fighter.forward_direction != input_buffer.movement_direction() and input_buffer.movement_direction() != 0:
+			dash_stop_particles.rotation_degrees.y = 180
+		else :
+			dash_stop_particles.rotation_degrees.y = 0
+		dash_stop_particles.restart()
 	
 	fighter.move_velocity = Vector3.ZERO
 	cooldown_end_time = Time.get_unix_time_from_system() + cooldown

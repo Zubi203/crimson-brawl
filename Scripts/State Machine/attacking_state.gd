@@ -15,6 +15,8 @@ var has_hit: bool = false
 @export var startup_time: float = 0.0
 @export var active_frames_time: float = 0.3
 
+@onready var hit_effect: PackedScene = preload("uid://dcaye7jt4o6jj")
+
 func can_enter() -> bool:
 	if Time.get_unix_time_from_system() < cooldown_end_time:
 		return false
@@ -35,6 +37,7 @@ func update(delta: float):
 			var hit: HitReciever = hit_sender.detect_hit()
 			
 			if hit and not has_hit:
+				_spawn_hit_effect(hit)
 				has_hit = true
 				audio_manager.play_random_pitch(sound_data.hit)
 				hit.hit(damage)
@@ -47,3 +50,10 @@ func exit():
 	has_hit = false
 	
 	cooldown_end_time = Time.get_unix_time_from_system() + cooldown
+
+func _spawn_hit_effect(hit: HitReciever):
+	var midpoint: Vector3 = (hit.global_position + hit_sender.global_position) / 2.0
+	var effect = hit_effect.instantiate()
+	hit.add_child(effect)
+	effect.global_position = midpoint
+	

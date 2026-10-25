@@ -1,0 +1,77 @@
+[gd_scene format=3 uid="uid://dcaye7jt4o6jj"]
+
+[ext_resource type="Script" uid="uid://dyx3s6nl8uasd" path="res://Scripts/one_shot_particles.gd" id="1_cji3q"]
+
+[sub_resource type="Curve" id="Curve_6v0c6"]
+_data = [Vector2(0, 1), 0.0, -0.09265228, 0, 0, Vector2(1, 0), -3.1944864, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_s8kkd"]
+curve = SubResource("Curve_6v0c6")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_xpw1u"]
+particle_flag_align_y = true
+spread = 180.0
+initial_velocity_min = 2.0
+initial_velocity_max = 4.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.07
+scale_max = 0.14999999
+scale_curve = SubResource("CurveTexture_s8kkd")
+sub_emitter_mode = 4
+sub_emitter_amount_at_start = 1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cji3q"]
+resource_local_to_scene = true
+transparency = 1
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 1.1
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_sr281"]
+material = SubResource("StandardMaterial3D_cji3q")
+
+[sub_resource type="Curve" id="Curve_bai1y"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.99999, 0), -2.7349205, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_yhcui"]
+curve = SubResource("Curve_bai1y")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_h2w44"]
+particle_flag_align_y = true
+direction = Vector3(1, 1, 0)
+spread = 90.0
+initial_velocity_min = 2.0
+initial_velocity_max = 5.0
+gravity = Vector3(0, -10, 0)
+scale_min = 0.049999997
+scale_max = 0.099999994
+scale_curve = SubResource("CurveTexture_yhcui")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6r0db"]
+resource_local_to_scene = true
+transparency = 1
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 1.1
+
+[sub_resource type="SphereMesh" id="SphereMesh_65ton"]
+material = SubResource("StandardMaterial3D_6r0db")
+
+[node name="HitEffect" type="GPUParticles3D" unique_id=1690052570]
+emitting = false
+amount = 12
+sub_emitter = NodePath("GPUParticles3D")
+lifetime = 0.2
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+process_material = SubResource("ParticleProcessMaterial_xpw1u")
+draw_pass_1 = SubResource("CapsuleMesh_sr281")
+script = ExtResource("1_cji3q")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="." unique_id=672427963]
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_h2w44")
+draw_pass_1 = SubResource("SphereMesh_65ton")
