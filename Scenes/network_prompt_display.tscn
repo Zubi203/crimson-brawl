@@ -97,9 +97,10 @@ _data = {
 }
 
 [node name="NetworkPromptDisplay" type="CanvasLayer" unique_id=835329614 node_paths=PackedStringArray("panels", "background", "text_copied_panel", "room_id_input", "join_room_button")]
-layer = 50
+layer = 150
 script = ExtResource("1_q3vgr")
 panels = {
+0: null,
 1: NodePath("PromptMenu/LoadingDisplay"),
 2: NodePath("PromptMenu/ConnectionFailedPrompt"),
 3: NodePath("PromptMenu/DisconnectedPrompt"),

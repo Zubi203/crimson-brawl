@@ -5,7 +5,6 @@
 [ext_resource type="Theme" uid="uid://crnhsk1q6t8r" path="res://Data/ui_theme.tres" id="1_bhc3w"]
 [ext_resource type="Script" uid="uid://sshbisoigeyr" path="res://Scripts/UI/animated_button_component.gd" id="3_2f5qs"]
 [ext_resource type="Script" uid="uid://dimct1fhrm5my" path="res://Scripts/UI/container_animation.gd" id="3_bryks"]
-[ext_resource type="Script" uid="uid://bw7u2deyx1w4l" path="res://Scripts/UI/auto_animate_ui_component.gd" id="4_ofcii"]
 [ext_resource type="Script" uid="uid://b0ig5g6bl6xug" path="res://Scripts/UI/button_audio_component.gd" id="6_jg0i6"]
 [ext_resource type="Script" uid="uid://cddruyahi7u02" path="res://Scripts/UI/fade_in_color_rect.gd" id="7_q32wx"]
 
@@ -125,9 +124,6 @@ text = "Shades of Crimson"
 label_settings = SubResource("LabelSettings_amrxi")
 horizontal_alignment = 1
 vertical_alignment = 2
-script = ExtResource("4_ofcii")
-anim_when = 2
-duration = 0.4
 
 [node name="HBoxContainer" type="HBoxContainer" parent="BG/MainMenuScreen" unique_id=1487834912]
 layout_mode = 2

@@ -75,6 +75,7 @@ func _ready() -> void:
 	
 	NetworkManager.OnOnlineIDCreated.connect(_on_text_copied)
 	NetworkManager.OnPlayerDisconnected.connect(_on_disconnect)
+	NetworkManager.OnServerDisconnected.connect(_on_disconnect.bind(1))
 	NetworkManager.OnConnectionFailed.connect(_on_connection_failed)
 
 func _on_text_copied(_text: String):

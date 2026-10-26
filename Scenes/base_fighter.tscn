@@ -38,6 +38,7 @@
 [ext_resource type="Script" uid="uid://dbe1j3a2ppmqm" path="res://Scripts/Fighter/fighter_animation.gd" id="19_sot8s"]
 [ext_resource type="Script" uid="uid://bsjds7nh32dfc" path="res://Scripts/State Machine/aerial_kick_state.gd" id="20_5lsle"]
 [ext_resource type="Script" uid="uid://bl17cgyo3fn61" path="res://Scripts/State Machine/sword_overhead_state.gd" id="20_fy4kr"]
+[ext_resource type="Script" uid="uid://r85535kaa7h7" path="res://Scripts/State Machine/falling_state.gd" id="21_5ygn2"]
 [ext_resource type="Animation" uid="uid://bsnau31a8i651" path="res://Animations/LightAttack2.res" id="23_hmecv"]
 [ext_resource type="Animation" uid="uid://gbhsefnye4nw" path="res://Animations/SpecialExit.res" id="24_iv45o"]
 [ext_resource type="Script" uid="uid://dglhwjh50ossn" path="res://Scripts/Fighter/fighter_visual.gd" id="24_lmko8"]
@@ -129,6 +130,9 @@ loop_mode = 0
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ded0y"]
 animation = &"FighterBase/Defeat"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_63w8k"]
+animation = &"FighterBase/LayToIdle"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_8027c"]
 animation = &"FighterBase/Hit_Head"
@@ -400,6 +404,11 @@ xfade_time = 0.2
 switch_mode = 2
 advance_mode = 2
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_a3qu7"]
+xfade_time = 0.2
+switch_mode = 2
+advance_mode = 2
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_h2w44"]
 states/AerialKickExit/node = SubResource("AnimationNodeAnimation_nxikv")
 states/AerialKickExit/position = Vector2(1403.1028, 141.73665)
@@ -410,10 +419,12 @@ states/ChestHit/position = Vector2(360.2, -107.89829)
 states/Dash/node = SubResource("AnimationNodeAnimation_3m6lo")
 states/Dash/position = Vector2(238, -13.602659)
 states/Defeat/node = SubResource("AnimationNodeAnimation_ded0y")
-states/Defeat/position = Vector2(724, -75.298294)
+states/Defeat/position = Vector2(928.8, -76.89829)
 states/End/position = Vector2(1308.8, 28.8)
+states/GetUp/node = SubResource("AnimationNodeAnimation_63w8k")
+states/GetUp/position = Vector2(653.9028, -25.194523)
 states/HeadHit/node = SubResource("AnimationNodeAnimation_8027c")
-states/HeadHit/position = Vector2(514.2595, -84.4548)
+states/HeadHit/position = Vector2(474.25952, -108.3296)
 states/HeavyAttack/node = SubResource("AnimationNodeAnimation_cbn6b")
 states/HeavyAttack/position = Vector2(490.76004, 516.922)
 states/HeavyAttackRecovery/node = SubResource("AnimationNodeAnimation_ejkuj")
@@ -421,7 +432,7 @@ states/HeavyAttackRecovery/position = Vector2(491.40005, 438.35834)
 states/JumpIdle/node = SubResource("AnimationNodeAnimation_ylc4a")
 states/JumpIdle/position = Vector2(1217.968, 144.32295)
 states/JumpLand/node = SubResource("AnimationNodeAnimation_w4atc")
-states/JumpLand/position = Vector2(610.80005, -27.199997)
+states/JumpLand/position = Vector2(598.00006, -105.78231)
 states/JumpStart/node = SubResource("AnimationNodeAnimation_rhw32")
 states/JumpStart/position = Vector2(1218.96, 235.82445)
 states/LightAttack/node = SubResource("AnimationNodeAnimation_lmko8")
@@ -457,8 +468,8 @@ states/SwordUppercut/node = SubResource("AnimationNodeAnimation_yijv4")
 states/SwordUppercut/position = Vector2(618.3401, 359.01788)
 states/SwordUppercutRecovery/node = SubResource("AnimationNodeAnimation_uggdw")
 states/SwordUppercutRecovery/position = Vector2(625.54004, 276.51404)
-transitions = ["Start", "Standing", SubResource("AnimationNodeStateMachineTransition_w4atc"), "JumpLand", "Standing", SubResource("AnimationNodeStateMachineTransition_3m6lo"), "JumpStart", "JumpIdle", SubResource("AnimationNodeStateMachineTransition_lmko8"), "LightAttack", "Standing", SubResource("AnimationNodeStateMachineTransition_cbn6b"), "Dash", "Standing", SubResource("AnimationNodeStateMachineTransition_ejkuj"), "HeavyAttack", "HeavyAttackRecovery", SubResource("AnimationNodeStateMachineTransition_ded0y"), "HeavyAttackRecovery", "Standing", SubResource("AnimationNodeStateMachineTransition_30o8h"), "ChestHit", "Standing", SubResource("AnimationNodeStateMachineTransition_8027c"), "HeadHit", "Standing", SubResource("AnimationNodeStateMachineTransition_hmecv"), "SpecialExit", "Standing", SubResource("AnimationNodeStateMachineTransition_njbxy"), "SpecialShoot", "SpecialExit", SubResource("AnimationNodeStateMachineTransition_barkk"), "SpecialStart", "SpecialShoot", SubResource("AnimationNodeStateMachineTransition_rtpds"), "ShoulderBash", "Standing", SubResource("AnimationNodeStateMachineTransition_63w8k"), "ShoulderBashStart", "ShoulderBash", SubResource("AnimationNodeStateMachineTransition_uggdw"), "SwordUppercut", "SwordUppercutRecovery", SubResource("AnimationNodeStateMachineTransition_p7d5b"), "SwordUppercutRecovery", "Standing", SubResource("AnimationNodeStateMachineTransition_ms2eb"), "SwordDashLight", "Standing", SubResource("AnimationNodeStateMachineTransition_flmlp"), "SwordHeavyLunge", "Standing", SubResource("AnimationNodeStateMachineTransition_tpgsc"), "SwordHeavyLungeStart", "SwordHeavyLunge", SubResource("AnimationNodeStateMachineTransition_5lsle"), "SwordSweep", "SwordSweepRecovery", SubResource("AnimationNodeStateMachineTransition_5ygn2"), "SwordSweepRecovery", "Standing", SubResource("AnimationNodeStateMachineTransition_r2kgm"), "SwordSweepStart", "SwordSweep", SubResource("AnimationNodeStateMachineTransition_nxikv"), "AerialKickExit", "JumpIdle", SubResource("AnimationNodeStateMachineTransition_grvnd"), "AerialKickStart", "AerialKickExit", SubResource("AnimationNodeStateMachineTransition_fy4kr"), "SwordOverhead", "Standing", SubResource("AnimationNodeStateMachineTransition_51v4r")]
-graph_offset = Vector2(-171.89722, 182.20547)
+transitions = ["Start", "Standing", SubResource("AnimationNodeStateMachineTransition_w4atc"), "JumpLand", "Standing", SubResource("AnimationNodeStateMachineTransition_3m6lo"), "JumpStart", "JumpIdle", SubResource("AnimationNodeStateMachineTransition_lmko8"), "LightAttack", "Standing", SubResource("AnimationNodeStateMachineTransition_cbn6b"), "Dash", "Standing", SubResource("AnimationNodeStateMachineTransition_ejkuj"), "HeavyAttack", "HeavyAttackRecovery", SubResource("AnimationNodeStateMachineTransition_ded0y"), "HeavyAttackRecovery", "Standing", SubResource("AnimationNodeStateMachineTransition_30o8h"), "ChestHit", "Standing", SubResource("AnimationNodeStateMachineTransition_8027c"), "HeadHit", "Standing", SubResource("AnimationNodeStateMachineTransition_hmecv"), "SpecialExit", "Standing", SubResource("AnimationNodeStateMachineTransition_njbxy"), "SpecialShoot", "SpecialExit", SubResource("AnimationNodeStateMachineTransition_barkk"), "SpecialStart", "SpecialShoot", SubResource("AnimationNodeStateMachineTransition_rtpds"), "ShoulderBash", "Standing", SubResource("AnimationNodeStateMachineTransition_63w8k"), "ShoulderBashStart", "ShoulderBash", SubResource("AnimationNodeStateMachineTransition_uggdw"), "SwordUppercut", "SwordUppercutRecovery", SubResource("AnimationNodeStateMachineTransition_p7d5b"), "SwordUppercutRecovery", "Standing", SubResource("AnimationNodeStateMachineTransition_ms2eb"), "SwordDashLight", "Standing", SubResource("AnimationNodeStateMachineTransition_flmlp"), "SwordHeavyLunge", "Standing", SubResource("AnimationNodeStateMachineTransition_tpgsc"), "SwordHeavyLungeStart", "SwordHeavyLunge", SubResource("AnimationNodeStateMachineTransition_5lsle"), "SwordSweep", "SwordSweepRecovery", SubResource("AnimationNodeStateMachineTransition_5ygn2"), "SwordSweepRecovery", "Standing", SubResource("AnimationNodeStateMachineTransition_r2kgm"), "SwordSweepStart", "SwordSweep", SubResource("AnimationNodeStateMachineTransition_nxikv"), "AerialKickExit", "JumpIdle", SubResource("AnimationNodeStateMachineTransition_grvnd"), "AerialKickStart", "AerialKickExit", SubResource("AnimationNodeStateMachineTransition_fy4kr"), "SwordOverhead", "Standing", SubResource("AnimationNodeStateMachineTransition_51v4r"), "GetUp", "Standing", SubResource("AnimationNodeStateMachineTransition_a3qu7")]
+graph_offset = Vector2(199.10278, -167.20924)
 
 [sub_resource type="Curve" id="Curve_5lsle"]
 _data = [Vector2(0, 0.34821433), 0.0, 0.0, 0, 0, Vector2(0.26540285, 1), 0.0, 0.0, 0, 0, Vector2(0.620853, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -741,6 +752,14 @@ forward_force_initial = 3.0
 startup_time = 0.1
 stamina_cost_type = 6
 metadata/_custom_type_script = "uid://bl17cgyo3fn61"
+
+[node name="FallingState" type="Node" parent="StateMachine" unique_id=769650898]
+script = ExtResource("21_5ygn2")
+jump_force = 0.0
+jump_start_animation_name = "Fall"
+jump_land_animation_name = "GetUp"
+move_speed = 0.0
+metadata/_custom_type_script = "uid://r85535kaa7h7"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1449416530]
 libraries/FighterBase = SubResource("AnimationLibrary_3m6lo")

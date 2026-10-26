@@ -93,6 +93,7 @@ func _peer_connected(id: int):
 
 # when a peer (player) disconnects from the server
 func _peer_disconnected(id: int):
+	OnPlayerDisconnected.emit(id)
 	var player: NetworkPlayer = player_multiplayer_spawner.get_node(str(id))
 	
 	if player:
@@ -100,8 +101,6 @@ func _peer_disconnected(id: int):
 	
 	close_peer()
 	_server_disconnected()
-	
-	OnPlayerDisconnected.emit(id)
 
 func _delete_all_player_nodes():
 	for child in player_multiplayer_spawner.get_children():

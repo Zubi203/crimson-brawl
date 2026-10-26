@@ -27,6 +27,8 @@ var current_state: GameState
 
 @export var multiplayer_fighter_spawner: MultiplayerSpawner
 
+var is_quitting: bool = false
+
 func _enter_tree() -> void:
 	ServiceLocator.register("game_manager", self)
 
@@ -37,6 +39,7 @@ func _ready() -> void:
 	GlobalEvents.FighterDefeated.connect(_on_fighter_defeated)
 	animation_player.animation_finished.connect(_on_animation_finished)
 	NetworkManager.OnServerDisconnected.connect(_on_server_disconnected)
+	NetworkManager.OnPlayerDisconnected.connect(_on_server_disconnected)
 	
 	if animation_player == null:
 		return
@@ -191,6 +194,15 @@ func _on_animation_finished(anim_name: String):
 		return
 
 func _on_server_disconnected():
-	if not NetworkManager.has_connection:
+	SceneTransition.transition(GlobalData.Scenes.TITLE_SCREEN, GlobalData.Scenes.MAIN_GAME)
+
+func _force_exit():
+	if is_quitting:
 		return
-	SceneTransition.transition.rpc(GlobalData.Scenes.TITLE_SCREEN, GlobalData.Scenes.MAIN_GAME)
+	is_quitting = true
+	SceneTransition.transition(GlobalData.Scenes.TITLE_SCREEN, GlobalData.Scenes.MAIN_GAME)
+	NetworkManager.close_peer()
+
+func _process(_delta: float) -> void:
+	if Input.is_action_just_pressed("quit"):
+		_force_exit()
