@@ -8,3 +8,5 @@ extends Resource
 @export var heavy_attack: AudioStream
 @export var jump_land: AudioStream
 @export var hit: AudioStream
+@export var sword_start_sound: AudioStream
+@export var sword_slash_sound: AudioStream

@@ -18,6 +18,7 @@ signal StaminaUpdated (stamina: float)
 var forward_direction: int
 var move_velocity: Vector3
 var horizontal_force: float
+var is_invulnerable: bool = false
 @export var drag: float = 0.8
 
 @export var max_health: int = 100
@@ -82,20 +83,26 @@ func _set_starting_health(health: int):
 func _physics_process(delta: float) -> void:
 	if game_manager == null:
 		return
-	if !game_manager.current_state == GameManager.GameState.PLAYING:
+	if game_manager.current_state == GameManager.GameState.LOADING or game_manager.current_state == GameManager.GameState.COUNTDOWN:
 		return
 	
 	# get input packet
-	var input_packet: InputPacket = input_handler.get_input_packet()
-	
+	var input_packet: InputPacket
+	if game_manager.current_state == GameManager.GameState.PLAYING:
+		input_packet = input_handler.get_input_packet()
+	else:
+		input_packet = InputPacket.new()
+		
 	# send the input packet into the buffer
 	input_buffer.recieve_input(input_packet)
 	
 	# process the state machine using the inputs
 	state_machine.update(delta)
 	
-	# update facing direction
-	_update_facing_direction()
+	# update facing direction 
+	# only do this when the character is in the default standing state
+	if state_machine.current_state.name == state_machine.starting_state.name:
+		_update_facing_direction()
 	
 	# process movement
 	_movement(delta)

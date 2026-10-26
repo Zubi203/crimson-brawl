@@ -4,6 +4,5 @@
 
 [resource]
 script = ExtResource("1_yvpvi")
-regen_rate = 20.0
-heavy_attack_cost = 10.0
+regen_rate = 40.0
 metadata/_custom_type_script = "uid://c7p8hluhc6fig"

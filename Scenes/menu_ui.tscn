@@ -5,7 +5,9 @@
 [ext_resource type="Theme" uid="uid://crnhsk1q6t8r" path="res://Data/ui_theme.tres" id="1_bhc3w"]
 [ext_resource type="Script" uid="uid://sshbisoigeyr" path="res://Scripts/UI/animated_button_component.gd" id="3_2f5qs"]
 [ext_resource type="Script" uid="uid://dimct1fhrm5my" path="res://Scripts/UI/container_animation.gd" id="3_bryks"]
+[ext_resource type="Script" uid="uid://bw7u2deyx1w4l" path="res://Scripts/UI/auto_animate_ui_component.gd" id="4_ofcii"]
 [ext_resource type="Script" uid="uid://b0ig5g6bl6xug" path="res://Scripts/UI/button_audio_component.gd" id="6_jg0i6"]
+[ext_resource type="Script" uid="uid://cddruyahi7u02" path="res://Scripts/UI/fade_in_color_rect.gd" id="7_q32wx"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_amrxi"]
 font = ExtResource("1_28efy")
@@ -119,10 +121,13 @@ grow_vertical = 2
 [node name="TitleText" type="Label" parent="BG/MainMenuScreen" unique_id=2128139338]
 custom_minimum_size = Vector2(0, 350)
 layout_mode = 2
-text = "Shades of Red"
+text = "Shades of Crimson"
 label_settings = SubResource("LabelSettings_amrxi")
 horizontal_alignment = 1
 vertical_alignment = 2
+script = ExtResource("4_ofcii")
+anim_when = 2
+duration = 0.4
 
 [node name="HBoxContainer" type="HBoxContainer" parent="BG/MainMenuScreen" unique_id=1487834912]
 layout_mode = 2
@@ -144,6 +149,7 @@ size_flags_horizontal = 3
 theme_override_constants/separation = 30
 script = ExtResource("3_bryks")
 anim_when = 2
+delay_appear = 0.4
 
 [node name="Padding2" type="Control" parent="BG/MainMenuScreen/HBoxContainer/ButtonContainer" unique_id=2015049875]
 layout_mode = 2
@@ -494,6 +500,19 @@ mouse_filter = 2
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
+
+[node name="FadeInColorRect" type="ColorRect" parent="." unique_id=1431942917]
+z_index = 100
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+script = ExtResource("7_q32wx")
+fade_in_duration = 0.6
+metadata/_custom_type_script = "uid://cddruyahi7u02"
 
 [connection signal="pressed" from="BG/MainMenuScreen/HBoxContainer/ButtonContainer/LocalMPButton" to="." method="_on_local_mp_button_pressed"]
 [connection signal="pressed" from="BG/MainMenuScreen/HBoxContainer/ButtonContainer/PvEButton" to="." method="_on_pv_e_button_pressed"]

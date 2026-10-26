@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://cjanmes1yrq0b" path="res://Scripts/Globals/bootstrap.gd" id="1_thq22"]
 [ext_resource type="Script" uid="uid://cdjltdjcqpeaj" path="res://Scripts/Networking/player_multiplayer_spawner.gd" id="2_svnr0"]
 [ext_resource type="PackedScene" uid="uid://cyc3oo3y4y7v4" path="res://Scenes/network_prompt_display.tscn" id="3_s2rua"]
+[ext_resource type="Script" uid="uid://bibinbhxekupa" path="res://Scenes/hitstop_manager.gd" id="4_iy130"]
 
 [node name="Bootstrap" type="Node" unique_id=1282334709]
 script = ExtResource("1_thq22")
@@ -12,4 +13,14 @@ _spawnable_scenes = PackedStringArray("uid://81vin80rr0de")
 spawn_path = NodePath(".")
 script = ExtResource("2_svnr0")
 
-[node name="NetworkPromptDisplay" parent="." unique_id=835329614 instance=ExtResource("3_s2rua")]
+[node name="NetworkPromptDisplay" parent="." unique_id=835329614 node_paths=PackedStringArray("panels") instance=ExtResource("3_s2rua")]
+panels = {
+0: null,
+1: NodePath("PromptMenu/LoadingDisplay"),
+2: NodePath("PromptMenu/ConnectionFailedPrompt"),
+3: NodePath("PromptMenu/DisconnectedPrompt"),
+4: NodePath("PromptMenu/JoinRoomPrompt")
+}
+
+[node name="HitstopManager" type="Node" parent="." unique_id=424886714]
+script = ExtResource("4_iy130")

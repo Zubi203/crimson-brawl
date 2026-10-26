@@ -8,9 +8,7 @@ extends MovementState
 @export var jump_land_animation_name: String = "JumpLand"
 @export var jump_particles: GPUParticles3D
 @export var land_particles: GPUParticles3D
-
-func can_enter() -> bool:
-	return stamina_controller.stamina_available(stamina_data.light_attack_cost)
+@export var jump_attack_state: State = null
 	
 func enter():
 	super.enter()
@@ -23,7 +21,6 @@ func enter():
 	
 	animation.set_animation(jump_start_animation_name)
 	fighter.move_velocity.y = jump_force
-	stamina_controller.consume_stamina(stamina_data.light_attack_cost)
 
 
 func update(delta: float):
@@ -33,11 +30,17 @@ func update(delta: float):
 	
 	if fighter.is_on_floor() and not standing_state == null:
 		state_machine.change_state(standing_state.name)
+		_on_land()
+		return
+	
+	if input_buffer.was_pressed("light_attack", 5) or input_buffer.was_pressed("heavy_attack", 5):
+		if jump_attack_state != null:
+			state_machine.change_state(jump_attack_state.name)
+			return
 
-func exit():
+func _on_land():
 	if land_particles:
 		land_particles.restart()
-	
 	audio_manager.play_random_pitch(sound_data.jump_land)
 	animation.set_animation(jump_land_animation_name)
 	fighter.move_velocity.y = 0.0

@@ -107,10 +107,9 @@ func set_lobby_ui():
 	if host_player_name == null or client_player_name == null:
 		return
 	if not NetworkManager.has_connection:
-		online_multiplayer_start_button.disabled = true
 		return
-	
-	online_multiplayer_start_button.disabled = false
+
+	online_multiplayer_start_button.disabled = NetworkManager.player_host == null or NetworkManager.player_client == null
 	
 	if NetworkManager.player_client:
 		client_player_name.text = NetworkManager.player_client.username

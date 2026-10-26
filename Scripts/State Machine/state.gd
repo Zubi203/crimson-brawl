@@ -1,9 +1,10 @@
 class_name State
 extends Node
 
+@export var stamina_cost_type: StaminaData.MoveTypes = StaminaData.MoveTypes.FREE
+
 var state_machine: StateMachine
 
-var enter_time: float
 var local_time: float
 
 var fighter: Fighter:
@@ -37,14 +38,14 @@ func initialize (fsm: StateMachine):
 	state_machine = fsm
 
 func can_enter() -> bool:
-	return true
+	return stamina_controller.stamina_available(stamina_data.stamina_costs[stamina_cost_type])
 
 func enter():
-	enter_time = Time.get_unix_time_from_system()
+	stamina_controller.consume_stamina(stamina_data.stamina_costs[stamina_cost_type])
+	local_time = 0.0
 
 func exit():
 	pass
 
 func update(_delta: float):
-	var time: float = Time.get_unix_time_from_system()
-	local_time = time - enter_time
+	local_time += _delta

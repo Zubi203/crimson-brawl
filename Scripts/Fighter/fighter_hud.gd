@@ -6,6 +6,8 @@ var fighter_parent: Fighter = null
 @export var health_bar: Range
 @export var health_bar_underlay: Range
 @export var health_text: Label
+@export var name_text: Label
+@export var name_text_x_offset: float = 35
 @export var stamina_bar: Range
 @export var stats_container: Control
 @export var player_pos_0: Control
@@ -49,20 +51,36 @@ func _setup_ui():
 		return
 	if player_pos_1 == null:
 		return
+	if name_text == null:
+		return
 	
 	if NetworkManager.has_connection:
 		if fighter_parent.is_server_fighter():
 			stats_container.position = player_pos_0.position
+			name_text.position = player_pos_0.position
+			name_text.position.x += name_text_x_offset
+			name_text.text = NetworkManager.player_host.username
 		else:
 			stats_container.position = player_pos_1.position
 			stats_container.offset_transform_scale.x *= -1
+			name_text.position = player_pos_1.position
+			name_text.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+			name_text.position.x -= name_text_x_offset
+			name_text.text = NetworkManager.player_client.username
 	else:
 		match fighter_parent.player_id:
 			0:
 				stats_container.position = player_pos_0.position
+				name_text.position = player_pos_0.position
+				name_text.position.x += name_text_x_offset
+				name_text.text = "Player" if GlobalData.game_mode == GlobalData.GameMode.PLAYER_VS_AI else "Player 1"
 			_:
 				stats_container.position = player_pos_1.position
 				stats_container.offset_transform_scale.x *= -1
+				name_text.position = player_pos_1.position
+				name_text.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+				name_text.position.x -= name_text_x_offset
+				name_text.text = "CPU" if GlobalData.game_mode == GlobalData.GameMode.PLAYER_VS_AI else "Player 2"
 
 func _update_stamina(stamina: float):
 	if stamina_bar == null:

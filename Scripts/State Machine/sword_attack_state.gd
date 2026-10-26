@@ -13,6 +13,7 @@ func enter():
 	super.enter()
 	hit_sender = sword.hit_sender
 	sword.appear()
+	audio_manager.play_random_pitch(sound_data.sword_start_sound)
 
 func exit():
 	super.exit()

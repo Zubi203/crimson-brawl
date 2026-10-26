@@ -16,7 +16,7 @@ extends MovementState
 func update(delta: float):
 	super.update(delta)
 	
-	if input_buffer.is_pressed("jump") and not jumping_state == null:
+	if input_buffer.was_pressed("jump", attack_buffer_frames) and not jumping_state == null:
 		state_machine.change_state(jumping_state.name)
 		return
 	
@@ -48,7 +48,7 @@ func update(delta: float):
 		state_machine.change_state(heavy_attack_state.name)
 		return
 	
-	if input_buffer.is_pressed("dash") and not dash_state == null:
+	if input_buffer.was_pressed("dash", attack_buffer_frames) and not dash_state == null:
 		state_machine.change_state(dash_state.name)
 		return
 	

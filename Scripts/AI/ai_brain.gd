@@ -155,8 +155,8 @@ func _dodge_attack() -> int:
 	if not skill_check:
 		return 0
 	
-	var can_jump: bool = stamina_controller.stamina_available(stamina_controller.data.jump_cost)
-	var can_dash: bool = stamina_controller.stamina_available(stamina_controller.data.dash_cost)
+	var can_jump: bool = stamina_controller.stamina_available(stamina_controller.data.stamina_costs[StaminaData.MoveTypes.JUMP])
+	var can_dash: bool = stamina_controller.stamina_available(stamina_controller.data.stamina_costs[StaminaData.MoveTypes.DASH])
 	
 	if can_dash and not can_jump:
 		return 2
@@ -198,8 +198,8 @@ func _decide_attack() -> int:
 	if opponent_distance > heavy_attack_range:
 		return 0
 	
-	var can_heavy_attack: bool = stamina_controller.stamina_available(stamina_controller.data.heavy_attack_cost)
-	var can_light_attack: bool = stamina_controller.stamina_available(stamina_controller.data.light_attack_cost)
+	var can_heavy_attack: bool = stamina_controller.stamina_available(stamina_controller.data.stamina_costs[StaminaData.MoveTypes.HEAVY_ATTACK])
+	var can_light_attack: bool = stamina_controller.stamina_available(stamina_controller.data.stamina_costs[StaminaData.MoveTypes.LIGHT_ATTACK])
 	
 	var perform_perfect_attack: bool = randf() < skill
 	if perform_perfect_attack:

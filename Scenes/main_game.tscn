@@ -32,6 +32,8 @@ properties/1/replication_mode = 1
 [sub_resource type="LabelSettings" id="LabelSettings_h2w44"]
 font = ExtResource("10_r0mdn")
 font_size = 220
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(10, 10)
 
 [sub_resource type="Animation" id="Animation_tpqse"]
 resource_name = "End"
@@ -203,7 +205,7 @@ fog_height = 1.2
 fog_height_density = 0.1
 
 [sub_resource type="BoxMesh" id="BoxMesh_h2w44"]
-size = Vector3(1.0256348, 6.3085938, 21.043945)
+size = Vector3(1.7849121, 6.3085938, 21.043945)
 
 [node name="Main" type="Node3D" unique_id=46452760]
 
@@ -306,7 +308,7 @@ light_cull_mask = 4294967294
 shadow_enabled = true
 
 [node name="Floor" type="MeshInstance3D" parent="Environment" unique_id=1700826672]
-transform = Transform3D(0.99006134, -0.1406357, 5.9604645e-08, 0.1406357, 0.9900613, -1.1175871e-08, -3.1664968e-08, -7.450581e-09, 1, -0.22241223, -3.2466784, -0.6638185)
+transform = Transform3D(0.99006134, -0.1406357, 5.9604645e-08, 0.1406357, 0.9900613, -1.1175871e-08, -3.1664968e-08, -7.450581e-09, 1, -0.22241223, -3.1481705, -0.6638185)
 material_override = ExtResource("16_erobn")
 mesh = SubResource("BoxMesh_h2w44")
 

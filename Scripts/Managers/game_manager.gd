@@ -143,6 +143,9 @@ func end_game():
 	animation_player.play(end_animation_name)
 
 func _on_fighter_defeated(fighter: Fighter):
+	
+	await get_tree().create_timer(1.0).timeout
+	
 	_change_state(GameState.ENDED)
 	
 	if end_text_label == null:
@@ -166,19 +169,16 @@ func _on_fighter_defeated(fighter: Fighter):
 
 @rpc("authority", "call_local", "reliable")
 func _networked_end_game(server_lost: bool):
-	var did_lose: bool = NetworkManager.is_server and server_lost
-	
-	if did_lose:
+	if server_lost:
 		if NetworkManager.is_server:
 			end_text_label.text = NetworkManager.player_client.username + " Wins!"
 		else:
-			end_text_label.text = NetworkManager.player_host.username + " Wins!"
+			end_text_label.text = NetworkManager.local_username + " Wins!"
 	else:
 		if NetworkManager.is_server:
-			end_text_label.text = NetworkManager.player_host.username + " Wins!"
+			end_text_label.text = NetworkManager.local_username + " Wins!"
 		else:
-			end_text_label.text = NetworkManager.player_client.username + " Wins!"
-
+			end_text_label.text = NetworkManager.player_host.username + " Wins!"
 
 func _on_animation_finished(anim_name: String):
 	if anim_name == start_animation_name:
