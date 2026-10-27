@@ -4,6 +4,16 @@
 Shades of Crimson is a 1v1 Fighting game featuring a varied state machine based moveset and a tight and responsive input handling system. The game has 3 modes: Local PvP where two players can fight each other on the same keyboard, a PvE mode where you can fight a CPU controller character, and an Online PvP mode where you can fight another player over the internet by sharing a Room ID with them.
 
 ### Key Features
+- An extensive input system using input packets (a resource) to store all inputs pressed in a single frame, an input handler that is responsible for generating these packets based on player/CPU input, and an input buffer that stores input packets in an array, effectively remembering all inputs pressed during the past 20 frames as well as their sequence
+- A complex and expandable State Machine system which deals with animating and moving the fighter based on inputs and actions. A StateMachine class is responsible for transitioning between states and for acting as a bridge between the states and the parent Fighter node to make it easier for the states to reference data on the Fighter node. The Fighter has 14 different States currently, all extending from the same base State class
+- Used Godot's AnimationTree Node to smoothly blend and transition between different animations based on the state machine's current state
+- Implemented a Service Locator and a Global Event Bus to decouple game systems and allow for easier communication between parts of the game
+- Implemented an audio pooling systems as a service that can be registered to the service locator. This dynamically creates and caches audio stream players when needed, and re-uses cached players if available
+- Implemented online multiplayer using Godot's high-level multiplayer API
+- Used MultiplayerSpawner and MultiplayerSynchronizer nodes to sync player spawning, transform, and inputs between server and client
+- Used Remote Procedure Calls to call methods on all running instances of the game in order to sync animations, effects, scene transitions, and game state changes
+- Implemented a "Bootstrap" scene architecture to allow certain nodes to persist between scenes without using Autoloads/Singletons
+- Used the Node Tunnel plugin to bypass the need for port forwarding when connecting to peers in different regions by using a relay server
 
 
 ### Engine and Tools
