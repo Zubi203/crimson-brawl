@@ -7,8 +7,8 @@ extends AudioStreamPlayer
 @export var pitch_variation: float = 0.3
 @export var volume_decibels: float = -10
 
-@onready var default_button_enter_sound: AudioStream = preload("uid://cvu7fl34q48vb")
-@onready var default_button_press_sound: AudioStream = preload("uid://b1qjh7mikodki")
+@onready var default_button_enter_sound: AudioStream = preload("uid://6bg78kd2shhm")
+@onready var default_button_press_sound: AudioStream = preload("uid://d0yx3fhfoxnmo")
 
 func _ready() -> void:
 	volume_db = volume_decibels

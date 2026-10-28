@@ -2,7 +2,7 @@
 
 [ext_resource type="AudioStream" uid="uid://dtgm6u5nh2bal" path="res://Audio/Combat/Dash.ogg" id="1_i0ors"]
 [ext_resource type="Script" uid="uid://dkaijnf7eu51o" path="res://Scripts/Data/fighter_sound_data.gd" id="1_oh6ga"]
-[ext_resource type="AudioStream" uid="uid://bd1p584j1y7e7" path="res://Audio/Combat/Minifantasy_Dungeon_SFX/15_human_dash_2.wav" id="1_wu5py"]
+[ext_resource type="AudioStream" uid="uid://bd1p584j1y7e7" path="res://Audio/Combat/15_human_dash_2.wav" id="1_wu5py"]
 [ext_resource type="AudioStream" uid="uid://dl747mmrh0v0x" path="res://Audio/Combat/Hit.ogg" id="2_44tnm"]
 [ext_resource type="AudioStream" uid="uid://cdahvo2o5e6b2" path="res://Audio/Combat/12_human_jump_3.wav" id="3_4jswm"]
 [ext_resource type="AudioStream" uid="uid://cqw8pv8u2v1lw" path="res://Audio/Combat/LightAttack.ogg" id="3_5u536"]

@@ -3,10 +3,10 @@
 [ext_resource type="Script" uid="uid://bxbfkfn8ajssc" path="res://Scripts/network_prompt_display.gd" id="1_q3vgr"]
 [ext_resource type="Theme" uid="uid://crnhsk1q6t8r" path="res://Data/ui_theme.tres" id="2_bcnlc"]
 [ext_resource type="Script" uid="uid://dimct1fhrm5my" path="res://Scripts/UI/container_animation.gd" id="3_jheto"]
-[ext_resource type="Texture2D" uid="uid://bg6tlnw1qlch7" path="res://UI/2x/Danger sign 1.png" id="3_lyqui"]
+[ext_resource type="Texture2D" uid="uid://bg6tlnw1qlch7" path="res://UI/Danger sign 1.png" id="3_lyqui"]
 [ext_resource type="FontFile" uid="uid://x8i6v4n3k2ku" path="res://Fonts/MetalMania-Regular.ttf" id="4_21bp7"]
 [ext_resource type="Script" uid="uid://sshbisoigeyr" path="res://Scripts/UI/animated_button_component.gd" id="5_be2f8"]
-[ext_resource type="Texture2D" uid="uid://c1pie62hd0siq" path="res://UI/2x/Wi Fi.png" id="6_21bp7"]
+[ext_resource type="Texture2D" uid="uid://c1pie62hd0siq" path="res://UI/Wi Fi.png" id="6_21bp7"]
 [ext_resource type="Script" uid="uid://bw7u2deyx1w4l" path="res://Scripts/UI/auto_animate_ui_component.gd" id="6_be2f8"]
 [ext_resource type="Script" uid="uid://b0ig5g6bl6xug" path="res://Scripts/UI/button_audio_component.gd" id="7_voomm"]
 

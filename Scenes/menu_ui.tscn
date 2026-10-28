@@ -120,7 +120,7 @@ grow_vertical = 2
 [node name="TitleText" type="Label" parent="BG/MainMenuScreen" unique_id=2128139338]
 custom_minimum_size = Vector2(0, 350)
 layout_mode = 2
-text = "Shades of Crimson"
+text = "Crimson Brawl"
 label_settings = SubResource("LabelSettings_amrxi")
 horizontal_alignment = 1
 vertical_alignment = 2
@@ -181,6 +181,7 @@ metadata/_custom_type_script = "uid://b0ig5g6bl6xug"
 [node name="OnlineMPButton" type="Button" parent="BG/MainMenuScreen/HBoxContainer/ButtonContainer" unique_id=1919123567]
 layout_mode = 2
 size_flags_vertical = 3
+disabled = true
 text = "Online PvP"
 
 [node name="AnimatedButtonComponent" type="Node2D" parent="BG/MainMenuScreen/HBoxContainer/ButtonContainer/OnlineMPButton" unique_id=2044498675]
@@ -498,6 +499,7 @@ size_flags_horizontal = 3
 mouse_filter = 2
 
 [node name="FadeInColorRect" type="ColorRect" parent="." unique_id=1431942917]
+visible = false
 z_index = 100
 anchors_preset = 15
 anchor_right = 1.0

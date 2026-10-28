@@ -18547,7 +18547,7 @@ _subresources={
 },
 "Shield_OneShot": {
 "save_to_file/enabled": true,
-"save_to_file/fallback_path": "res://Animations/ShieldStart.res",
+"save_to_file/fallback_path": "res://Animations/ShoulderBashStart.res",
 "save_to_file/keep_custom_tracks": "",
 "save_to_file/path": "uid://du5ldla0at41a",
 "settings/loop_mode": 0,
